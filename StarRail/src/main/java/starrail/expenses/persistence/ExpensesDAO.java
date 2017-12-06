@@ -2,28 +2,26 @@ package starrail.expenses.persistence;
 
 import java.util.List;
 import java.util.Map;
-
-import starrail.expenses.domain.ExpenseCourseVO;
 import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 
 public interface ExpensesDAO {
 
-	//¿¹»ó°æºñ ¼³Á¤
+	//ì˜ˆìƒê²½ë¹„ ì„¤ì •
 	public void expensesInsert(ExpensesVO expensesVO) throws Exception;
 	public Integer selectE_no() throws Exception;
 
-	//ÃÑ ³²Àº±İ¾× ±¸ÇØ¿À±â
+	//ì´ ë‚¨ì€ê¸ˆì•¡ êµ¬í•´ì˜¤ê¸°
 	public Integer totalMoney(int e_no) throws Exception;
 	
-	//ÁöÃâ³»¿ª ÀúÀå
+	//ì§€ì¶œë‚´ì—­ ì €ì¥
 	public void amountInsert(StatementVO statementVO) throws Exception;
 	public Integer selectEd_no() throws Exception;
 	
-	//ÃÑ ³²Àº ±İ¾×-»ç¿ë±İ¾× µÈ ±İ¾×À¸·Î ÃÑ ³²Àº±İ¾× ¼öÁ¤
+	//ì´ ë‚¨ì€ ê¸ˆì•¡-ì‚¬ìš©ê¸ˆì•¡ ëœ ê¸ˆì•¡ìœ¼ë¡œ ì´ ë‚¨ì€ê¸ˆì•¡ ìˆ˜ì •
 	public Integer updateExpenses(Map<String, Integer> map) throws Exception;
 	
-	//»ç¿ëÀÚ°¡ ¿À´Ã »ç¿ëÇÑ ÃÑ ±İ¾× °¡Á®¿À±â
+	//ì‚¬ìš©ìê°€ ì˜¤ëŠ˜ ì‚¬ìš©í•œ ì´ ê¸ˆì•¡ ê°€ì ¸ì˜¤ê¸°
 	public Integer todayTotal(Map<String, Object> map) throws Exception;
 	
 	public List<Map<String, Object>> course(String id) throws Exception;

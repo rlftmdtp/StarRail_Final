@@ -3,8 +3,6 @@ package starrail.message.persistence;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -18,43 +16,43 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	private static String namespace = "railro.review.mapper.MessageMapper";
 	
-	@Override	//ÂÊÁöº¸³»±â
+	@Override	//ìª½ì§€ë³´ë‚´ê¸°
 	public void insertMessage(MessageVO message) throws Exception {
 		session.insert(namespace +".insertMessage", message); 
 	}
 
-	@Override	//±Û¹øÈ£ +1
+	@Override	//ê¸€ë²ˆí˜¸ +1
 	public Integer selectMsg_no() throws Exception {
 		return session.selectOne(namespace+".selectMsg_no");
 	}
 
-	@Override	//¹ŞÀºÂÊÁöÇÔ ÀüÃ¼ ¸®½ºÆ®
+	@Override	//ë°›ì€ìª½ì§€í•¨ ì „ì²´ ë¦¬ìŠ¤íŠ¸
 	public List<MessageVO> listMessage(String m_id) throws Exception {
 		System.out.println("daoid : " + m_id);
 		return session.selectList(namespace+".list", m_id);
 	}
 
-	@Override	//ÂÊÁö»èÁ¦
+	@Override	//ìª½ì§€ì‚­ì œ
 	public void delete(int msg_no) throws Exception {
 		session.delete(namespace + ".delete", msg_no);
 	}
 
-	@Override	//ÂÊÁö ¼ö½ÅÇÔ ¿­¸² ´İÈû È®ÀÎ
+	@Override	//ìª½ì§€ ìˆ˜ì‹ í•¨ ì—´ë¦¼ ë‹«í˜ í™•ì¸
 	public Integer msg_hit(int msg_no) throws Exception {
 		return session.update(namespace+".msg_hit", msg_no);
 	}
 
-	@Override	//½Ç½Ã°£ ÂÊÁö°¹¼ö
+	@Override	//ì‹¤ì‹œê°„ ìª½ì§€ê°¯ìˆ˜
 	public Integer update_hit(String m_id) throws Exception {
 		return session.selectOne(namespace+".update_hit", m_id);
 	}
 
-	@Override	//ÂÊÁöÈ®ÀÎÇÏ±â
+	@Override	//ìª½ì§€í™•ì¸í•˜ê¸°
 	public MessageVO detail(int msg_no) throws Exception {
 		return session.selectOne(namespace+".detail", msg_no);
 	}
 
-	@Override	//º¸³½ÂÊÁöÇÔ ÀüÃ¼ ¸®½ºÆ®
+	@Override	//ë³´ë‚¸ìª½ì§€í•¨ ì „ì²´ ë¦¬ìŠ¤íŠ¸
 	public List<MessageVO> sendemail(String m_id) throws Exception {
 		return session.selectList(namespace+".sendemail", m_id);
 	}

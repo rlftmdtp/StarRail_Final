@@ -1,7 +1,7 @@
 package starrail.review.domain;
 
 
-//r_no¸¦ ÅëÇÑ ³» ÇØ½ÃÅÂ±× ÀúÀå
+//r_noë¥¼ í†µí•œ ë‚´ í•´ì‹œíƒœê·¸ ì €ì¥
 public class HashTag {
 	private int h_no;
 	private int r_no;

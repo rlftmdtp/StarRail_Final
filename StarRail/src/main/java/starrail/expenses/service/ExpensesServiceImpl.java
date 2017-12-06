@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-
-import starrail.expenses.domain.ExpenseCourseVO;
 import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 import starrail.expenses.persistence.ExpensesDAO;
@@ -18,7 +16,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 	@Inject
 	private ExpensesDAO dao;
 
-	@Override // ¿¹»ó°æºñ ÀúÀåÇÏ±â
+	@Override // ì˜ˆìƒê²½ë¹„ ì €ì¥í•˜ê¸°
 	public void expensesRegist(ExpensesVO expensesVO) throws Exception {
 
 		if (dao.selectE_no() != null) {
@@ -32,16 +30,16 @@ public class ExpensesServiceImpl implements ExpensesService {
 	
 	@Override
 	public Integer totalMoney(int e_no, int ed_amount) throws Exception {
-		// ÃÑ ÀÜ¾× - »ç¿ë±İ¾× °è»êÇØÁÖ±â
+		// ì´ ì”ì•¡ - ì‚¬ìš©ê¸ˆì•¡ ê³„ì‚°í•´ì£¼ê¸°
 		int total = dao.totalMoney(e_no) - ed_amount;
 		
-		System.out.println("¼­ºñ½º °è»ê±â : dao.totalMoney(e_no) : " + dao.totalMoney(e_no));
-		System.out.println("¼­ºñ½º °è»ê±â : ed_amount : " + ed_amount);
-		System.out.println("¼­ºñ½º °è»ê±â : total : " + total);
+		System.out.println("ì„œë¹„ìŠ¤ ê³„ì‚°ê¸° : dao.totalMoney(e_no) : " + dao.totalMoney(e_no));
+		System.out.println("ì„œë¹„ìŠ¤ ê³„ì‚°ê¸° : ed_amount : " + ed_amount);
+		System.out.println("ì„œë¹„ìŠ¤ ê³„ì‚°ê¸° : total : " + total);
 		return total;
 	}
 
-	@Override	//ÁöÃâ³»¿ª ÀúÀå
+	@Override	//ì§€ì¶œë‚´ì—­ ì €ì¥
 	public void amountRegist(StatementVO statementVO, Integer total) throws Exception {
 		if (dao.selectEd_no() != null) {
 			statementVO.setEd_no(dao.selectEd_no() + 1);
@@ -49,21 +47,21 @@ public class ExpensesServiceImpl implements ExpensesService {
 			statementVO.setEd_no(1);
 		}
 
-		// totalÇÏ°í e_no°°ÀÌ ³Ñ±â±â
+		// totalí•˜ê³  e_noê°™ì´ ë„˜ê¸°ê¸°
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("total", total);
 		map.put("e_no", statementVO.getE_no());
-		dao.updateExpenses(map); // °¡Á®¿Â totalÀ» ÃÑÀÜ¾×¿¡ updateÇØÁÖ°í
-		dao.amountInsert(statementVO); // ÁöÃâ³»¿ª¿¡´Â insertÇØÁÜ
+		dao.updateExpenses(map); // ê°€ì ¸ì˜¨ totalì„ ì´ì”ì•¡ì— updateí•´ì£¼ê³ 
+		dao.amountInsert(statementVO); // ì§€ì¶œë‚´ì—­ì—ëŠ” insertí•´ì¤Œ
 	}
 
-	@Override	//¿À´Ã »ç¿ëÇÑ ÃÑ ±İ¾×
+	@Override	//ì˜¤ëŠ˜ ì‚¬ìš©í•œ ì´ ê¸ˆì•¡
 	public int todayTotal(int e_no, String ed_date) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("e_no", e_no);
 		map.put("ed_date", ed_date);
 
-		//ÀÜ¾×ÀÌ ¾øÀ¸¸é 0
+		//ì”ì•¡ì´ ì—†ìœ¼ë©´ 0
 		if(dao.todayTotal(map)==null){
 			return 0;
 		}else{
@@ -74,7 +72,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 
 	@Override
 	public List<Map<String, Object>> course(String id) throws Exception {
-		System.out.println("service m_id´Â : " +id);
+		System.out.println("service m_idëŠ” : " +id);
 		List<Map<String, Object>> list = new ArrayList<>();	
 		
 		list = dao.course(id);

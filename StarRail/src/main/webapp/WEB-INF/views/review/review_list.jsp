@@ -17,21 +17,56 @@
 <script src="/starrail/resources/bootstrap/js/bootstrap.js"></script>
 
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<scriptsrc="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/css/main/header_footer.css">
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/css/review/review_list.css">
+<link rel="stylesheet" type="text/css"href="/starrail/resources/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"href="/starrail/resources/css/review/review_list.css">
+
+
+
+<!-- start 추천CSS -->
+     <link href="/starrail/resources/css/recommend/recommend.css" rel="stylesheet">
+    <link href="/starrail/resources/css/recommend/round-about.css" rel="stylesheet">
+<!-- end 추천CSS -->
+    
+
+
 </head>
 
 <body>
+<!-- start header-->
+	<%@include file="../main/nav_page.jsp"%>
+	<div style="margin-top: 80px;"></div>   
+<!-- start header-->
+
+
+<!-- start body영역 -->
 	<div class="container">
+	
+	<!-- start 추천-->
+      <h1 class="my-4" style="margin-top: 50px; margin-left: 20px;">
+      	<span style="font-size: 30px; color: #F0AD4E; font-weight: bold;">${m_name}&nbsp;</span>님에게 추천해드리는 오늘의 태그
+        <small>오늘의 추천 태그</small>
+      </h1>
+      
+     <!-- start 로그인 한 사용자마다 맞춤 태그 생성 -->
+     <div style="margin: 30px 40px;">
+	     <c:forEach items="${hashSearchVO}" var="Hash_SearchVO" varStatus="status">
+		    <a class="btn1 btn-rounded1 btn-round-tosquare1 btn-lg1  btn-bordered-warning1" 
+		    		data="${Hash_SearchVO.hs_search}">
+		    <span style="font-weight: bold;"></span>${Hash_SearchVO.hs_search}</a>	&nbsp;&nbsp;	
+	     </c:forEach>
+     </div>
+      <!-- end 로그인 한 사용자마다 맞춤 태그 생성 -->
+
+	<!-- end 추천-->
+	
+	
+	
+	
+    <!-- start 게시판 -->	
 		<div class="row">
 
 
@@ -125,7 +160,10 @@
 					</div>
 				</div>
 			</div>
+		<!-- end 게시판 -->	
+			
 		</div>
+    <!-- end body영역 -->	
 
 <!-- 
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
@@ -204,6 +242,10 @@
 		</div>
  -->
  
+     <div style="margin-top: 30px;">
+    	<%@include file="../main/footer.jsp"%>   
+    </div>   		
+ 
  <!-- 검색어 찾아주기 -->
 		<script>
 			$(document).ready(function(){
@@ -241,5 +283,13 @@
 				$("[data-toggle=tooltip]").tooltip();
 			});
 		</script> -->
+		
+
+	
+<!-- start 추천 Script -->
+   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="/starrail/resources/js/recommend/recommend.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<!-- end 추천 Script -->	
 </body>
 </html>

@@ -11,8 +11,11 @@ public class ReviewVO{
 	private String r_content;
 	private Timestamp r_date;
 	private int r_hit;
+	private int r_recomm;
 
 	
+
+
 	private String[] files;
 	
 	public ReviewVO() {}
@@ -62,13 +65,20 @@ public class ReviewVO{
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
+	public int getR_recomm() {
+		return r_recomm;
+	}
+	public void setR_recomm(int r_recomm) {
+		this.r_recomm = r_recomm;
+	}
 
 	@Override
 	public String toString() {
-		return "ReviewVO [r_no=" + r_no + ", m_id=" + m_id + ", r_title=" + r_title
-				+ ", r_content=" + r_content + ", r_date=" + r_date + ", r_hit=" + r_hit
-				+ ", files=" + Arrays.toString(files) + "]";
+		return "ReviewVO [r_no=" + r_no + ", m_id=" + m_id + ", r_title=" + r_title + ", r_content=" + r_content
+				+ ", r_date=" + r_date + ", r_hit=" + r_hit + ", r_recomm=" + r_recomm + ", files="
+				+ Arrays.toString(files) + "]";
 	}
+
 
 
 

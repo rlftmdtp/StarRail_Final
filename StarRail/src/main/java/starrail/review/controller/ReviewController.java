@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import starrail.review.domain.ReviewVO;
 import starrail.main.domain.UserVO;
+import starrail.recommender.service.RecommenderService;
 import starrail.review.domain.Hash_SearchVO;
 import starrail.review.domain.ReviewPageMaker;
 import starrail.review.domain.ReviewSearchCriteria;
 import starrail.review.persistence.ReviewDao;
+import starrail.review.service.RecommendReviewService;
 import starrail.review.service.ReviewService;
 
 @Controller
@@ -29,6 +31,7 @@ public class ReviewController {
 	@Inject
 	public ReviewService service;
 	public ReviewDao dao;
+	public RecommendReviewService serviceRecomm;
 
 	// 후기 글 작성하러 가는 창
 	@RequestMapping(value = "/review_insert", method = RequestMethod.GET)
@@ -84,17 +87,53 @@ public class ReviewController {
 		return "redirect:/review/review_list";
 	}
 
-	// 전체 후기 리스트
+	
+	
+	// 전체 후기 리스트 + 사용자 맞춤 태그 추천
 	@RequestMapping(value = "/review_list", method = RequestMethod.GET)
-	public void listReviewGET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model) throws Exception {
-
-		model.addAttribute("list", service.listSearchCriteria(cri));
+	public void listReviewGET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model, HttpServletRequest request) throws Exception {
+		// 추천 시작
+		HttpSession session = request.getSession();
+		int m_no;	
+		String m_name;	
+		List<Integer> list = new ArrayList<Integer>();
+		List<Hash_SearchVO> tag_list = new ArrayList<Hash_SearchVO>();
+		
 		ReviewPageMaker pageMaker = new ReviewPageMaker();
 		pageMaker.setCri(cri);
-
 		pageMaker.setTotalCount(service.listSearchCount(cri));
+		
+		// 리스트를 출력하기 위해 전체 리스트 정보와 페이지 정보를 담음
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("list", service.listSearchCriteria(cri));
+		
+		
+		try {
+			if(((UserVO) session.getAttribute("login")) != null){
+				UserVO user =  (UserVO) session.getAttribute("login");		
+				m_no = user.getM_no();
+				
+				list = serviceRecomm.preferList_service(m_no);
+				tag_list = serviceRecomm.tagRecommend_service(list);
+				System.out.println("컨트롤러 결과값 : " + tag_list);
+				
+				model.addAttribute("hashSearchVO", tag_list);
+				model.addAttribute("m_name", user.getM_name());
+			}else{
+				model.addAttribute("hashSearchVO", null);
+				model.addAttribute("m_name", "?");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}			
 	}
+	
+	
+	
+	
+	
+	
 
 	// 한개 상세보기 눌렀을 때
 	@RequestMapping(value = "/review_detail", method = RequestMethod.GET)

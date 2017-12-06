@@ -3,26 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="starrail.recommend.mappers.partnerMapper">
+<mapper namespace="starrail.recommend.mappers.recommendMapper">
 
-	<select id="prefer_Select" resultType="java.util.HashMap">
-		SELECT m.M_NO, pd.TAG_NO
-			  FROM MEMBER_PREFER pre, MEMBER_PREFERDETAIL pd, HASH_SEARCH hs, MEMBER m
-			  where pre.PRE_NO = pd.PRE_NO and
-			        hs.HS_NO = pd.TAG_NO and
-			        m.M_ID = pre.M_ID
-			  order by m.M_NO
-	</select>
 	
-	<select id="tagRecommend_Select" resultType="Hash_SearchVO" parameterType="java.util.ArrayList">
-		select *
-			from HASH_SEARCH
-  			<where>
-  				HS_NO IN
-  				<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
-			    	#{item.value}
-				</foreach>  				
-  			</where>
+	<select id="reviewRecommend_Select" resultType="ReviewVO">
+		select r.R_NO as r_no, r.M_ID as m_id, r.R_TITLE as r_title, r.R_CONTENT as r_content
+		      , r.R_DATE as r_date, r.R_HIT as r_hit, r.R_RECOMM as r_recomm
+		  from REVIEW r, HASH h
+		  where r.R_NO = h.R_NO and
+		        h.R_HASH = #{tag}
+		  order by r.R_RECOMM desc
 	</select>
 
 

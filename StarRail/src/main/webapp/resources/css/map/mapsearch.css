@@ -1,40 +1,53 @@
 @CHARSET "UTF-8";
 
+
 body * {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
 
+.fontapply{
+	font-size:30px;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+    letter-spacing: 2px;
+}
 .rails {
 	min-height: 7vh;
-	background: red;
+	/*background: red;*/
 }
-
 .course {
 	min-height: 7vh;
-	background: green;
+	/*background: green;*/
 }
-
 .station {
 	min-height: 7vh;
-	background: pink;
+	/*background: pink;*/
 }
-
+.sort{
+	min-height: 7vh;
+}
 .map {
 	position:relative;
-	min-height: 50vh;
-}
-
-.info {
 	min-height: 70vh;
-	background: yellow;
+}
+.info {
+	margin-top:3%;
+	min-height: 70vh;
+	/*background: yellow;*/
 	position: relative;
 }
-
 .graph {
-	min-height: 50vh;
-	background: blue;
+	min-height: 30vh;
+	/*background: blue;*/
 }
 
+#charttable{
+	width: 100%;
+}
+.pagination{
+	margin-left: 65%;
+}
+
+/*
 .info1 {
 	position: absolute;
 	height: 100%;
@@ -57,7 +70,6 @@ body * {
 	
 }
 
-
 .info2 {
 	position: absolute;
 	right: 0;
@@ -70,12 +82,25 @@ body * {
 .info-content > div {
 	height: 100%;
 }
+*/
 
 .search{
 	position: absolute;
 	z-index: 1000
 }
 
-#courseButtons,#stationButtons{
-	text-align: center;
+#courseButtons,#stationButtons,#sortButtons{
+	width: 100%;
+	margin-left: 20%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+.sortButton{
+	padding-left: 10%;
+    padding-right: 10%
+}
+
+#replies{
+	width: 100%;
+	margin-left: 2%;
 }

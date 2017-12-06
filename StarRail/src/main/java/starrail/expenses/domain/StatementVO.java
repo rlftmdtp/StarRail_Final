@@ -1,7 +1,7 @@
 package starrail.expenses.domain;
 
 
-//ÁöÃâ³»¿ª Å×ÀÌºí
+//ì§€ì¶œë‚´ì—­ í…Œì´ë¸”
 public class StatementVO {
 	private int ed_no;
 	private int e_no;

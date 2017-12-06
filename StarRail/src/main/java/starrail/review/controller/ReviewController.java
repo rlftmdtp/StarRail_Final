@@ -30,20 +30,20 @@ public class ReviewController {
 	public ReviewService service;
 	public ReviewDao dao;
 
-	// ÈÄ±â ±Û ÀÛ¼ºÇÏ·¯ °¡´Â Ã¢
+	// í›„ê¸° ê¸€ ì‘ì„±í•˜ëŸ¬ ê°€ëŠ” ì°½
 	@RequestMapping(value = "/review_insert", method = RequestMethod.GET)
 	public void insertReviewGET(ReviewVO review, Hash_SearchVO hash, String hashSearch, Model model) throws Exception {
 		List<String> list = new ArrayList<String>();
-		// ÇØ½ÃÅÂ±× ÀüÃ¼ ºÒ·¯¿À±â
+		// í•´ì‹œíƒœê·¸ ì „ì²´ ë¶ˆëŸ¬ì˜¤ê¸°
 		list = service.hashSearch();
 		for (int i = 0; i < list.size(); i++) {
 			list.set(i, "\"" + list.get(i) + "\"");
 		}
-		System.out.println("ºÙ¾î¿À´Ï? : " + list);
+		System.out.println("ë¶™ì–´ì˜¤ë‹ˆ? : " + list);
 		model.addAttribute("list", list);
 	}
 
-	// ÈÄ±â °Ô½Ã¹° µî·ÏÇÏ±â ´­·¶À» ‹š
+	// í›„ê¸° ê²Œì‹œë¬¼ ë“±ë¡í•˜ê¸° ëˆŒë €ì„ ë–„
 	@RequestMapping(value = "/review_insert", method = RequestMethod.POST)
 	public String insertReviewPOST(@ModelAttribute("review") ReviewVO review, Hash_SearchVO searchVO, HttpServletRequest request)
 			throws Exception {
@@ -53,16 +53,16 @@ public class ReviewController {
 		review.setM_id(userVO.getM_id());
 		System.out.println(review.toString());
 
-		//ÈÄ±â °Ô½ÃÆÇ¿¡ µî·Ï
+		//í›„ê¸° ê²Œì‹œíŒì— ë“±ë¡
 		service.register(review);
 		
 		List<String> list = new ArrayList<String>();
-		//ÇØ½ÃÅÂ±× ÀüÃ¼ ºÒ·¯¿À±â
+		//í•´ì‹œíƒœê·¸ ì „ì²´ ë¶ˆëŸ¬ì˜¤ê¸°
 		list = service.hashSearch();
 	
 		List<String> listHash = new ArrayList<String>();
 		
-		//³» ÈÄ±â ±Û¹øÈ£·Î ÇØ½ÃÅÂ±×¸¸ µû·Î ÀúÀå
+		//ë‚´ í›„ê¸° ê¸€ë²ˆí˜¸ë¡œ í•´ì‹œíƒœê·¸ë§Œ ë”°ë¡œ ì €ì¥
 		listHash = service.hashtagInsert(review, searchVO);
 
 		boolean check = false;
@@ -84,7 +84,7 @@ public class ReviewController {
 		return "redirect:/review/review_list";
 	}
 
-	// ÀüÃ¼ ÈÄ±â ¸®½ºÆ®
+	// ì „ì²´ í›„ê¸° ë¦¬ìŠ¤íŠ¸
 	@RequestMapping(value = "/review_list", method = RequestMethod.GET)
 	public void listReviewGET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model) throws Exception {
 
@@ -96,7 +96,7 @@ public class ReviewController {
 		model.addAttribute("pageMaker", pageMaker);
 	}
 
-	// ÇÑ°³ »ó¼¼º¸±â ´­·¶À» ¶§
+	// í•œê°œ ìƒì„¸ë³´ê¸° ëˆŒë €ì„ ë•Œ
 	@RequestMapping(value = "/review_detail", method = RequestMethod.GET)
 	public void DetailReviewGET(@RequestParam("r_no") int r_no, @ModelAttribute("cri") ReviewSearchCriteria cri,
 			Model model) throws Exception {
@@ -105,7 +105,7 @@ public class ReviewController {
 		model.addAttribute(service.read(r_no));
 	}
 
-	// °Ô½ÃÆÇ »èÁ¦
+	// ê²Œì‹œíŒ ì‚­ì œ
 	@RequestMapping(value = "/review_remove", method = RequestMethod.GET)
 	public String RemoveReviewGET(@RequestParam("r_no") int r_no, ReviewSearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
@@ -118,14 +118,14 @@ public class ReviewController {
 		return "redirect:/review/review_list";
 	}
 
-	// °Ô½ÃÆÇ ¼öÁ¤ Àü
+	// ê²Œì‹œíŒ ìˆ˜ì • ì „
 	@RequestMapping(value = "/review_modify", method = RequestMethod.GET)
 	public void ModifyReviewGET(@RequestParam("r_no") int r_no, @ModelAttribute("cri") ReviewSearchCriteria cri,
 			Model model) throws Exception {
 		model.addAttribute(service.read(r_no));
 	}
 
-	// °Ô½ÃÆÇ ¼öÁ¤ ÈÄ
+	// ê²Œì‹œíŒ ìˆ˜ì • í›„
 	@RequestMapping(value = "/review_modify", method = RequestMethod.POST)
 	public String ModifyReviewPOST(ReviewVO review, ReviewSearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {

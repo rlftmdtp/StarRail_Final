@@ -16,7 +16,7 @@ public class MessageServiceImpl implements MessageService {
 	@Inject
 	private MessageDAO dao;
 	
-	@Override	//ÂÊÁö º¸³»±â + ÂÊÁö ±Û¹øÈ£+1
+	@Override	//ìª½ì§€ ë³´ë‚´ê¸° + ìª½ì§€ ê¸€ë²ˆí˜¸+1
 	public void regist(MessageVO message) throws Exception {
 		int msg_no = dao.selectMsg_no();
 		
@@ -27,18 +27,18 @@ public class MessageServiceImpl implements MessageService {
 		dao.insertMessage(message);
 	}
 
-	@Override	//ÂÊÁöÇÔ ¸®½ºÆ® °¡Á®¿À±â
+	@Override	//ìª½ì§€í•¨ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	public List<MessageVO> messageList(String m_id) throws Exception {
-		System.out.println("¼­ºñ½ºid : " + m_id);
+		System.out.println("ì„œë¹„ìŠ¤id : " + m_id);
 		return dao.listMessage(m_id);
 	}
 
-	@Override	//ÂÊÁö »èÁ¦
+	@Override	//ìª½ì§€ ì‚­ì œ
 	public void remove(int msg_no) throws Exception {
 		dao.delete(msg_no);
 	}
 
-	@Override	//ÂÊÁö È®ÀÎ À¯¹«
+	@Override	//ìª½ì§€ í™•ì¸ ìœ ë¬´
 	public Integer msg_hit(int msg_no) throws Exception {
 		if(dao.msg_hit(msg_no)==null){
 			return 0;
@@ -48,7 +48,7 @@ public class MessageServiceImpl implements MessageService {
 		
 	}
 
-	@Override	//ÂÊÁö ½Ç½Ã°£ °¹¼ö
+	@Override	//ìª½ì§€ ì‹¤ì‹œê°„ ê°¯ìˆ˜
 	public Integer update_hit(String m_id) throws Exception {
 		if(dao.update_hit(m_id) == null) {
 			return 0;
@@ -57,12 +57,12 @@ public class MessageServiceImpl implements MessageService {
 		}		
 	}
 
-	@Override	//ÂÊÁöÇÔÀĞ±â
+	@Override	//ìª½ì§€í•¨ì½ê¸°
 	public MessageVO read(int msg_no) throws Exception {
 		return dao.detail(msg_no);
 	}
 
-	@Override	//º¸³½ÂÊÁöÇÔ
+	@Override	//ë³´ë‚¸ìª½ì§€í•¨
 	public List<MessageVO> sendemail(String m_id) throws Exception {
 		return dao.sendemail(m_id);
 	}

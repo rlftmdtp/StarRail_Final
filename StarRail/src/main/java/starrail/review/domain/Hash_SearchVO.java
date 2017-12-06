@@ -1,7 +1,8 @@
 package starrail.review.domain;
 
 
-//ÇØ½ÃÅÂ±× ÀüÃ¼ Å×ÀÌºí
+
+//í•´ì‹œíƒœê·¸ ì „ì²´ í…Œì´ë¸”
 public class Hash_SearchVO {
 	private int hs_no;
 	private String hs_search;

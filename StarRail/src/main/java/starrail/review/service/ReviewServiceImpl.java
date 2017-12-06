@@ -25,7 +25,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDao dao;
 
 	@Transactional
-	@Override		//ÈÄ±â °Ô½ÃÆÇ µî·Ï
+	@Override		//í›„ê¸° ê²Œì‹œíŒ ë“±ë¡
 	public void register(ReviewVO review) throws Exception {
 
 		
@@ -54,16 +54,16 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED)
-	@Override	//ÈÄ±â°Ô½ÃÆÇ »ó¼¼º¸±â
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public ReviewVO read(Integer r_no) throws Exception {
 		dao.updateR_hit(r_no);
 		return dao.selectReview(r_no);
 	}
 
 	@Transactional
-	@Override	//ÈÄ±â°Ô½ÃÆÇ ¼öÁ¤ÇÏ±â
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ìˆ˜ì •í•˜ê¸°
 	public void modify(ReviewVO review) throws Exception {
-		System.out.println("ì§±ë˜˜  : " + review.toString());
+		System.out.println("ï§ê¹…ì‚“  : " + review.toString());
 		dao.updateReview(review);
 
 		Integer r_no = review.getR_no();
@@ -79,18 +79,18 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Transactional
-	@Override	//ÈÄ±â°Ô½ÃÆÇ »èÁ¦
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ì‚­ì œ
 	public void remove(Integer r_no) throws Exception {
 		dao.deleteAttach(r_no);
 		dao.deleteReview(r_no);
 	}
 
-	@Override	//ÀüÃ¼º¸±â
+	@Override	//ì „ì²´ë³´ê¸°
 	public List<ReviewVO> list() throws Exception {
 		return dao.listReview();
 	}
 
-	@Override	//ÆäÀÌÂ¡Ã³¸®
+	@Override	//í˜ì´ì§•ì²˜ë¦¬
 	public List<ReviewVO> listCriteria(ReviewCriteria cri) throws Exception {
 		return dao.listCriteria(cri);
 	}
@@ -100,7 +100,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.countPaging(cri);
 	}
 
-	@Override	//°Ë»ö + ÆäÀÌÂ¡
+	@Override	//ê²€ìƒ‰ + í˜ì´ì§•
 	public List<ReviewVO> listSearchCriteria(ReviewSearchCriteria cri) throws Exception {
 		return dao.listSearch(cri);
 	}
@@ -110,12 +110,12 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.listSearchCount(cri);
 	}
 
-	@Override	//ÆÄÀÏ ºÒ·¯¿À±â
+	@Override	//íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 	public List<String> getAttach(Integer r_no) throws Exception {
 		return dao.getAttach(r_no);
 	}
 
-	@Override	//hash ±Û¹øÈ£ °¡Á®¿À±â
+	@Override	//hash ê¸€ë²ˆí˜¸ ê°€ì ¸ì˜¤ê¸°
 	public int hash_no() throws Exception {
 		if (dao.hash_no() == null) {
 			return 0;
@@ -132,11 +132,11 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 	}
 
-	@Override	//ÇØ½ÃÅÂ±× Á¤±ÔÇ¥Çö½ÄÀ¸·Î ÀÚ¸£±â
+	@Override	//í•´ì‹œíƒœê·¸ ì •ê·œí‘œí˜„ì‹ìœ¼ë¡œ ìë¥´ê¸°
 	public List<String> hashtagInsert(ReviewVO review, Hash_SearchVO searchVO) throws Exception {
-		//Á¤±ÔÇ¥Çö½Ä
-		Pattern p = Pattern.compile("\\#([0-9a-zA-Z°¡-ÆR]*)");
-		//ÈÄ±â°Ô½ÃÆÇ ³»¿ë¿¡ ÀÖ´Â °Íµé °¡Á®¿Í¼­
+		//ì •ê·œí‘œí˜„ì‹
+		Pattern p = Pattern.compile("\\#([0-9a-zA-Zê°€-í£]*)");
+		//í›„ê¸°ê²Œì‹œíŒ ë‚´ìš©ì— ìˆëŠ” ê²ƒë“¤ ê°€ì ¸ì™€ì„œ
 		Matcher m = p.matcher(review.getR_content());
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -146,17 +146,17 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		while (m.find()) {
 			r_hash = specialCharacter_replace(m.group());
-			System.out.println("¼­ºñ½º r_hash : " + r_hash);
+			System.out.println("ì„œë¹„ìŠ¤ r_hash : " + r_hash);
 			if (dao.hash_no() != null) {
 				h_no = dao.hash_no() + 1;
-				System.out.println("¼­ºñ½º h_no : "+h_no);
+				System.out.println("ì„œë¹„ìŠ¤ h_no : "+h_no);
 			}else{
 				h_no = 1;
 			}
 				paramMap.put("h_no", h_no);
 				paramMap.put("r_no", review.getR_no());
 				paramMap.put("r_hash", r_hash);
-				System.out.println("¼­ºñ½º : "+paramMap);
+				System.out.println("ì„œë¹„ìŠ¤ : "+paramMap);
 				dao.tagAdd(paramMap);
 				list.add(r_hash);
 			}
@@ -167,7 +167,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public String specialCharacter_replace(String str) throws Exception {
-		str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`£© ", "");
+		str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`ï¼‰ ", "");
 
 		if (str.length() < 1) {
 			return null;
@@ -175,27 +175,26 @@ public class ReviewServiceImpl implements ReviewService {
 		return str;
 	}
 
-	@Override	//ÅÂ±× ÀüÃ¼ °¡Á®¿À±â
+	@Override	//íƒœê·¸ ì „ì²´ ê°€ì ¸ì˜¤ê¸°
 	public List<String> hashSearch() throws Exception {
 
 		return dao.HashSearch();
 	}
 
-	@Override	//°Ô½ÃÆÇ »ó¼¼º¸±â¿¡ ³» ÇØ½ÃÅÂ±× °¡Á®¿À±â
+	@Override	//ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°ì— ë‚´ í•´ì‹œíƒœê·¸ ê°€ì ¸ì˜¤ê¸°
 	public List<String> myHash(int r_no) throws Exception {
 		return dao.myHash(r_no);
 		
 	}
 
-	@Override	//ÀüÃ¼ ÇØ½ÃÅ×ÀÌºí¿¡ ÇØ´çµÇ´Â ÇØ½Ã +1
+	@Override	//ì „ì²´ í•´ì‹œí…Œì´ë¸”ì— í•´ë‹¹ë˜ëŠ” í•´ì‹œ +1
 	public void updateHash(String r_hash) throws Exception {
-		System.out.println("update·Î ³Ñ¾î¿Â hash : " + r_hash);
+		System.out.println("updateë¡œ ë„˜ì–´ì˜¨ hash : " + r_hash);
 		dao.updatehash(r_hash);
 	}
-
 	@Override
 	public void insertHash(String r_hash) throws Exception {
-		System.out.println("insert·Î ³Ñ¾î¿Â hash : " + r_hash);
+		System.out.println("insertë¡œ ë„˜ì–´ì˜¨ hash : " + r_hash);
 		int hs_no = 0;
 		if(dao.select_hs_no()==null){
 			hs_no = 1;

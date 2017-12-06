@@ -1,9 +1,8 @@
 package starrail.expenses.domain;
 
 public class ExpensesVO{
-//¿¹»ó°æºñ Å×ÀÌºí
+	//ì˜ˆìƒê²½ë¹„ í…Œì´ë¸”
 		private int e_no;
-		private int c_id;
 		private String m_id;
 		private String e_title;
 		private String e_sdate;
@@ -17,14 +16,6 @@ public class ExpensesVO{
 
 		public void setE_no(int e_no) {
 			this.e_no = e_no;
-		}
-
-		public int getC_id() {
-			return c_id;
-		}
-
-		public void setC_id(int c_id) {
-			this.c_id = c_id;
 		}
 
 		public String getM_id() {
@@ -69,7 +60,7 @@ public class ExpensesVO{
 
 		@Override
 		public String toString() {
-			return "ExpensesVO [e_no=" + e_no + ", c_id=" + c_id + ", m_id=" + m_id + ", e_title=" + e_title + ", e_sdate="
+			return "ExpensesVO [e_no=" + e_no + ", m_id=" + m_id + ", e_title=" + e_title + ", e_sdate="
 					+ e_sdate + ", e_edate=" + e_edate + ", e_total=" + e_total + "]";
 		}
 	

@@ -9,25 +9,25 @@ import starrail.review.domain.ReviewSearchCriteria;
 
 public interface ReviewService {
 
-	//ÈÄ±â°Ô½ÃÆÇ µî·Ï
+	//í›„ê¸°ê²Œì‹œíŒ ë“±ë¡
 	public void register(ReviewVO review) throws Exception;
-	//ÈÄ±â°Ô½ÃÆÇ »ó¼¼º¸±â
+	//í›„ê¸°ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public ReviewVO read(Integer r_no) throws Exception;
-	//ÈÄ±â°Ô½ÃÆÇ ¼öÁ¤
+	//í›„ê¸°ê²Œì‹œíŒ ìˆ˜ì •
 	public void modify(ReviewVO review) throws Exception;
-	//ÈÄ±â°Ô½ÃÆÇ »èÁ¦
+	//í›„ê¸°ê²Œì‹œíŒ ì‚­ì œ
 	public void remove(Integer r_no) throws Exception;
-	//ÀüÃ¼ °Ô½ÃÆÇ
+	//ì „ì²´ ê²Œì‹œíŒ
 	public List<ReviewVO> list() throws Exception;
-	//ÀüÃ¼°Ô½ÃÆÇ + ÆäÀÌÂ¡Ã³¸®
+	//ì „ì²´ê²Œì‹œíŒ + í˜ì´ì§•ì²˜ë¦¬
 	public List<ReviewVO> listCriteria(ReviewCriteria cri) throws Exception;
 	
 	public int listCountCriteria(ReviewCriteria cri) throws Exception;
-	//ÀüÃ¼°Ô½ÃÆÇ + ÆäÀÌÂ¡ + °Ë»ö
+	//ì „ì²´ê²Œì‹œíŒ + í˜ì´ì§• + ê²€ìƒ‰
 	public List<ReviewVO> listSearchCriteria(ReviewSearchCriteria cri) throws Exception;
 	
 	public int listSearchCount(ReviewSearchCriteria cri) throws Exception;
-	//ÆÄÀÏ ºÒ·¯¿À±â
+	//íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 	public List<String> getAttach(Integer r_no) throws Exception;
 	
 	public int hash_no()throws Exception;
@@ -37,10 +37,10 @@ public interface ReviewService {
 	public List<String> hashtagInsert(ReviewVO review, Hash_SearchVO searchVO) throws Exception;
 	
 	public String specialCharacter_replace(String str) throws Exception;
-	//ÀüÃ¼ ÅÂ±× °¡Á®¿À±â
+	//ì „ì²´ íƒœê·¸ ê°€ì ¸ì˜¤ê¸°
 	public List<String> hashSearch() throws Exception;
 	
-	//°Ô½ÃÆÇ »ó¼¼º¸±â¿¡ ÇØ½ÃÅÂ±× °¡Á®¿À±â
+	//ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°ì— í•´ì‹œíƒœê·¸ ê°€ì ¸ì˜¤ê¸°
 	public List<String> myHash(int r_no) throws Exception;
 	
 	public void updateHash(String r_hash) throws Exception;

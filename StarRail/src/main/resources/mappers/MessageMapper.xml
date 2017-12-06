@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="railro.review.mapper.MessageMapper">
+	<cache />
+
+	<!-- 쪽지번호 +1씩 증가시켜주기 -->
+	<select id="selectMsg_no" resultType="Integer">
+		select max(msg_no) from
+		message
+	</select>
+
+	<!-- Message DB에 삽입하기 -->
+	<insert id="insertMessage" parameterType="MessageVO">
+		insert into
+		Message(msg_no, m_id, msg_sendid, msg_content, msg_date, msg_hit)
+		values(#{msg_no}, #{m_id}, #{msg_sendid}, #{msg_content}, SYSDATE , 0)
+	</insert>
+
+	<!-- 로그인한 회원이 받은쪽지 보여주기 -->
+	<select id="list" resultType="MessageVO">
+		select *
+		from message
+		where m_id = #{m_id}
+		order by msg_no desc, msg_date desc
+	</select>
+
+	<!-- 로그인한 회원이 보낸 쪽지 보여주기 -->
+	<select id="sendemail" resultType="MessageVO">
+		select *
+		from message
+		where msg_sendid = #{m_id}
+		order by msg_no desc, msg_date desc
+	</select>
+
+	<!-- 쪽지 삭제 -->
+	<delete id="delete">
+		delete from message where msg_no = #{msg_no}
+	</delete>
+
+	<!-- 쪽지 확인 유무 -->
+	<update id="msg_hit">
+		update message set msg_hit = msg_hit+1
+		where msg_no =
+		#{msg_no}
+	</update>
+
+	<!-- 실시간 쪽지 갯수 -->
+	<select id="update_hit" resultType="Integer">
+		select count(*)
+		from message
+		where msg_hit=0
+		and m_id = #{m_id}
+	</select>
+
+	<!-- 쪽지확인창 -->
+	<select id="detail" resultType="MessageVO">
+		select * from message
+		where msg_no
+		= #{msg_no}
+	</select>
+
+
+
+
+</mapper>

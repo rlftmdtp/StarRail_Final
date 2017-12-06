@@ -1,0 +1,119 @@
+@CHARSET "EUC-KR";
+
+/* carousel */
+.media-carousel {
+	margin-bottom: 0;
+	padding: 0 40px 30px 40px;
+	margin-top: 30px;
+}
+/* Prev 버튼 눌렀을 때  */
+.media-carousel .carousel-control.left {
+	left: -12px;
+	background-image: none;
+	background: none repeat scroll 0 0 #222222;
+	border: 4px solid #FFFFFF;
+	border-radius: 23px 23px 23px 23px;
+	height: 40px;
+	width: 40px;
+	margin-top: 30px
+}
+/* Next 버튼 눌렀을 때  */
+.media-carousel .carousel-control.right {
+	right: -12px !important;
+	background-image: none;
+	background: none repeat scroll 0 0 #222222;
+	border: 4px solid #FFFFFF;
+	border-radius: 23px 23px 23px 23px;
+	height: 40px;
+	width: 40px;
+	margin-top: 30px
+}
+/* Changes the position of the indicators : indicators들이 바뀌는 위치 */
+.media-carousel .carousel-indicators {
+	right: 50%;
+	top: auto;
+	bottom: 0px;
+	margin-right: -19px;
+}
+/* Changes the colour of the indicators : indicators들의 색깔 */
+.media-carousel .carousel-indicators li {
+	background: #c0c0c0;
+}
+
+.media-carousel .carousel-indicators .active {
+	background: #ff0080;
+}
+
+.media-carousel img {
+	width: 150px;
+	height: 100px;
+}
+
+a{
+	display: none;
+}
+/* End carousel */
+
+
+
+/* START동반자 찾기 했을때 나오는 폼 */
+.src-image {
+  display: none;
+}
+
+.card {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #CCC;
+  border-radius: 8px;
+  text-align: center;
+  padding: 0;
+  background-color: #fdeaea;
+  color: rgb(0, 0, 0);
+}
+
+.card .header-bg {
+  /* This stretches the canvas across the entire hero unit */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px #FFF solid;
+  /* This positions the canvas under the text */
+  z-index: 1;
+}
+.card .avatar {
+  position: relative;
+  margin-top: 15px;
+  z-index: 100;
+}
+
+.card .avatar img {
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid rgba(0,0,0,0);
+  background-image: url("");
+}
+/* END 동반자 찾기 했을때 나오는 폼 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+body * {
+	border: 1px solid black;
+}
+
+.rails {
+	min-height: 7vh;
+	background: red;
+}
+
+.course {
+	min-height: 7vh;
+	background: green;
+}
+
+.station {
+	min-height: 7vh;
+	background: pink;
+}
+
+.map {
+	position:relative;
+	min-height: 50vh;
+}
+
+.info {
+	min-height: 70vh;
+	background: yellow;
+	position: relative;
+}
+
+.graph {
+	min-height: 50vh;
+	background: blue;
+}
+
+.info1 {
+	position: absolute;
+	height: 100%;
+}
+.info1 > .row {
+	height: inherit;
+}
+.info1 > .row > div {
+	height: inherit;
+}
+.info1 > .row > div > ul {
+	margin: 0 auto;
+	text-align: center;
+	width: 500px;
+	height:10%
+}
+
+.info1 > .row > div > ul > li{
+	height:100%;
+	
+}
+
+
+.info2 {
+	position: absolute;
+	right: 0;
+	height: 100%;
+}
+
+.info-content{
+	height: 90%;
+}
+.info-content > div {
+	height: 100%;
+}
+
+.search{
+	position: absolute;
+	z-index: 1000
+}
+
+#courseButtons,#stationButtons{
+	text-align: center;
+}

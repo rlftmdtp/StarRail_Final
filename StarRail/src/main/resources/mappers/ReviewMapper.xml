@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="railro.review.mapper.ReviewMapper">
+
+	<select id="selectR_no" resultType="Integer">
+		select max(r_no) from review
+	</select>
+
+	<!-- 후기게시물 등록  -->
+ <insert id="insertReview" parameterType="ReviewVO">
+      insert into review
+      values(
+      #{r_no}, #{m_id}, #{r_title}, #{r_content},
+      SYSDATE, 0,0
+      )
+   </insert>
+
+	<!-- 후기게시물 전체 보기  -->
+	<select id="listReview" resultType="ReviewVO">
+		select r_no, r_title, m_id,
+		r_date, r_hit
+		from review
+		order by r_no desc, r_date desc
+	</select>
+
+	<!-- 페이징처리 -->
+	<select id="listPage" resultType="ReviewVO">
+	<![CDATA[ 
+		select r_no, r_title, m_id, r_date, r_hit 
+		from review
+		where r_no > 0
+		order by r_no desc, r_date desc
+		]]>
+	</select>
+
+	<select id="listCriteria" resultType="ReviewVO">
+	<![CDATA[ 
+		select r_no, r_title, m_id, r_date, r_hit 
+		from review
+		where r_no > 0
+		order by r_no desc, r_date desc
+		]]>
+	</select>
+
+	<!-- 검색 -->
+	<select id="listSearch" resultType="ReviewVO">
+	<![CDATA[ 
+		select r_no, r_title, m_id, r_date, r_hit
+		from review
+		where r_no > 0
+			]]>
+		<include refid="search"></include>
+		
+		<![CDATA[
+		order by r_no desc
+		
+	]]>
+	</select>
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and r_title like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and r_content like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and m_id like '%'|| #{keyword}||'%'
+			</if>
+
+			<if test="searchType == 'tc'.toString()">
+				and ( r_title like '%'|| #{keyword}||'%' OR r_content
+				like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( r_content like '%'|| #{keyword}||'%' OR m_id like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( r_title like '%'|| #{keyword}||'%'
+				OR
+				r_content like
+				'%'|| #{keyword}||'%'
+				OR
+				m_id like '%'|| #{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	
+	<!-- 게시물 조회수 -->
+	<update id="updateR_hit">
+		update review set r_hit = r_hit + 1
+		where r_no= #{r_no}
+	</update>
+
+	<select id="listSearchCount" resultType="int">
+	<![CDATA[ 
+		select count(r_no)
+		from review
+		where r_no > 0
+		order by r_no desc, r_date desc
+		]]>
+	</select>
+
+	<!-- 총게시물 갯수 -->
+	<select id="countPaging" resultType="int">
+	<![CDATA[ 
+		select count(r_no)
+		from review
+		where r_no > 0
+		]]>
+	</select>
+
+	<!-- 게시물 상세보기 -->
+	<select id="detailReview" resultType="ReviewVO">
+		select * from review where
+		r_no = #{r_no}
+	</select>
+
+	<!-- 게시물 수정하기 -->
+	<update id="updateReview" parameterType="ReviewVO">
+		update Review set
+		r_title = #{r_title}, r_content = #{r_content},
+		r_date = sysdate
+		where r_no = #{r_no}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deleteReview">
+		delete from Review where r_no = #{r_no}
+	</delete>
+
+
+	<!-- 게시판 첨부파일 업로드 -->
+	<insert parameterType="FileVO" id="addAttach">
+		insert into review_file
+		values(
+		#{rf_fullname}, #{r_no}, SYSDATE
+		)
+	</insert>
+
+	<select id="maxNum" resultType="int">
+		select MAX(r_no) from review
+	</select>
+
+	<!-- 첨부파일 주가된 게시물 조회 -->
+	<select id="getAttach" resultType="string">
+		select rf_fullname
+		from
+		review_file
+		where r_no = #{r_no}
+		order by rf_date
+	</select>
+
+	<!-- 첨부파일 수정,삭제 작업 -->
+	<delete id="deleteAttach">
+		delete from review_file where r_no = #{r_no}
+	</delete>
+
+	<insert id="replaceAttach">
+		insert into review_file(rf_fullname, r_no)
+		values(#{rf_fullname}, #{r_no})
+	</insert>
+
+	<!-- 해시태그 -->
+	<!-- 내 글에 해시태그 추가하기 -->
+	<insert id="addHash" parameterType="hashMap">
+		insert into hash values(
+		#{h_no}, #{r_no}, #{r_hash}
+		)
+	</insert>
+
+	<!-- 전체 해시태그 가져가기 -->
+	<select id="tagGet" resultType="String">
+		select hs_search
+		from hash_search
+    	ORDER BY HS_COUNT desc
+	</select>
+
+	<select id="selectH_no" resultType="Integer">
+		select max(h_no) from hash
+	</select>
+	
+	<!--게시판 상세보기에 해시태그 가져오기 -->
+	<select id="myhash" resultType="String">
+		select r_hash
+		from hash
+		where r_no = #{r_no}
+	</select>
+	
+	<!-- 해시태그 hit수 증가 -->
+	<update id="updatehash" parameterType="String">
+		update hash_search set
+		hs_count = hs_count + 1
+		where hs_search = #{r_hash}
+	</update>
+	
+	<!-- 새로운 해시태그 생성 -->
+	<insert id="inserthash" parameterType="map">
+		insert into hash_search
+		values(
+		#{hs_no}, #{hs_search}, 1
+		)
+	</insert>
+	
+	<select id="select_hs_no" resultType="integer">
+		select max(hs_no)
+		from hash_search
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

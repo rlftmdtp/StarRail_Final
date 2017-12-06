@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="starrail.recommend.mappers.partnerMapper">
+
+	<select id="prefer_Select" resultType="java.util.HashMap">
+		SELECT m.M_NO, pd.TAG_NO
+			  FROM MEMBER_PREFER pre, MEMBER_PREFERDETAIL pd, HASH_SEARCH hs, MEMBER m
+			  where pre.PRE_NO = pd.PRE_NO and
+			        hs.HS_NO = pd.TAG_NO and
+			        m.M_ID = pre.M_ID
+			  order by m.M_NO
+	</select>
+	
+	<select id="tagRecommend_Select" resultType="Hash_SearchVO" parameterType="java.util.ArrayList">
+		select *
+			from HASH_SEARCH
+  			<where>
+  				HS_NO IN
+  				<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+			    	#{item.value}
+				</foreach>  				
+  			</where>
+	</select>
+
+
+
+</mapper>  

@@ -1,0 +1,51 @@
+.departures div.btn-group,
+.arrivals div.btn-group{
+	width:480px;
+}
+
+.departures div.btn-group label,
+.arrivals div.btn-group label
+{
+  padding-left: 40px;
+  width:110px;
+  margin-top:0px;
+  margin-bottom:5px;
+  margin-right:5px;
+}
+
+.departures div.btn-group label.btn input[type="radio"]:empty,
+.arrivals div.btn-group label.btn input[type="radio"]:empty
+{
+  display: none;
+}
+
+.departures div.btn-group label.btn input[type="radio"] ~ span:before,
+.arrivals div.btn-group label.btn input[type="radio"] ~ span:before
+{
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 2.5em;
+  background: #D1D3D4;
+}
+
+.departures div.btn-group label.btn input[type="radio"]:before,
+.arrivals div.btn-group label.btn input[type="radio"]:before
+{
+  content: '\2714';
+  text-indent: .9em;
+  color: #C2C2C2;
+}
+
+.departures div.btn-group label.btn input[type="radio"]:checked ~ span:before,
+.arrivals div.btn-group label.btn input[type="radio"]:checked ~ span:before
+{
+  content: '\2714';
+  text-indent: .3em;
+  color: #fff;
+  background-color: #5cb85c;
+  line-height: 2.5em;
+}

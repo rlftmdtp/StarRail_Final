@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="starrail.course.mappers.courseMapper">
+
+	<select id="issueSelect" parameterType="String" resultType="IssueInfoVO">
+		select * from issueinfo
+		where i_name = #{i_name}
+	</select>
+
+	<select id="selectC_id" resultType="Integer">
+		select max(c_id) from course
+	</select>
+	
+	<select id="selectCd_id" resultType="Integer">
+		select max(cd_id) from coursedetail
+	</select>
+
+	<insert id="courseInsert" parameterType="CourseVO">
+		insert into course(c_id, m_id, i_name, c_name, c_filename)
+		values( #{c_id}, #{m_id}, #{i_name}, #{c_name}, #{c_filename} )
+	</insert>
+
+	<insert id="courseDetailInsert" parameterType="CourseDetailVO">
+		insert into coursedetail( cd_id, c_id, cd_start, cd_stime, cd_end, cd_etime)
+		values ( #{cd_id}, #{c_id}, #{cd_start}, #{cd_stime}, #{cd_end}, #{cd_etime} )
+	</insert>
+	
+	<select id="courseSelect" parameterType="Integer" resultType="CourseVO">
+		select * from course
+		where c_id = #{c_id}
+	</select>
+	
+	<select id="courseDetailList" parameterType="Integer" resultType="CourseDetailVO">
+		select * from coursedetail
+		where c_id = #{c_id}
+	</select>
+	
+	<update id="courseUpdate" parameterType="CourseVO">
+		update course set i_name=#{i_name}, c_name=#{c_name}, c_filename=#{c_filename}
+		where c_id =#{c_id}
+	</update>
+	
+	<delete id="courseDetailDelete" parameterType="Integer">
+		delete from coursedetail where c_id = #{c_id}
+	</delete>
+
+</mapper>  
+
+  

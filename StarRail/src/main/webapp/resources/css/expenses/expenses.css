@@ -1,0 +1,129 @@
+@CHARSET "UTF-8";
+
+/* 저장버튼 */
+#submit {
+	background-color: #FFA7A7;
+}
+
+/* 썸네일 */
+
+.btn-radio {
+	width: 100%;
+}
+.img-radio {
+	opacity: 0.5;
+	margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}
+
+.input-daterange input-group{
+	margin-left : 6px;
+	width: 50%;
+}
+
+/* 하나하나의 div */
+.input-group {
+	
+	height: 34px;
+	width : 90%;
+	margin-top : 20px;
+	margin-bottom: 10px;
+}
+
+.form-control{
+	height: 40px;
+}
+
+/* tab안에 감싸는 div */
+.tab-content {
+	margin-top: 0px;
+}
+
+/* 예산경비 등록하는 form */
+.expenseslist{
+	position: pixed;
+	
+}
+
+/* 오늘총사용금액, 남은예산 */
+p{
+	margin-bottom: 0px;
+}
+
+/* 지출내역에 등록하는 form */
+#katelist{
+	position: pixed;
+	float : left;
+	margin-left: 0px;
+	width: 50%;
+	margin-top: 15px;
+	
+}
+
+.selected {
+	background-color: yellow;
+}
+
+/* 지출내역에 보여지는 list form */
+#amountlist{
+	float : right;
+	width: 50%;
+}
+
+/* 지출내역 보여주는 list 높이 */
+.hero-widget{
+	width : 350px;
+	height: 300px;
+}
+
+/* 출발일 input태그 background */
+#datepicker_expense {
+	background-color: #eee;
+	background-position: right;
+	border-radius: 5px;
+	border-color: #ccc;
+}
+
+
+
+/*Panel tabs*/
+.panel-tabs {
+	position: relative;
+	bottom: 30px;
+	clear: both;
+	border-bottom: 1px solid transparent;
+}
+
+.panel-tabs>li {
+	float: left;
+	margin-bottom: -1px;
+}
+
+.panel-tabs>li>a {
+	margin-right: 2px;
+	margin-top: 4px;
+	line-height: .85;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+	color: #ffffff;
+}
+
+.panel-tabs>li>a:hover {
+	border-color: transparent;
+	color: #ffffff;
+	background-color: transparent;
+}
+
+.panel-tabs>li.active>a, .panel-tabs>li.active>a:hover, .panel-tabs>li.active>a:focus
+	{
+	color: #fff;
+	cursor: default;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-color: rgba(255, 255, 255, .23);
+	border-bottom-color: transparent;
+}

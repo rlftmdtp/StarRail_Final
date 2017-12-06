@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="starrail.partner.mappers.partnerMapper">
+	
+	<select  id="myCourse_Select" resultType="CourseVO">
+	<![CDATA[
+		SELECT course.*
+		      FROM(select c.C_ID, c.M_ID, c.I_NAME, c.C_NAME, c.C_FILENAME
+		              from course c, member m
+		              where c.M_ID = m.M_ID AND
+		                    m.M_ID = #{m_id}
+		              ORDER by c.c_id desc)course
+		      WHERE ROWNUM <= 3
+	]]>
+	</select>
+	
+	
+	<!-- 썸네일 이미지 클릭 시 해당하는 코스의 코스 디테일을 가져오기 위함 -->
+	<select id="mySchedule_Select" resultType="CourseDetailVO">
+		select cd.cd_id as cd_id
+				, cd.c_id as c_id
+				, cd.cd_start as cd_start
+				, cd.CD_STIME as cd_stime
+				, cd.CD_END as cd_end
+				, cd.CD_ETIME as cd_etime
+			  from COURSEDETAIL cd, COURSE c, MEMBER m
+			  where cd.C_ID = c.C_ID AND
+			        m.M_ID = c.M_ID AND
+			        m.M_ID = #{m_id} AND
+			        c.C_ID = #{c_id}
+	</select>
+	
+	<!-- 동반자 찾기 버튼 클릭 시 클릭된 일정의 코스디테일 뽑음 -->
+	<select id="courseDetail_Select" parameterType="java.util.HashMap" resultType="CourseDetailVO">
+	    select *  from COURSEDETAIL
+	    <where>
+	        cd_id IN
+			<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+			    #{item.value}
+			</foreach>
+	    </where>
+	</select>
+	
+	
+	<select id="partnerSearch_Select" resultType="UserVO" parameterType="CourseDetailVO">	
+  	      <!--and cd.CD_STIME < '201712140900' 
+      			and cd.CD_ETIME > '201712140900' 
+      			and cd.CD_END='정동진'  -->        	
+      					
+		select m_id, m_pw, m_name , m_gender, m_age 
+			from member
+		    where M_ID IN(select m.M_ID
+				                   from member m, course c, coursedetail cd
+                    			   where m.M_ID = c.M_ID and c.C_ID = cd.C_ID  
+                    			   		and not c.c_id = #{c_id} 
+				                    	<![CDATA[                  
+				                        and cd.CD_STIME <= #{cd_etime}
+				                        and cd.CD_ETIME >= #{cd_etime} ]]>
+				                        and cd.CD_END = #{cd_end})
+	</select>
+
+	<select id="cd_Select" resultType="CourseDetailVO">
+		select * from coursedetail where cd_id=#{cd_id}
+	</select>
+
+
+
+</mapper>  

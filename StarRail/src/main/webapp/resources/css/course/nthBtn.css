@@ -1,0 +1,157 @@
+.beds-baths span.icon {            	
+    opacity: 1;
+    color: #909090;
+    font-size: 32px;
+
+    display: block;
+    margin: 0 auto;
+    height: 24px;
+    line-height: 24px;
+}
+
+
+
+/* .icon-blank-space {
+    text-indent: -9999px
+} */
+
+.beds-baths.active span.icon {    			
+	opacity: 0;		
+    color: #fff;
+    font-size: 20px;   
+
+}
+/* 
+.beds-baths-group .beds-baths.active:first-child span.icon {
+    opacity: 1;
+    color: #909090;
+    font-size: 32px;
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    height: 24px;
+    line-height: 24px;
+  }
+
+.beds-baths-group .beds-baths:first-child, .beds-baths-group .beds-baths:hover:first-child, .beds-baths-group .beds-baths:active:first-child, .beds-baths-group .beds-baths:focus:first-child {
+    background: #F3F3F3;
+    border-color: #ccc;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    cursor: default;
+    color: #909090;    
+}
+
+
+ */
+
+.beds-baths.active {
+    background: #7BB712;   
+}
+
+
+
+.beds-baths {
+    width: 100px;   
+}
+
+#beds-baths-group {
+    width:1000px;   
+}
+#beds-baths-group  label {margin-right:10px; border-radius: 10px;}
+.beds-baths-word {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 34px;
+    width: 100px;
+    margin: 0 auto;
+    font-size: 14px;
+    font-weight: bold;
+    color: #909090;
+}
+
+.beds-baths.active .beds-baths-word {
+    color: #fff;
+}
+
+.mobile-br {
+ display: block;   
+}
+
+.beds-baths-clearfix {
+    display: none;
+    clear: both;
+}
+
+@media (max-width: 600px) {
+
+    .beds-baths {
+        text-align: left;
+        margin-bottom: 0px !important;
+    }
+    
+    .beds-baths-word {
+        display: block;
+        position: absolute;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 17px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        font-weight: bold;
+        text-align: center;
+}
+
+.beds-baths-1,
+.beds-baths-2,
+.beds-baths-3,
+.beds-baths-4,
+.beds-baths-5,
+.beds-baths-6,
+.beds-baths-7,
+.beds-baths-8 {
+    width: 50% !important;
+margin-top: -1px;
+    margin-bottom: -1px;
+}
+
+.beds-baths-2,
+.beds-baths-4,
+.beds-baths-6,
+.beds-baths-8 {
+    float: right !important;	
+}
+
+.beds-baths-1,
+.beds-baths-3,
+.beds-baths-5,
+.beds-baths-7 {
+    float: left !important;
+
+}
+
+.bed-baths-9 {
+	width: 100% !important;
+}
+
+    .beds-baths.active .beds-baths-word {
+        color: #fff;
+    }
+    
+    .beds-baths-clearfix {
+        display: block;
+        clear: both;
+    }
+
+.mobile-br {
+ display: none;   
+ 
+ 
+}
+
+}

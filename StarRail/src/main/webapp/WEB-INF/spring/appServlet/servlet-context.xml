@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<default-servlet-handler />
+	<context:component-scan base-package="starrail.main.controller" />
+	<context:component-scan base-package="starrail.map.controller" />
+
+	<context:component-scan base-package="starrail.course.controller" />
+	<context:component-scan base-package="starrail.review.controller" />
+	<context:component-scan base-package="starrail.message.controller" />
+	<context:component-scan base-package="starrail.expenses.controller" />
+	<context:component-scan base-package="starrail.partner.controller" />
+	<context:component-scan base-package="starrail.recommender.controller" />
+
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+
+	<resources mapping="/resources/**" location="/resources/" />
+
+
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<!-- 로그인 관련 인터셉터 -->
+	<beans:bean id="loginInterceptor" class="starrail.main.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="starrail.main.interceptor.AuthInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/main/loginPost" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/map/search" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/review/review_insert" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/map/search" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/partner/partner" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/recommend/recommend" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+	</interceptors>
+
+	<!-- review 파일 업로드 -->
+	<beans:bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver">
+		<beans:property value="10485760" name="maxUploadSize" />
+	</beans:bean>
+
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="C:\\upload" />
+	</beans:bean>
+
+
+</beans:beans>

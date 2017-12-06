@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="railro.expenses.mapper.ExpensesMapper">
+	<cache />
+	
+	<!-- 예상 경비 지정  -->
+	<insert id="expensesInsert" parameterType="ExpensesVO">
+		insert into expenses(e_no, m_id, e_title, e_sdate, e_edate, e_total)
+		values(#{e_no}, #{m_id}, #{e_title}, #{e_sdate}, #{e_edate}, #{e_total})
+	</insert>
+	
+	<select id="selectE_no" resultType="Integer">
+		select max(e_no) from expenses
+	</select>
+	
+	<!-- 지출 항목 저장 -->
+	<select id="totalMoney" resultType="int">
+		select e_total 
+		from expenses
+		where e_no = #{e_no}
+	</select>
+	
+	<!-- 총예산 - 쓴돈 계산해서 총남은금액 바꿔주기 -->
+	<update id="updateExpenses" parameterType="Map">
+		update expenses set e_total = #{total}
+		where e_no=#{e_no}
+	</update>
+	
+	<!-- 지출내역등록 -->
+	<insert id="amountInsert" parameterType="StatementVO">
+		insert into expenses_detail 
+		values(#{ed_no}, #{e_no}, #{ed_date}, #{ed_kategorie}, #{ed_katename}, #{ed_amount}, #{ed_plma})
+	</insert>
+	
+	<select id="selectEd_no" resultType="Integer">
+		select max(ed_no) from expenses_detail
+	</select>
+	
+	<!-- 사용자가 오늘 총 사용한 금액 -->
+	<select id="todayTotal" parameterType="Map" resultType="Integer">
+		select sum(ed_amount)
+		from expenses_detail
+		where ed_date = #{ed_date}
+		AND e_no = #{e_no}
+	</select>
+	
+	<!-- 예상 경비에서 코스 불러오기 -->
+	<select id="course" resultType="Map">
+	<![CDATA[ select course.*
+		from (select c.c_id "c_id", c.c_name "c_name" 
+          	  from course c, member m 
+          	  where c.m_id = m.m_id
+          	  AND m.M_ID = #{id}
+         	  order by c_id desc)course
+    	where ROWNUM <=3
+    	]]>
+	</select>
+	
+	<select id="recall" resultType="Map">
+	<![CDATA[
+	select expenses.*
+	from (select e.e_no "e_no", e.e_title "e_title"
+		from expenses e, member m
+		where e.m_id = m.m_id
+		and m.m_id = #{m_id}
+		order by e_no desc)expenses
+	where ROWNUM <=3 
+	]]>
+	</select>
+	
+	<select id ="recallData" resultType="Map">
+		 select ex.e_no "e_no", ex.e_sdate "e_sdate", ex.e_edate "e_edate", 
+      ex.e_total "e_total", ed.ed_no "ed_no", ed.ed_date "ed_date", ed.ed_kategorie "ed_kategorie",
+      ed.ed_katename "ed_katename", ed.ed_amount "ed_amount"
+      from expenses ex, expenses_detail ed
+      where ex.e_no = ed.e_no
+      and ex.e_no = #{e_no}
+	</select>
+	
+</mapper>	

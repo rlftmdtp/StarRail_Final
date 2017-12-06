@@ -1,0 +1,323 @@
+@CHARSET "utf-8";
+ 
+ 
+body{margin:0; padding:0;}
+
+h4{
+	font-weight: bolder;
+	font-size:12pt;
+	line-height: inherit;
+}
+#getdetaildata{
+	display: none;
+}
+#courseWrap{
+	margin:0 auto;
+	width:1080px;
+	overflow: inherit;
+	
+	background:#E6F7FF;
+}
+
+#courseName{
+	width:1060px;
+	margin: 0px 10px 10px 10px;
+	padding:5px;
+}
+
+#periodSetting{
+	width:1060px;
+	margin: 0px 10px 10px 10px;
+	padding: 5px;
+	height:50px;
+	
+	border-bottom: 1px solid;
+}
+
+#dateSetting{
+	width:1060px;
+	margin: 0px 10px 10px 10px;
+	padding: 5px;
+	height:70px;
+	line-height:70px;
+	
+}
+
+#stationSetting{
+	width:1060px;
+	margin: 0px 10px 10px 10px;
+	padding: 10px 20px 10px 20px;
+	height: 220px;
+	
+	background: #FFE5CC;
+}
+
+.departures{
+	float:left;
+	width:500px;
+	margin:0px 10px 0px 0px;
+	padding: 10px;
+	height:200px;
+	border-radius:15px;
+	overflow:hidden;
+	overflow-y:auto;
+	
+	background: #FFFFCC;
+}
+
+.arrivals{
+	float:left;
+	width:500px;
+	margin:0px 0px 0px 10px;
+	padding:10px;
+	height:200px;
+	border-radius:15px;
+	overflow:hidden;
+	overflow-y:auto;
+	
+	background: #FFFFCC;
+}
+
+#courseSetting{
+	width:1060px;
+	margin:0px 10px 10px 10px;
+	padding:5px 10px 5px 10px;
+	height:700px;
+	
+	background: #FFE5CC;
+}
+
+#trainSetting{
+	float:left;
+	width:300px;
+	height:690px;
+	
+	background: #FFFFCC;
+}
+
+.hopingTime{
+	width:280px;
+	margin: 75px 10px 10px 10px;
+	height: 70px;
+	font-weight: bolder;
+	
+	background: #CCCCFF;
+}
+
+.hopingTime h4{
+	width:280px;
+	margin:0;
+}
+
+.hopingTime select{
+	margin-top:10px;
+	margin-left:2em;
+}
+
+.trainTimeTableTitle{
+	width:280px;
+	height:30px;
+	margin:0px 10px 5px 10px;
+	
+	background: #CCCCFF;
+}
+
+.trainTimeTable{
+	width:280px;
+	margin: 0px 10px 10px 10px;
+	height:370px;
+	padding:5px;
+	overflow:hidden;
+	overflow-y:auto;
+	
+	
+	background: #CCCCFF;
+}
+
+.trainListTable{
+	margin:0 auto;
+	width:250px;
+	border-collapse: collapse;
+}
+
+.trainListTable thead th{
+	height:30px;
+	border: 1px solid;
+	padding:0;
+	font-size: 11pt;
+	background: #BCBCBC;
+	text-align: center;
+}
+
+.trainListTable thead th.th1{
+	width:100px;
+}
+
+.trainListTable thead th.th2{
+	width:100px;
+}
+
+.trainListTable thead th.th3{
+	width:50px;
+}
+
+.trainListTable tbody td{
+	text-align:center;
+	height:25px;
+	border:1px solid;
+	padding:0 0.5em 0 0.5em;
+}
+
+.addingBtn{
+	width:280px;
+	margin:0px 10px 0px 10px;
+	height: 50px;
+	text-align: right;
+	padding-top:8px;
+	background: #CCCCFF;
+}
+
+
+.addingBtn .btn-outline-success {
+    color: #27ae60;
+    background-color: #fff;
+    border-color: #27ae60;
+}
+.addingBtn .btn-outline-success:hover {
+    color: #fff;
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+
+#mapArea{
+	float:left;
+	width:432px;
+	height:690px;
+	padding:10px 0px 11px 0px;
+	margin:0px 4px 0px 4px;
+	
+	background: #FFFFCC;
+}
+
+#couresDetailView{
+	float:left;
+	width:300px;
+	height:560px;
+	margin: 65px 0px 0px 0px;
+	padding:10px;
+	
+	background: #FFFFCC;
+}
+
+#couresDetailView h4.title{
+	width:280px;
+	margin:0;
+}
+
+#couresDetailView div.uls{
+	width:280px;
+	height: 500px;
+	margin-top:9px;
+	padding-top:10px;
+	overflow: hidden;
+	overflow-y: auto;
+	background: #CCCCFF;
+}
+
+#couresDetailView h4.date{
+	width:270px;
+	margin:0;
+	padding-left:10px;
+}
+
+#couresDetailView ul{
+	width:280px;
+	padding-left:20px;
+	margin:0px 0px 15px 0px;
+	list-style: none;
+}
+
+#couresDetailView ul li:before{
+	content: "•";
+    padding-right: 8px;
+}
+
+span.coureDetail{
+	display: none;
+}
+
+#issueSetting{
+	width:1060px;
+	margin: 0px 10px 10px 10px;
+	padding: 10px;
+	
+	
+	background: #FFE5CC;
+}
+
+.trainListTable tbody td{
+	text-align:center;
+	height:25px;
+	border:1px solid;
+	padding:0 0.5em 0 0.5em;
+}
+
+
+table.issuelist{
+	margin:0 auto;
+	width:1040px;
+	border-collapse: collapse;
+}
+
+.issuelist thead th{
+	height:30px;
+	border: 1px solid;
+	padding:0;
+	font-size: 11pt;
+	background: #BCBCBC;
+	text-align: center;
+}
+
+.issuelist thead th.th1{
+	width:60px;
+}
+
+.issuelist thead th.th2,
+.issuelist thead th.th3,
+.issuelist thead th.th4,
+.issuelist thead th.th5{
+	width:235px;
+}
+
+.issuelist thead th.th6{
+	width:40px;
+}
+
+.issuelist tbody td{
+	height:25px;
+	border:1px solid;
+	padding:0 0.5em 0 0.5em;
+}
+
+#allSavingBtn{
+	width:1060px;
+	margin: 0px 10px 10px 10px;
+	padding: 5px;
+	height:60px;
+	text-align: right;
+	
+	background: #FFE5CC;
+}
+
+#allSavingBtn .btn-outline-success {
+   	color: #27ae60;
+    background-color: #fff;
+    border-color: #27ae60;
+}
+
+#allSavingBtn .btn-outline-success:hover {
+    color: #fff;
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}

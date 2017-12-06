@@ -6,25 +6,25 @@ import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 
 public interface ExpensesService {
-	//¿¹»ó °æºñ ¼³Á¤
+	//ì˜ˆìƒ ê²½ë¹„ ì„¤ì •
 	public void expensesRegist(ExpensesVO expensesVO) throws Exception;
 	
-	//ÃÑ ³²Àº±İ¾× ±¸ÇØ¿À±â
+	//ì´ ë‚¨ì€ê¸ˆì•¡ êµ¬í•´ì˜¤ê¸°
 	public Integer totalMoney(int e_no, int ed_amount) throws Exception;
 	
-	//ÁöÃâ ³»¿ª ÀúÀå
+	//ì§€ì¶œ ë‚´ì—­ ì €ì¥
 	public void amountRegist(StatementVO statementVO, Integer total) throws Exception;
 	
-	//»ç¿ëÀÚ°¡ ¿À´Ã »ç¿ëÇÑ ÃÑ ±İ¾×
+	//ì‚¬ìš©ìê°€ ì˜¤ëŠ˜ ì‚¬ìš©í•œ ì´ ê¸ˆì•¡
 	public int todayTotal(int e_no, String ed_date)throws Exception;
 
-	//ÄÚ½º
+	//ì½”ìŠ¤
 	public List<Map<String, Object>> course(String id) throws Exception;
 	
-	//ºÒ·¯¿À±â
+	//ë¶ˆëŸ¬ì˜¤ê¸°
 	public List<Map<String, Object>> recall(String m_id) throws Exception;
 
-	//¼±ÅÃÇÑ ÀúÀå³»¿ª »Ì¾Æ¿À±â
+	//ì„ íƒí•œ ì €ì¥ë‚´ì—­ ë½‘ì•„ì˜¤ê¸°
 	public List<Map<String, Object>> recallData(int e_no) throws Exception;
 	
 	

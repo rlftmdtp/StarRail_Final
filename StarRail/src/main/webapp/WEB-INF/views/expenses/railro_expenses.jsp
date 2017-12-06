@@ -331,18 +331,34 @@
 				var ed_amount = 0;
 				var e_no = 0;
 				var ed_no = 0;
-/* 				var Date = new Date();
-				ed_date = (Date.getFullYear() + '-'
-						+ (Date.getMonth() + 1)
-						+ '-' + Date.getDate());
-				
-			$('#endDate').attr("value", (endDate.getFullYear() + '-'
-							+ (endDate.getMonth() + 1)
-							+ '-' + endDate.getDate())); */
+ 				var startDate = new Date();
+ 				var strArr;
+ 				var strArr2;
 
 
 				 $.each(data, function(index, item) {
-					 alert("item : "+item["e_no"]);
+					 
+					 strArr = item["e_sdate"].split('-');
+					 
+					 startDate.setMonth(Number(strArr[1]) - 1);
+					 startDate.setFullYear(strArr[0]);
+					 startDate.setDate(strArr[2]);
+					 alert(startDate);
+
+					var endDate = new Date();
+					strArr2 = item["e_edate"].split('-');
+					 alert(strArr2);
+						endDate.setMonth(Number(strArr2[1]) - 1);
+						endDate.setFullYear(strArr2[0]);
+						endDate.setDate(strArr2[2]);
+						alert(endDate);
+						/* 일 수 구하는 공식 */
+						var interval = endDate.getTime() - startDate.getTime();
+						interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+						interval.toString();
+
+						alert(interval.toString());
+					 
 					 $('.lead').append('<p>' + item["ed_date"] + '</p>');
 					 $('.lead').append('<input type="hidden" value="'+item["e_no"]+'" >');
 					 

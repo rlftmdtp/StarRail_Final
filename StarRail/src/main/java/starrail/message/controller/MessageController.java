@@ -26,25 +26,25 @@ public class MessageController {
 
 	@RequestMapping(value = "/start", method = RequestMethod.GET)
 	public void startGET() {
-		//ÈñÁ¤ÀÌ µ¿¹İÀÚ Ã£±â ¹öÆ° 
+		//í¬ì •ì´ ë™ë°˜ì ì°¾ê¸° ë²„íŠ¼ 
 	}
 
 	@RequestMapping(value = "/msg_insertform", method = RequestMethod.GET)
 	public void msg_insertGET(MessageVO message) throws Exception {
-		//ÂÊÁöº¸³»±â ¹öÆ°´©¸£¸é ÂÊÁöÃ¢ ¶ä
+		//ìª½ì§€ë³´ë‚´ê¸° ë²„íŠ¼ëˆ„ë¥´ë©´ ìª½ì§€ì°½ ëœ¸
 	}
 	
 
 
 	@RequestMapping(value = "/msg_insertform", method = RequestMethod.POST)
 	public void msg_insertformPOST(MessageVO message) throws Exception {
-		//º¸³»±â ´©¸£¸é ÂÊÁö°¡ »ó´ë¹æ¿¡°Ô º¸³»Áø´Ù!
+		//ë³´ë‚´ê¸° ëˆ„ë¥´ë©´ ìª½ì§€ê°€ ìƒëŒ€ë°©ì—ê²Œ ë³´ë‚´ì§„ë‹¤!
 		service.regist(message);
 	}
 
 	@RequestMapping(value = "/msg_insertok", method = RequestMethod.POST)
 	public ResponseEntity<String> MessageinsertPOST() throws Exception {
-		//ÂÊÁö ÀÚ¼¼È÷º¸°í È®ÀÎ ´©¸£¸é ´İÈ÷°Ô ÇÏ·Á°í 
+		//ìª½ì§€ ìì„¸íˆë³´ê³  í™•ì¸ ëˆ„ë¥´ë©´ ë‹«íˆê²Œ í•˜ë ¤ê³  
 		ResponseEntity<String> entity = null;
 		try {
 			entity = new ResponseEntity<String>("", HttpStatus.OK);
@@ -58,11 +58,11 @@ public class MessageController {
 
 	@RequestMapping(value = "/msg_list", method = RequestMethod.GET)
 	public ModelAndView msg_listGET(Model model, MessageVO messageVO) throws Exception {
-		//·Î±×ÀÎÇÑ ¾ÆÀÌµğÀÇ ¹ŞÀº ÂÊÁö¸¦ °¡Á®¿Â´Ù
+		//ë¡œê·¸ì¸í•œ ì•„ì´ë””ì˜ ë°›ì€ ìª½ì§€ë¥¼ ê°€ì ¸ì˜¨ë‹¤
 		ModelAndView mav = new ModelAndView();
 		messageVO.setM_id("dlwotmd");
 		
-		//msg_list·Î ¾Æ·¡ÀÇ 3°¡Áö¸¦ °¡Áö°í °¡°Ú´Ù.
+		//msg_listë¡œ ì•„ë˜ì˜ 3ê°€ì§€ë¥¼ ê°€ì§€ê³  ê°€ê² ë‹¤.
 		mav.setViewName("/message/msg_list");
 		mav.addObject("m_id", "dlwotmd");
 		mav.addObject("updatenum", service.update_hit(messageVO.getM_id()));
@@ -73,7 +73,7 @@ public class MessageController {
 
 	@RequestMapping(value = "/message_delete", method = RequestMethod.POST)
 	public String MessageDeleteGET(@RequestBody int test) throws Exception {
-		//ÂÊÁö »èÁ¦
+		//ìª½ì§€ ì‚­ì œ
 		service.remove(test);
 
 		return "redirect:/message/msg_list";
@@ -81,7 +81,7 @@ public class MessageController {
 
 	@RequestMapping(value = "/msg_detail{msg_no}", method = RequestMethod.GET)
 	public ModelAndView MessageDetailGET(@PathVariable int msg_no, Model model) throws Exception {
-		//ÂÊÁö ÀÚ¼¼È÷ º¸±â
+		//ìª½ì§€ ìì„¸íˆ ë³´ê¸°
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/message/msg_detail");
 		mav.addObject("messageVO", service.read(msg_no));
@@ -91,7 +91,7 @@ public class MessageController {
 
 	@RequestMapping(value = "/msg_detail", method = RequestMethod.POST)
 	public ResponseEntity<String> MessageDetailPOST() throws Exception {
-		//ÂÊÁö ÀÚ¼¼È÷º¸°í È®ÀÎ ´©¸£¸é ÀÚ½ÄÃ¢ ´İÈ÷°Ô ÇÏ·Á°í 
+		//ìª½ì§€ ìì„¸íˆë³´ê³  í™•ì¸ ëˆ„ë¥´ë©´ ìì‹ì°½ ë‹«íˆê²Œ í•˜ë ¤ê³  
 		ResponseEntity<String> entity = null;
 		try {
 			entity = new ResponseEntity<String>("", HttpStatus.OK);
@@ -104,7 +104,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/msg_sendmail", method = RequestMethod.GET)
 	public ModelAndView msg_sendmailGET(Model model, MessageVO messageVO) throws Exception {
-		//·Î±×ÀÎÇÑ ¾ÆÀÌµğ°¡ ´Ù¸¥ »ç¶÷¿¡°Ô º¸³½ ÂÊÁö
+		//ë¡œê·¸ì¸í•œ ì•„ì´ë””ê°€ ë‹¤ë¥¸ ì‚¬ëŒì—ê²Œ ë³´ë‚¸ ìª½ì§€
 		ModelAndView mav = new ModelAndView();
 		messageVO.setM_id("dlwotmd");
 		mav.setViewName("/message/msg_sendmail");

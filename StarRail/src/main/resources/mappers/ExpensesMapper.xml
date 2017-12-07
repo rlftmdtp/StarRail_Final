@@ -69,14 +69,37 @@
 	where ROWNUM <=3 
 	]]>
 	</select>
+
+	<select id="recallData" resultType="Map">
+		select e_no "e_no", e_sdate "e_sdate", e_edate "e_edate"
+		from expenses
+		where e_no = #{e_no}
+	</select>
 	
-	<select id ="recallData" resultType="Map">
+<!-- 	<select id ="recallData" resultType="Map">
 		 select ex.e_no "e_no", ex.e_sdate "e_sdate", ex.e_edate "e_edate", 
       ex.e_total "e_total", ed.ed_no "ed_no", ed.ed_date "ed_date", ed.ed_kategorie "ed_kategorie",
       ed.ed_katename "ed_katename", ed.ed_amount "ed_amount"
       from expenses ex, expenses_detail ed
       where ex.e_no = ed.e_no
       and ex.e_no = #{e_no}
+	</select> -->
+
+	<select id="listData" parameterType="map" resultType="map">
+		select
+		e.e_total "e_total", ed.ed_date "ed_date", ed.ed_kategorie "ed_kategorie", ed.ed_katename "ed_katename", ed.ed_amount "ed_amount"
+		from expenses e, expenses_detail ed
+		where e.e_no = ed.e_no
+		and e.e_no= #{e_no}
+		and ed.ed_date = #{ed_date}
+	</select>
+	
+	<select id="chart" resultType="Map">
+		select expenses_detail.*
+		from (select ed.ed_kategorie "ed_kategorie", ed.ed_amount "ed_amount"
+				from expenses ex, expenses_detail ed
+				where ex.e_no = ed.e_no
+				and ex.e_no = #{e_no})expenses_detail
 	</select>
 	
 </mapper>	

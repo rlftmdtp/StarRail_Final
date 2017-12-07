@@ -30,5 +30,9 @@ public interface ExpensesDAO {
 	
 	public List<Map<String, Object>> recallData(int e_no) throws Exception;
 
+	//선택한 날짜 리스트 뽑아오기
+	public List<Map<String, Object>> listData(Map<String, Object> map) throws Exception;
 	
+	//도표
+	public List<Map<String, Object>> chart(int e_no) throws Exception;
 }

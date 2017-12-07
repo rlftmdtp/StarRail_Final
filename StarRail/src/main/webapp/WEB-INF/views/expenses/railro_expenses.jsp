@@ -20,7 +20,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet prefetch'
 	href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.standalone.css'>
-<link rel="stylesheet" href="/starrail/resources/css/main/style.css"> 
+<link rel="stylesheet" href="/starrail/resources/css/main/style.css">
 
 </head>
 
@@ -31,15 +31,15 @@
 	<br>
 	<div class="container" style="margin-top: 50px;">
 		<div class="row">
-			<div class="panel panel-primary" style="width: 95%;">
-				<div class="panel-heading">
+			<div class="panel panel-primary" style="width: 95%; border-color: #FAED7D;">
+				<div class="panel-heading" style="background-color: #FAED7D; border-color: #FAED7D;">
 					<h3 class="panel-title">여행 경비 관리</h3>
 					<span class="pull-right"> </span>
 				</div>
 
 				<!-- Tab안 -->
 				<div class="panel-body">
-					<div class="col-md-4">
+					<div class="col-md-4" style="margin-left: -15px; margin-right: 15px;">
 						<div class="tab-content">
 
 							<!-- 예산경비 등록 폼 -->
@@ -110,7 +110,7 @@
 
 									<div class="input-group">
 										<input type="button" value="저장" id="submit1"
-											class="btn btn-primary" data-toggle="modal" onclick="save()">
+											class="btn btn-primary" data-toggle="modal" ">
 										&nbsp;&nbsp;
 
 										<div class="modal-footer" style="border: 1px #eee;">
@@ -129,9 +129,9 @@
 								</div>
 							</form>
 						</div>
+					</div>
 
-
-
+				<div class="col-md-4">
 						<!-- 지출내역 등록하는 카테고리 -->
 						<form action="#" id="katelist">
 							<div class="hero-widget well well-sm"
@@ -198,40 +198,39 @@
 							</div>
 						</form>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-1">
 						<!-- 지출된 금액 계산해주고 view에 뿌려주는 list -->
-						<form action="#" id="amountlist" style="background-color: yellow; width: 95%; height: 300px; ">
-
-							<div id="tabnavi" class="btn-group row-md-2" data-toggle="buttons-radio">
-								<!-- tab생성하기 -->
-							</div>
-							<div class="tab-content row-md-7">
-								<div class="tab-pane active" id="prices2">
-									<br>
-									<p class="lead"><!-- 날짜 --></p>
-									<div class="row">
-										<div class="pay">
-											<!-- 지출내역 -->
-										</div>
-										
-									</div>
+						<form action="#" id="amountlist" >
+							<div class="hero-widget well well-sm" style="background-color: #FFFFFF; width : 320px; height: 300px; margin-left: -15px;">
+								<div id="tabnavi" class="btn-group row-md-3" data-toggle="buttons-radio">
+									<!-- tab생성하기 -->
 								</div>
-							</div>
 
-								<div class="totallist row-md-3">
+								<div class="tab-content row-md-2">
+									<p class="lead">
+										<!-- 날짜 -->
+									</p>
+								</div>
+
+								<div class="tab-content row-md-5">
+									<ul class="list-group">
+										<li class="list-group-item pay" style="height: 200px"></li>
+									</ul>
+								</div>
+
+								<div class="totallist row-md-2">
 									<div class="col-md-6 totalmoney">
-									<!-- 총사용금액, 총남은돈  -->
+										<!-- 총사용금액, 총남은돈  -->
 									</div>
-									
+
 								</div>
+							</div>
 						</form>
 					</div>
 
-					<div class="col-md-4">
 						<!-- 실시간 도표 -->
-						<form action="#" id="chartlist"></form>
-						<div class="hero-widget well well-sm"></div>
-					</div>
+
+							<div id="piechart" style="width: 600px; height: 500px; margin-top: 300px; margin-left: 400px; "></div>
 				</div>
 			</div>
 		</div>
@@ -248,10 +247,43 @@
 		src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js'></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js'></script>
-
+	<script type="text/javascript"
+		src='/starrail/resources/js/expenses/expense.js'></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 
+<!--  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      var doubleArray;
+	
+      
+      function drawChart() {
 
+    	doubleArray = [['Task','djfksljf'],['fdjsk',123321],['432',321123]];
+        var data = google.visualization.arrayToDataTable(
+        		doubleArray
+        /* 		[
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ] */
+        		
+        );
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+ -->
 
 <!--5일차,7일차 체크박스 클릭했을 때, 하나만 눌리게 -->
 <script type="text/javascript">
@@ -269,13 +301,11 @@
  
  <!-- 코스불러오기버튼 눌렀을 때 -->
 <script type="text/javascript">
-
-	$('#recall').on('click', function(){
-		alert('불러오거라');	
 	
+	$('#recall').on('click', function(){
+		
 		var obj = new Object();
 		obj.m_id = $('.m_id').attr('value');
-		
 		$.ajax({
 			url : '/starrail/expenses/expense_recall',
 			type : 'POST',
@@ -285,14 +315,11 @@
 			data : obj.m_id,
 			dataType : "json",
 			success: function(data) {
-				alert("불러오기성공이다");
-				alert(data);
 
 				var e_title = "";
 				var e_no = 0;
-
+				$('.dropdown-menu').empty();
 				 $.each(data, function(index, item) {
-					 alert("item : "+item["e_no"]);
 					$('.dropdown-menu').append("<li><a href='#' id='recallCome' data='" +item["e_no"] +"'>"
 							+item["e_title"] +"</a></li>");
 					
@@ -304,109 +331,7 @@
 	
 </script>  
 
-<!-- 선택한회원 용돈기입장 가져오기 -->
-<script type="text/javascript">
-
-	$('.dropdown-menu').on('click', '#recallCome', function() {
-		var obj = new Object();
-		obj.e_no = $(this).attr('data');
-		$.ajax({
-			url : '/starrail/expenses/recallData',
-			type : 'POST',
-			headers : {
-				'Content-Type' : 'application/json'
-			},
-			data : obj.e_no,
-			dataType : "json",
-			success : function(data) {
-				alert("하이요~!");
-
-				var e_title = "";
-				var e_sdate = "";
-				var e_edate = "";
-				var ed_date = "";
-				var ed_kategorie = "";
-				var ed_katename = "";
-				var e_total = 0;
-				var ed_amount = 0;
-				var e_no = 0;
-				var ed_no = 0;
- 				var startDate = new Date();
- 				var strArr;
- 				var strArr2;
-
-
-				 $.each(data, function(index, item) {
-					 
-					 strArr = item["e_sdate"].split('-');
-					 
-					 startDate.setMonth(Number(strArr[1]) - 1);
-					 startDate.setFullYear(strArr[0]);
-					 startDate.setDate(strArr[2]);
-					 alert(startDate);
-
-					var endDate = new Date();
-					strArr2 = item["e_edate"].split('-');
-					 alert(strArr2);
-						endDate.setMonth(Number(strArr2[1]) - 1);
-						endDate.setFullYear(strArr2[0]);
-						endDate.setDate(strArr2[2]);
-						alert(endDate);
-						/* 일 수 구하는 공식 */
-						var interval = endDate.getTime() - startDate.getTime();
-						interval = Math.floor(interval / (1000 * 60 * 60 * 24));
-						interval.toString();
-
-						alert(interval.toString());
-					 
-					 $('.lead').append('<p>' + item["ed_date"] + '</p>');
-					 $('.lead').append('<input type="hidden" value="'+item["e_no"]+'" >');
-					 
-					 
-					$('.dropdown-menu').append("<li><a href='#' id='recallCome' data='" +item["e_no"] +"'>"
-							+item["e_title"] +"</a></li>");
-					
-
-
-					if (item["ed_kategorie"] == 'food') {
-						$('.pay').append('<div class="list-group-item"><img src ="/starrail/resources/images/expenses/dinner.png">('
-												+ item["ed_katename"]
-												+ ')&nbsp&nbsp'
-												+ item["ed_amount"] + '</div>');
-					} else if (item["ed_kategorie"] == 'shopping') {
-						$('.pay').append(
-										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/shopping.png">('
-												+ item["ed_katename"]
-												+ ')&nbsp&nbsp'
-												+ item["ed_amount"] + '</div>');
-					} else if (item["ed_kategorie"] == 'hotel') {
-						$('.pay').append(
-										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/bed.png">('
-												+ item["ed_katename"]
-												+ ')&nbsp&nbsp'
-												+ item["ed_amount"] + '</div>');
-					} else if (item["ed_kategorie"] == 'bus') {
-						$('.pay').append(
-										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/bus.png">('
-												+ item["ed_katename"]
-												+ ')&nbsp&nbsp'
-												+ item["ed_amount"] + '</div>');
-					} else if (item["ed_kategorie"] == 'etc') {
-						$('.pay').append(
-										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/001-speech-bubble.png">('
-												+ item["ed_katename"]
-												+ ')&nbsp&nbsp'
-												+ item["ed_amount"] + '</div>');
-					}
-
-		//			$('.totalmoney').append('<p>쓴 돈 : ' + item["todayTotal"] + '</p>');
-					$('.totalmoney').append('<p>남은 돈 : ' + item["e_total"] + '</p>');
-				 }); 
-			}
-		});
-	});
-</script>
-
+ 
 <!--코스가져오기 눌렀을 때-->
 <script type="text/javascript">
 	function courseclick() {
@@ -421,8 +346,6 @@
 			data : obj.m_id,
 			dataType : "json",
 			success : function(data) {
-				alert("성공");
-				alert(data);
 
 				 
 				var c_name = "";
@@ -502,12 +425,14 @@
 														+ (tripDateStart.getMonth() + 1)
 														+ '/' + tripDateStart.getDate())
 														+ '"> </input>');
-								$('#tabnavi').append('<a href="#" class="btn btn-large btn-info active" data-toggle="tab" id="'
-										+(tripDateStart.getFullYear()
+								$('#tabnavi').append('<input type="button" value='
+										+ (i + 1)
+										+ '일차  class="listed_date" id="'
+										+ (tripDateStart.getFullYear()
 										+ '/'
 										+ (tripDateStart.getMonth() + 1)
 										+ '/' + tripDateStart.getDate())
-										+'">'+ (i+1)+'일차</a>');
+										+ '"> </input>');
 								tripDateStart.setDate(tripDateStart.getDate() + 1);
 	
 							}
@@ -521,15 +446,13 @@
 var thumbnailBtn;
 
 $('#thumbnail').on('click','#thumbnailBtn' ,function(){
-	alert("끌릭!");
-	alert($(this).attr('data'));
 	thumbnailBtn = $(this).attr('data');
 	
 })
 
-	function save() {
+	$('#submit1').on('click', function(){
+	
 		alert("등록합니다");
-		alert(thumbnailBtn);
 		$.ajax({
 
 					url : '/starrail/expenses/railro_expenses',
@@ -546,25 +469,29 @@ $('#thumbnail').on('click','#thumbnailBtn' ,function(){
 					}),
 					dataType : "text",
 					success : function(data) {
-						alert("성공");
-						alert(data);
 						/* 지출경비form에 e_no를 hidden으로 숨겨 누가 지출하는지 알게하기 */
 						$('#ddol').append('<input type="hidden" value="' + data + '" class="e_no"/>');
 					}
 				});
-	}
+});
 </script>
 
 
 
 <!-- 지출내역 저장 눌렀을 때 -->
 <script type="text/javascript">
-	var kategorie;
+	var kategorie="";
 	var day;
-
+	var food = 0;
+	var shopping = 0;
+	var hotel = 0;
+	var bus = 0;
+	var etc = 0;
+	
 	/* 카테고리중 클릭한 값 가져오기 */
 	$('.btn').on('click', function() {
-		kategorie = ($(this).attr('data'));
+		kategorie = $(this).attr('data');
+		alert(kategorie);
 		/* 클릭한 버튼에 이벤트 걸어 뭐 눌렀는지 알려주자 */
 		$(this).addClass("selected");
 		$(this).siblings().removeClass("selected");
@@ -579,70 +506,123 @@ $('#thumbnail').on('click','#thumbnailBtn' ,function(){
 	});
 
 	/* 지출내역 저장 눌렀을 때  DB로 보내고 새로고침*/
-	function expense_save() {
+//	$('#expense_save').on('click', function() {
+		function expense_save(){
+			
 		alert("저장합니다");
+		var newNO = $('.e_no').attr('value');
 		var html = "";
 		$.ajax({
-					url : '/starrail/expenses/railro_amount',
-					type : 'POST',
-					headers : {
-						'Content-Type' : 'application/json'
-					},
-					data : JSON.stringify({
-						'ed_kategorie' : kategorie,
-						'ed_katename' : $('#ed_katename').val(),
-						'ed_amount' : $('#ed_amount').val(),
-						'ed_date' : day,
-						'e_no' : $('.e_no').val()
-					}),
-					dataType : "json",
-					success : function(data) {
-						alert(data.todayTotal);
-						/* 내가 사용한 지출 내역을 가져와 view에 뿌려줌 */
+			url : '/starrail/expenses/railro_amount',
+			type : 'POST',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : JSON.stringify({
+				'ed_kategorie' : kategorie,
+				'ed_katename' : $('#ed_katename').val(),
+				'ed_amount' : $('#ed_amount').val(),
+				'ed_date' : day,
+				'e_no' : newNO
+			}),
+			dataType : "json",
+			success : function(data) {
+				alert("데이터 :  -----------" +data);
+				/* 내가 사용한 지출 내역을 가져와 view에 뿌려줌 */
+					$(document).on('click', '.listed_date', function() {
+						$('.lead').empty();
+						$('.pay').empty();
+						$('.totalmoney').empty();
 						
-						$('.lead').append(
-								'<p>' + data.ed_date + '</p>');
-						$('.lead').append(
-								'<input type="hidden" value="'+data.e_no+'" >');
+					//day:지출된날짜   $('listed_date').attr('id') : 내가누른버튼
+				if(data.ed_date.match($(this).attr('id'))){
+					$('.lead').append(
+							'<p>' + data.ed_date + '</p>');
+					$('.lead').append(
+							'<input type="hidden" value="'+data.e_no+'" >');
 
-						if (data.ed_kategorie == 'food') {
-							$('.pay').append(
-											'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/dinner.png">('
-													+ data.ed_katename
-													+ ')&nbsp&nbsp'
-													+ data.ed_amount + '</div>');
-						} else if (data.ed_kategorie == 'shopping') {
-							$('.pay').append(
-											'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/shopping.png">('
-													+ data.ed_katename
-													+ ')&nbsp&nbsp'
-													+ data.ed_amount + '</div>');
-						} else if (data.ed_kategorie == 'hotel') {
-							$('.pay').append(
-											'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/bed.png">('
-													+ data.ed_katename
-													+ ')&nbsp&nbsp'
-													+ data.ed_amount + '</div>');
-						} else if (data.ed_kategorie == 'bus') {
-							$('.pay').append(
-											'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/bus.png">('
-													+ data.ed_katename
-													+ ')&nbsp&nbsp'
-													+ data.ed_amount + '</div>');
-						} else if (data.ed_kategorie == 'etc') {
-							$('.pay').append(
-											'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/001-speech-bubble.png">('
-													+ data.ed_katename
-													+ ')&nbsp&nbsp'
-													+ data.ed_amount + '</div>');
-						}
-
-						$('.totalmoney').append('<p>쓴 돈 : ' + data.todayTotal + '</p>');
-						$('.totalmoney').append('<p>남은 돈 : ' + data.e_total + '</p>');
+					if (data.ed_kategorie == 'food') {
+						$('.pay').append(
+										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/dinner.png">('
+												+ data.ed_katename
+												+ ')&nbsp&nbsp'
+												+ data.ed_amount + '</div>');
+					} else if (data.ed_kategorie == 'shopping') {
+						$('.pay').append(
+										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/shopping.png">('
+												+ data.ed_katename
+												+ ')&nbsp&nbsp'
+												+ data.ed_amount + '</div>');
+					} else if (data.ed_kategorie == 'hotel') {
+						$('.pay').append(
+										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/bed.png">('
+												+ data.ed_katename
+												+ ')&nbsp&nbsp'
+												+ data.ed_amount + '</div>');
+					} else if (data.ed_kategorie == 'bus') {
+						$('.pay').append(
+										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/bus.png">('
+												+ data.ed_katename
+												+ ')&nbsp&nbsp'
+												+ data.ed_amount + '</div>');
+					} else if (data.ed_kategorie == 'etc') {
+						$('.pay').append(
+										'<div class="list-group-item"><img src ="/starrail/resources/images/expenses/001-speech-bubble.png">('
+												+ data.ed_katename
+												+ ')&nbsp&nbsp'
+												+ data.ed_amount + '</div>');
+					}
+					
+					$('.totalmoney').append('<p>쓴 돈 : ' + data.todayTotal + '</p>');
+					$('.totalmoney').append('<p>남은 돈 : ' + data.e_total + '</p>');
 
 					}
 				});
-	}
+				
+					
+	$.ajax({
+		url : '/starrail/expenses/chart',
+		type : 'POST',
+		headers : {
+			'Content-Type' : 'application/json'
+		},
+		data : JSON.stringify({
+				'e_no' : newNO
+		}),
+		dataType : "json",
+		success : function(data) {
+			google.charts.load('current', {'packages':['corechart']});
+		    google.charts.setOnLoadCallback(drawChart);
+		      var title = new Array();
+		      title =  [['Task', 'Hours per Day']];
+		      
+		      $.each(data, function(index, item) {
+		      var keys = Object.keys(item);
+		      	for(var i in keys){
+		    		title.push([keys[i],item[keys[i]]]);
+		    	  }	      
+		    	  
+		      });
+		      function drawChart() {
+
+		        var data = google.visualization.arrayToDataTable(
+		        		title
+
+		        );
+
+		        var options = {
+		          title: 'My Expense'
+		        };
+
+		        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+		        chart.draw(data, options);
+		      }
+		}
+	});
+					}//success
+				});//ajax
+	};
 </script>
 
 </html>

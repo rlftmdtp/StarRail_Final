@@ -52,18 +52,21 @@ public class ExpensesController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> railro_amountPOST(@RequestBody StatementVO statementVO, ExpensesVO expensesVO) throws Exception{
 		Map<String, Object> map = new HashMap<>();
-		
+		System.out.println("??");
 		statementVO.setEd_plma("+");
+		System.out.println("여기여기모여라"+statementVO);
 		
 		//총남은 금액 - 사용금액 계산한 것
 		int totalMoney =service.totalMoney(statementVO.getE_no(), statementVO.getEd_amount());
-	
+		System.out.println("1");
 		//계산하고 난 후 최종값 수정 및 지출내역 저장
-		service.amountRegist(statementVO, service.totalMoney(statementVO.getE_no(), statementVO.getEd_amount())); //
-		
+		service.amountRegist(statementVO, service.totalMoney(statementVO.getE_no(), statementVO.getEd_amount())); 
+		System.out.println("2");
+
 		//오늘 쓴 총 금액
 		int todayTotal = service.todayTotal(statementVO.getE_no(), statementVO.getEd_date());
-		
+		System.out.println("3");
+
 		//map에 담아 jsp로 가져갈것
 				map.put("ed_date", statementVO.getEd_date());
 				map.put("ed_kategorie", statementVO.getEd_kategorie());
@@ -107,9 +110,36 @@ public class ExpensesController {
 		//int e_no = Integer.parseInt(data);
 		System.out.println(e_no);
 		list = service.recallData(e_no);
-		System.out.println("컨트롤러 list 값가져오기이이이:  " + list);
-	//	model.addAttribute("todayTotal", service.todayTotal(statementVO.getE_no(), statementVO.getEd_date()));
+		System.out.println("컨트롤러맨~" + list);
+		
 		return new ResponseEntity<List<Map<String, Object>>>(list, HttpStatus.OK);
+	}
+	
+	//저장된 내역 불러오기
+	@RequestMapping(value="/listData", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List<Map<String, Object>>> listDataPOST(@RequestBody StatementVO vo)throws Exception{
+		List<Map<String, Object>> list =new ArrayList<>();
+		System.out.println("=====================listDataPOST 접근");
+		System.out.println("no: " + vo.getE_no());
+		System.out.println("date: " + vo.getEd_date());
+		list = service.listData(vo.getE_no(), vo.getEd_date());
+		
+		return new ResponseEntity<List<Map<String,Object>>>(list, HttpStatus.OK);
+	}
+	
+	//도표
+	@RequestMapping(value="/chart", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List<Map<String, Integer>>> chartPOST(@RequestBody StatementVO vo)throws Exception{
+		System.out.println(vo.getE_no());
+		Map<String, Integer> map = new HashMap<>();
+		map = service.chart(vo.getE_no());
+		System.out.println(map);
+		List<Map<String,Integer>> list = new ArrayList();
+		
+		list.add(map);
+		return new ResponseEntity<List<Map<String, Integer>>>  (list, HttpStatus.OK);
 	}
 
 }

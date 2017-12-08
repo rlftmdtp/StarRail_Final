@@ -5,12 +5,30 @@ import java.util.Map;
 
 import starrail.review.domain.FileVO;
 import starrail.review.domain.Hash_SearchVO;
+import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewVO;
 import starrail.review.domain.ReviewCriteria;
 import starrail.review.domain.ReviewSearchCriteria;
 
 
 public interface ReviewDao {
+	// 추천 start
+	public  List<Map<String, Integer>> preferList();
+	public List<Hash_SearchVO> tagRecommend(List<Integer> list);
+	public List<ReviewVO> reviewRecommend(String tag, ReviewSearchCriteria cri);
+	public Integer reviewRecommendCount(String tag);
+	public Integer selectMr_no();
+	public List<Integer> selectCheckR_no(int r_no);
+	public void insertMemberRecommend(Member_RecommendVO mr);
+	public List<Map<String, Integer>> list_MemberRecommend();
+	public void updateMr_count(Member_RecommendVO mr);
+	// 추천 end
+	
+	
+	
+	
+	
+	
 
 	//후기게시판 등록
 	public void insertReview(ReviewVO review) throws Exception;

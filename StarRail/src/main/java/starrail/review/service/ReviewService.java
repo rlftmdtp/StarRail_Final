@@ -1,13 +1,39 @@
 package starrail.review.service;
 
 import java.util.List;
+import java.util.Map;
+
 import starrail.review.domain.ReviewVO;
 import starrail.review.domain.Hash_SearchVO;
+import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewCriteria;
 import starrail.review.domain.ReviewSearchCriteria;
 
 
 public interface ReviewService {
+	
+	// 추천 시작
+	public List<Integer> preferList_service(int m_no) throws Exception;
+	public List<Integer> recommender_service(int m_no);
+	public List<Hash_SearchVO> tagRecommend_service(List<Integer> list);
+	public List<ReviewVO> reviewRecommend_service(String tag, ReviewSearchCriteria cri);
+	public Integer reviewRecommendCount_service(String tag);
+	public Integer selectMr_no_service();
+	public List<Integer> selectCheckR_no_service(int r_no);
+	public void registMemberRecommend_service(Member_RecommendVO mr);
+	public List<Map<String, Integer>> list_MemberRecommend_service();
+	public List<Integer> list_reviewRecommend(int m_no) throws Exception;
+	public void updateMr_count_service(Member_RecommendVO mr);
+	// 추천 끝
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	//후기게시판 등록
 	public void register(ReviewVO review) throws Exception;

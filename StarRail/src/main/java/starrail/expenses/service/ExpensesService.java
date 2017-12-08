@@ -27,6 +27,9 @@ public interface ExpensesService {
 	//선택한 저장내역 뽑아오기
 	public List<Map<String, Object>> recallData(int e_no) throws Exception;
 	
+	//해당 날짜의 리스트 뽑아오기
+	public List<Map<String, Object>> listData(int e_no, String ed_date) throws Exception;
 	
-	
+	//도표
+	public Map<String, Integer> chart(int e_no) throws Exception;
 }

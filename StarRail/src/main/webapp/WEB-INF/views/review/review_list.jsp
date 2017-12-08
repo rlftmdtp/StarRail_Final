@@ -17,26 +17,65 @@
 <script src="/starrail/resources/bootstrap/js/bootstrap.js"></script>
 
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<scriptsrc="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/css/main/header_footer.css">
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/css/review/review_list.css">
+
+<script src="/starrail/resources/js/review/recommend.js"></script>
+
+<link rel="stylesheet" type="text/css"href="/starrail/resources/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"href="/starrail/resources/css/review/review_list.css">
+
+<!-- start 추천 Css-->
+    <link href="/starrail/resources/css/recommend/recommend.css" rel="stylesheet">
+    <link href="/starrail/resources/css/recommend/round-about.css" rel="stylesheet">
+<!-- end 추천 Css-->
+
+
+
 </head>
 
 <body>
+
+
+	<%@include file="../main/nav_page.jsp"%>
+	<div style="margin-top: 50px;"></div>  
+
+
 	<div class="container">
-		<div class="row">
-
-
-			<div class="col-md-12">
-				<h4>내일로 후기</h4>
+	
+	<!-- start 추천 -->
+		<div id="recommend_container" style="margin-bottom: 60px;">		
+			<!-- Introduction Row -->
+			<c:if test="${ !empty m_name}">
+		      <h1 class="my-4" style="margin-top: 10px; margin-left: 20px;">
+		      	<span style="font-size: 30px; color: #F0AD4E; font-weight: bold;">${m_name}&nbsp;</span>님에게 추천해드리는 오늘의 태그
+		        <input type="hidden" id="m_no" value="${m_id }">
+		        <small>오늘의 추천 태그</small>
+		      </h1>
+		      
+		     <!-- start 로그인 한 사용자마다 맞춤 태그 생성 -->
+		     <div style="margin: 30px 40px;">
+			     <c:forEach items="${hashSearchVO}" var="Hash_SearchVO" varStatus="status">
+				    <a class="btn1 btn-rounded1 btn-round-tosquare1 btn-lg1  btn-bordered-warning1"
+				    		data = "${Hash_SearchVO.hs_search}">
+				    <span style="font-weight: bold;"></span>${Hash_SearchVO.hs_search}</a>	&nbsp;&nbsp;
+			     </c:forEach>	     
+		     </div>
+	     	</c:if>
+	      <!-- end 로그인 한 사용자마다 맞춤 태그 생성 -->
+		</div>
+		<!-- end 추천 -->
+	
+		<hr>
+	
+	
+	
+		<!-- start 게시판 -->	
+		<div class="row" >
+			<div class="col-md-12" >
+				<h3 style="margin-top: 40px; margin-bottom: 20px; font-weight: bold;">StarRail Review Board</h3>
 				<!-- <div class="table-responsive"> -->
 					<div class='box-body'>
 
@@ -82,38 +121,38 @@
 							<th>VIEWCNT</th>
 
 						</thead>
-						<tbody>
-
-							<c:forEach items="${list}" var="reviewVO">
-								<tr>
-									<td>${reviewVO.r_no}</td>
-									<td><a
-										href="/starrail/review/review_detail${pageMaker.makeQuery(pageMaker.cri.page) }&r_no=${reviewVO.r_no}">${reviewVO.r_title }</a></td>
-									<td>${reviewVO.m_id }</td>
-									<td><fmt:formatDate value="${reviewVO.r_date }"
-											pattern="yyyy-MM-dd" /></td>
-									<td>${reviewVO.r_hit }</td>
-								</tr>
-							</c:forEach>
+						<tbody id="reviewTable">
+							<c:if test="${ !empty list}">
+								<c:forEach items="${list}" var="reviewVO">
+									<tr>
+										<td>${reviewVO.r_no}</td>
+										<td><a  class="review_click" data ="${reviewVO.r_no}" 
+											href="/starrail/review/review_detail${pageMaker.makeQuery(pageMaker.cri.page) }&r_no=${reviewVO.r_no}&m_id=${m_id}">${reviewVO.r_title }</a></td>
+										<td>${reviewVO.m_id }</td>
+										<td><fmt:formatDate value="${reviewVO.r_date }"
+												pattern="yyyy-MM-dd" /></td>
+										<td>${reviewVO.r_hit }</td>
+									</tr>
+								</c:forEach>
+							</c:if>
 						</tbody>
 
 					</table>
 
 					<div class="container">
 						<ul class="pagination">
+						<c:if test="${!empty pageMaker}">
 							<c:if test="${pageMaker.prev}">
 								<li class="disabled"><a
 									href="/starrail/review/review_list${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a></li>
 							</c:if>
 
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
+							<c:forEach begin="${pageMaker.startPage }"	end="${pageMaker.endPage }" var="idx">
 								<li class="active"
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a
-									href="/starrail/review/review_list${pageMaker.makeQuery(idx)}">${idx}
+									<a href="/starrail/review/review_list${pageMaker.makeQuery(idx)}">${idx}
 										<span class="sr-only">(current)</span>
-								</a>
+									</a>
 								</li>
 							</c:forEach>
 
@@ -121,10 +160,13 @@
 								<li><a
 									href="/starrail/review/review_list${pageMaker.makeQuery(pageMaker.endPage +1) }">»</a></li>
 							</c:if>
+						</c:if>	
 						</ul>
 					</div>
 				</div>
 			</div>
+			<!-- end 게시판 -->	
+			
 		</div>
 
 <!-- 
@@ -203,6 +245,26 @@
 			/.modal-dialog
 		</div>
  -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     <div style="margin-top: 30px;">
+    	<%@include file="../main/footer.jsp"%>   
+    </div>   
+ 
+ 
+ 
+ 
  
  <!-- 검색어 찾아주기 -->
 		<script>

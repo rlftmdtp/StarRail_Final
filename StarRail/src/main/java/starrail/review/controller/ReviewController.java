@@ -1,14 +1,21 @@
 package starrail.review.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import starrail.review.domain.ReviewVO;
 import starrail.main.domain.UserVO;
 import starrail.review.domain.Hash_SearchVO;
+import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewPageMaker;
 import starrail.review.domain.ReviewSearchCriteria;
 import starrail.review.persistence.ReviewDao;
@@ -28,7 +36,9 @@ public class ReviewController {
 
 	@Inject
 	public ReviewService service;
-	public ReviewDao dao;
+	public ReviewDao dao;	
+	
+	
 
 	// 후기 글 작성하러 가는 창
 	@RequestMapping(value = "/review_insert", method = RequestMethod.GET)
@@ -84,26 +94,9 @@ public class ReviewController {
 		return "redirect:/review/review_list";
 	}
 
-	// 전체 후기 리스트
-	@RequestMapping(value = "/review_list", method = RequestMethod.GET)
-	public void listReviewGET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model) throws Exception {
 
-		model.addAttribute("list", service.listSearchCriteria(cri));
-		ReviewPageMaker pageMaker = new ReviewPageMaker();
-		pageMaker.setCri(cri);
 
-		pageMaker.setTotalCount(service.listSearchCount(cri));
-		model.addAttribute("pageMaker", pageMaker);
-	}
 
-	// 한개 상세보기 눌렀을 때
-	@RequestMapping(value = "/review_detail", method = RequestMethod.GET)
-	public void DetailReviewGET(@RequestParam("r_no") int r_no, @ModelAttribute("cri") ReviewSearchCriteria cri,
-			Model model) throws Exception {
-		System.out.println(service.myHash(r_no));
-		model.addAttribute("hasgTag", service.myHash(r_no));
-		model.addAttribute(service.read(r_no));
-	}
 
 	// 게시판 삭제
 	@RequestMapping(value = "/review_remove", method = RequestMethod.GET)
@@ -142,5 +135,130 @@ public class ReviewController {
 	public List<String> getAttach(@PathVariable("r_no") Integer r_no) throws Exception {
 		return service.getAttach(r_no);
 	}
+	
+	
+	
+	
+	
+	
+// start 희정 코드 --------------------------------------------------------------------------------------------------	
+		
+		// 전체 후기 리스트 + 추천
+		@RequestMapping(value = "/review_list", method = RequestMethod.GET)
+		public void listReview_GET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model, HttpServletRequest request) throws Exception {
+			
+			// start 솔 코드
+			model.addAttribute("list", service.listSearchCriteria(cri));
+			
+			ReviewPageMaker pageMaker = new ReviewPageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.listSearchCount(cri));
+			
+			model.addAttribute("pageMaker", pageMaker);
+			// end 솔 코드
+
+
+			//******************************************************
+
+			
+			// start 추천
+			HttpSession session = request.getSession();
+			int m_no;	
+			String m_name;	
+			List<Integer> list = new ArrayList<Integer>();
+			List<Hash_SearchVO> tag_list = new ArrayList<Hash_SearchVO>();
+			
+			try {
+				if(((UserVO) session.getAttribute("login")) != null){
+					UserVO user =  (UserVO) session.getAttribute("login");		
+					m_no = user.getM_no();
+					
+					list = service.preferList_service(m_no);
+					tag_list = service.tagRecommend_service(list);
+					System.out.println("컨트롤러 결과값 : " + tag_list);
+					
+					model.addAttribute("hashSearchVO", tag_list);
+					model.addAttribute("m_name", user.getM_name());
+					model.addAttribute("m_id", user.getM_id());
+				}else{
+					model.addAttribute("hashSearchVO", null);
+					model.addAttribute("m_name", "?");
+					model.addAttribute("m_id", null);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}		
+			// end 추천
+		}
+
+		// 추천 태그 클릭 시 클릭한 태그가 존재하는 리뷰만 보여짐
+		@RequestMapping(value = "/review_list", method = RequestMethod.POST)
+		public @ResponseBody ResponseEntity<Map<Object,Object>> listReview_POST(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model, @RequestParam String tag) throws Exception{
+			List<ReviewVO> list = service.reviewRecommend_service(tag, cri);
+			
+			//System.out.println(cri);
+			
+			ReviewPageMaker pageMaker = new ReviewPageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.reviewRecommendCount_service(tag));
+			
+			Map<Object,Object> map = new HashMap<Object,Object>();
+			map.put("list", list);
+			map.put("pageMaker", pageMaker);
+			
+			//System.out.println(map.get("pageMaker").toString());
+			
+			ResponseEntity<Map<Object,Object>> entity = 
+										new ResponseEntity<Map<Object,Object>>(map, HttpStatus.OK);	
+			
+			return entity;
+		}
+
+		
+		
+		// 한개 상세보기 눌렀을 때
+		@RequestMapping(value = "/review_detail", method = RequestMethod.GET)
+		public void DetailReview_GET(@RequestParam("r_no") int r_no, @RequestParam("m_id") String m_id, HttpServletRequest request,
+				@ModelAttribute("cri") ReviewSearchCriteria cri, Model model) throws Exception {
+			
+			// start 솔
+			model.addAttribute("hasgTag", service.myHash(r_no));
+			model.addAttribute(service.read(r_no));
+			// System.out.println(service.myHash(r_no));
+			// end 솔
+						
+			
+			//******************************************************
+			HttpSession session = request.getSession();
+			UserVO user =  (UserVO) session.getAttribute("login");		
+			int m_no = user.getM_no();
+			
+			// start 추천			
+		Member_RecommendVO mr = new Member_RecommendVO();
+			mr.setMr_no(service.selectMr_no_service()+1);
+			mr.setM_id(m_id);
+			mr.setR_no(r_no);
+			
+			System.out.println(mr);
+			
+			// member_Recommend테이블에서 r_no가 중복되면 안됨 
+			if(service.selectCheckR_no_service(r_no).get(0) == 0){
+				service.registMemberRecommend_service(mr);
+			}else if(service.selectCheckR_no_service(r_no).get(0) > 0){
+				service.updateMr_count_service(mr);
+			}
+			
+			//System.out.println("서비스 맵 결과  :  " + service.list_MemberRecommend_service());
+			service.list_reviewRecommend(m_no);
+			
+			// end 추천
+		}
+		
+		
+// end 희정 코드 --------------------------------------------------------------------------------------------------	
+		
+		
+	
 
 }

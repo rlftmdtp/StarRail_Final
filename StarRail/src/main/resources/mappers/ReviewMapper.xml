@@ -4,6 +4,88 @@
 
 <mapper namespace="railro.review.mapper.ReviewMapper">
 
+<!-- start 추천 -->
+	<select id="prefer_Select" resultType="java.util.HashMap">
+		SELECT m.M_NO, pd.TAG_NO
+			  FROM MEMBER_PREFER pre, MEMBER_PREFERDETAIL pd, HASH_SEARCH hs, MEMBER m
+			  where pre.PRE_NO = pd.PRE_NO and
+			        hs.HS_NO = pd.TAG_NO and
+			        m.M_ID = pre.M_ID
+			  order by m.M_NO
+	</select>
+	
+	<select id="tagRecommend_Select" resultType="Hash_SearchVO" parameterType="java.util.ArrayList">
+		select *
+			from HASH_SEARCH
+  			<where>
+  				HS_NO IN
+  				<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+			    	#{item.value}
+				</foreach>  				
+  			</where>
+	</select>
+	
+	<select id="reviewRecommend_Select" resultType="ReviewVO">
+		select r.R_NO as r_no, r.M_ID as m_id, r.R_TITLE as r_title, r.R_CONTENT as r_content
+		      	, r.R_DATE as r_date, r.R_HIT as r_hit, r.R_RECOMM as r_recomm
+			  from REVIEW r, HASH h
+			  where r.R_NO = h.R_NO and
+			        h.R_HASH = #{tag}
+			  order by r.R_RECOMM desc
+	</select>
+	
+	<select id="reviewRecommendCount_Select" resultType="Integer">
+		select count(*)
+			  from REVIEW r, HASH h
+			  where r.R_NO = h.R_NO and
+			        h.R_HASH = #{tag}
+			  order by r.R_RECOMM desc
+	</select>
+	
+	<select id="mr_noSelect" resultType="Integer">
+		select count(MR_NO) FROM MEMBER_RECOMMEND
+	</select>
+	
+	<select id="MemberRecommend_r_noSelect" resultType="Integer">
+		select count(*) FROM MEMBER_RECOMMEND where r_no = #{r_no}
+	</select>
+	
+	<update id="Mr_count_Update" parameterType="Member_RecommendVO">
+		UPDATE MEMBER_RECOMMEND 
+			set MR_COUNT=MR_COUNT+1 
+				where R_NO=#{r_no} and M_ID=#{m_id}
+	</update>
+	
+ 	<insert id="member_recommend_Insert" parameterType="Member_RecommendVO">
+		INSERT into MEMBER_RECOMMEND VALUES(#{mr_no}, #{m_id}, #{r_no}, 0)
+	</insert> 
+	
+	<select id="member_recommendList_Select" resultType="java.util.HashMap">
+		select DISTINCT m.M_NO as m_no, mr.R_NO as r_no, mr.MR_COUNT as mr_count
+			  from MEMBER m, MEMBER_RECOMMEND mr
+			  where m.M_ID = mr.M_ID
+			  ORDER by m.M_NO
+	</select>
+	
+<!-- end 추천 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- start 게시판 -->
 	<select id="selectR_no" resultType="Integer">
 		select max(r_no) from review
 	</select>
@@ -20,7 +102,7 @@
 	<!-- 후기게시물 전체 보기  -->
 	<select id="listReview" resultType="ReviewVO">
 		select r_no, r_title, m_id,
-		r_date, r_hit
+		r_date, r_hit, r_recomm
 		from review
 		order by r_no desc, r_date desc
 	</select>
@@ -28,7 +110,7 @@
 	<!-- 페이징처리 -->
 	<select id="listPage" resultType="ReviewVO">
 	<![CDATA[ 
-		select r_no, r_title, m_id, r_date, r_hit 
+		select r_no, r_title, m_id, r_date, r_hit , r_recomm
 		from review
 		where r_no > 0
 		order by r_no desc, r_date desc
@@ -37,7 +119,7 @@
 
 	<select id="listCriteria" resultType="ReviewVO">
 	<![CDATA[ 
-		select r_no, r_title, m_id, r_date, r_hit 
+		select r_no, r_title, m_id, r_date, r_hit, r_recomm
 		from review
 		where r_no > 0
 		order by r_no desc, r_date desc
@@ -47,7 +129,7 @@
 	<!-- 검색 -->
 	<select id="listSearch" resultType="ReviewVO">
 	<![CDATA[ 
-		select r_no, r_title, m_id, r_date, r_hit
+		select r_no, r_title, m_id, r_date, r_hit, r_recomm
 		from review
 		where r_no > 0
 			]]>
@@ -213,6 +295,8 @@
 		select max(hs_no)
 		from hash_search
 	</select>
+<!-- end 게시판 -->
+
 </mapper>
 
 

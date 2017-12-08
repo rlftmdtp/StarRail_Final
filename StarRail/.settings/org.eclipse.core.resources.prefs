@@ -1,9 +1,8 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=refs/heads/Dev
+
 eclipse.preferences.version=1
 encoding//src/main/java/starrail/main/controller/MainController.java=UTF-8
 encoding//src/main/java/starrail/partner/controller/PartnerController.java=UTF-8
+
 encoding//src/main/java/starrail/review/controller=UTF-8
 encoding//src/main/webapp/resources/js/course/course.js=UTF-8
 encoding/<project>=UTF-8

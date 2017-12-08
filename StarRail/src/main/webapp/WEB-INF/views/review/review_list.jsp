@@ -21,6 +21,7 @@
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<<<<<<< HEAD
 
 <script src="/starrail/resources/js/review/recommend.js"></script>
 
@@ -33,18 +34,16 @@
 <!-- end 추천 Css-->
 
 
-
 </head>
 
 <body>
-
 
 	<%@include file="../main/nav_page.jsp"%>
 	<div style="margin-top: 50px;"></div>  
 
 
 	<div class="container">
-	
+
 	<!-- start 추천 -->
 		<div id="recommend_container" style="margin-bottom: 60px;">		
 			<!-- Introduction Row -->
@@ -76,6 +75,7 @@
 		<div class="row" >
 			<div class="col-md-12" >
 				<h3 style="margin-top: 40px; margin-bottom: 20px; font-weight: bold;">StarRail Review Board</h3>
+
 				<!-- <div class="table-responsive"> -->
 					<div class='box-body'>
 
@@ -166,8 +166,10 @@
 				</div>
 			</div>
 			<!-- end 게시판 -->	
+
 			
 		</div>
+    <!-- end body영역 -->	
 
 <!-- 
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
@@ -246,9 +248,7 @@
 		</div>
  -->
  
- 
- 
- 
+
  
  
  
@@ -265,7 +265,7 @@
  
  
  
- 
+
  <!-- 검색어 찾아주기 -->
 		<script>
 			$(document).ready(function(){
@@ -303,5 +303,13 @@
 				$("[data-toggle=tooltip]").tooltip();
 			});
 		</script> -->
+		
+
+	
+<!-- start 추천 Script -->
+   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="/starrail/resources/js/recommend/recommend.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<!-- end 추천 Script -->	
 </body>
 </html>

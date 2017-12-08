@@ -23,6 +23,8 @@ public class ReviewVO{
 		this.r_recomm = r_recomm;
 	}
 
+
+
 	private String[] files;
 	
 	public ReviewVO() {}

@@ -23,11 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import starrail.review.domain.ReviewVO;
 import starrail.main.domain.UserVO;
+import starrail.recommender.service.RecommenderService;
 import starrail.review.domain.Hash_SearchVO;
 import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewPageMaker;
 import starrail.review.domain.ReviewSearchCriteria;
 import starrail.review.persistence.ReviewDao;
+import starrail.review.service.RecommendReviewService;
 import starrail.review.service.ReviewService;
 
 @Controller
@@ -39,6 +41,7 @@ public class ReviewController {
 	public ReviewDao dao;	
 	
 	
+
 
 	// 후기 글 작성하러 가는 창
 	@RequestMapping(value = "/review_insert", method = RequestMethod.GET)
@@ -95,7 +98,10 @@ public class ReviewController {
 	}
 
 
-
+	
+	
+	
+	
 
 
 	// 게시판 삭제

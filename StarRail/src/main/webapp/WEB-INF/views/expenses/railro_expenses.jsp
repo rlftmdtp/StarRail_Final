@@ -31,8 +31,8 @@
 	<br>
 	<div class="container" style="margin-top: 50px;">
 		<div class="row">
-			<div class="panel panel-primary" style="width: 95%; border-color: #FAED7D;">
-				<div class="panel-heading" style="background-color: #FAED7D; border-color: #FAED7D;">
+			<div class="panel panel-primary" style="width: 95%; border-color: #F0AD4E;">
+				<div class="panel-heading" style="background-color: #F0AD4E; border-color: #F0AD4E; ">
 					<h3 class="panel-title">여행 경비 관리</h3>
 					<span class="pull-right"> </span>
 				</div>
@@ -45,26 +45,26 @@
 							<!-- 예산경비 등록 폼 -->
 							<form action="#" id="expenseslist">
 								<div class="hero-widget well well-sm"
-									style="background-color: #FFFFFF; height: 450px;">
+									style="background-color: #FFFFFF; height: 830px;">
 									<input type="hidden" class="m_id" value="${m_id }" name="m_id">
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1"
-											style="width: 25px;"> <span
+											style="width: 30px;"> <span
 											class="glyphicon glyphicon-book" aria-hidden="true"> </span></span>
 										<input type="text" class="form-control" id="e_title"
 											name="e_title" placeholder="제목"
 											aria-describedby="basic-addon1">
 									</div>
 									<div class="input-group"
-										style="margin-top: 7px; margin-bottom: -35px;">
+										style="margin-top: 30px; margin-bottom: -35px;">
 										<input id="courseId" type="checkbox" name="course"
 											class="course" value="couse" onclick="courseclick()">&nbsp;저장된
 										코스 가져오기
 									</div>
-									<div class="thumbnail" style="height: 100px; margin-top: 20px;">
+									<div class="thumbnail" style="height: 200px; margin-top: 20px;">
 										<form class='form-horizontal well' action='#'>
 											<div class='row'>
-												<div class='col-md-12' id="thumbnail"></div>
+												<div class='col-md-12' id="thumbnail" "></div>
 											</div>
 										</form>
 									</div>
@@ -73,7 +73,7 @@
 									<div class="input-daterange input-group" id="flight-datepicker"
 										style="margin-top: 10px;">
 										<span class="input-group-addon" id="basic-addon1"
-											style="width: 25px;"> <span
+											style="width: 30px;"> <span
 											class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
 										<span class="fontawesome-calendar"></span> <input
 											class="input-sm form-control" type="text"
@@ -92,7 +92,7 @@
 
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1"
-											style="width: 25px;"> <span
+											style="width: 30px;"> <span
 											class="glyphicon glyphicon-calendar" aria-hidden="true">
 										</span></span> <input type="text" class="form-control" id="endDate"
 											name="e_edate" placeholder="도착일"
@@ -101,7 +101,7 @@
 
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1"
-											style="width: 25px;"> <span
+											style="width: 30px;"> <span
 											class="glyphicon glyphicon-piggy-bank" aria-hidden="true">
 										</span></span> <input type="text" class="form-control" id="travelAmount"
 											name="e_total" placeholder="예산"
@@ -110,7 +110,7 @@
 
 									<div class="input-group">
 										<input type="button" value="저장" id="submit1"
-											class="btn btn-primary" data-toggle="modal" ">
+											class="btn btn-bordered-warning" data-toggle="modal" >
 										&nbsp;&nbsp;
 
 										<div class="modal-footer" style="border: 1px #eee;">
@@ -230,7 +230,7 @@
 
 						<!-- 실시간 도표 -->
 
-							<div id="piechart" style="width: 600px; height: 500px; margin-top: 300px; margin-left: 400px; "></div>
+							<div id="piechart" style="width: 600px; height: 500px; margin-top: 350px; margin-left: 400px; "></div>
 				</div>
 			</div>
 		</div>
@@ -247,8 +247,9 @@
 		src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js'></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js'></script>
-	<script type="text/javascript"
-		src='/starrail/resources/js/expenses/expense.js'></script>
+	<!-- 내꺼 -->
+	<script type="text/javascript" src='/starrail/resources/js/expenses/expense.js'></script>
+	<!-- chart -->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 
@@ -335,6 +336,7 @@
 <!--코스가져오기 눌렀을 때-->
 <script type="text/javascript">
 	function courseclick() {
+		$('#thumbnail').empty();
 		 var obj = new Object();
 			obj.m_id = $('.m_id').attr('value');
 		$.ajax({

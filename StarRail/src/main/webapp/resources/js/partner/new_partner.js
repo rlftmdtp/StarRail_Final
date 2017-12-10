@@ -113,30 +113,48 @@ $(function() {
 				    		  cd_id : $cd_id
 				    	  },
 				    	  dataType : "json",
-				    	  success : function(data) {     
+				    	  success : function(data) {    
+				    		  
 				    		  $("#partner-Profile").empty();
 				    		  $.each(data, function(index, item) {
-				    			  	$.each(item, function (index1, item1) {
-		/*		    			  		if(index1=='m_name'){
-											//alert(item1);
-											var profile = "<div class='col-sm-3' id ='partner-profile-list'>" 
-			        					 		+ "<div class='card'>" 
-			        				 			+ "<canvas class='header-bg' width='250' height='70' id='header-blur'></canvas>" 
-			        				 			+ "<div class='avatar'>" 
-			        				 			+ "<img src='/starrail/resources/images2/partner/F.png' alt='' />" 
-			        				 			+ "</div>" 
-			        				 			+ "<div class='content'>" 
-			        				 			+ "<p>" + item1 + "<br>" 
-			        				 			+ "More description here</p>" 
-			        				 			+ "<p><button type='button' class='btn btn-default' id='partner-list-button'>" 
-			        				 			+ "<span class='glyphicon glyphicon-envelope' aria-hidden='true'>쪽지</span></button></p>" 
-			        				 			+ "</div>" 
-			        				 			+ "</div>" 
-			        				 			+ "</div>";
-											
-											$("#partner-Profile").append(profile);	
-				    			  		}*/
-				    			  	})
+				    			  
+				    			  if(item["m_gender"] == "M"){
+				    				  var profile = "<div class='col-sm-3' id ='partner-profile-list' style='margin-bottom:10px;'>" 
+		        					 		+ "<div class='card'>" 
+		        				 			+ "<canvas class='header-bg' width='250' height='70' id='header-blur'></canvas>" 
+		        				 			+ "<div class='avatar'>" 
+		        				 			+ "<img src='/starrail/resources/images2/partner/FF.png' alt='' />" 
+		        				 			+ "</div>" 
+		        				 			+ "<div class='content'>" 
+		        				 			+ "<p>" + item["m_name"] + "<br><br>" 
+		        				 			+ item["m_age"] + "</p>" 
+		        				 			+ "<p><button type='button' class='btn btn-default' id='partner-list-button'>" 
+		        				 			+ "<span class='glyphicon glyphicon-envelope' aria-hidden='true'>쪽지</span></button></p>" 
+		        				 			+ "</div>" 
+		        				 			+ "</div>" 
+		        				 			+ "</div>";
+										
+										$("#partner-Profile").append(profile);					    				  
+				    			  }
+				    			  else if(item["m_gender"] == "F"){
+				    				  var profile2 = "<div class='col-sm-3' id ='partner-profile-list' style='margin-bottom:10px;'>" 
+		        					 		+ "<div class='card'>" 
+		        				 			+ "<canvas class='header-bg' width='250' height='70' id='header-blur'></canvas>" 
+		        				 			+ "<div class='avatar'>" 
+		        				 			+ "<img src='/starrail/resources/images2/partner/F.png' alt='' />" 
+		        				 			+ "</div>" 
+		        				 			+ "<div class='content'>" 
+		        				 			+ "<p>" + item["m_name"] + "<br><br>" 
+		        				 			+ item["m_age"] + "</p>" 
+		        				 			+ "<p><button type='button' class='btn btn-default' id='partner-list-button'>" 
+		        				 			+ "<span class='glyphicon glyphicon-envelope' aria-hidden='true'>쪽지</span></button></p>" 
+		        				 			+ "</div>" 
+		        				 			+ "</div>" 
+		        				 			+ "</div>";
+										
+										$("#partner-Profile").append(profile2);	
+				    				  
+				    			  }				    			
 				    		  })
 				    		  
 				    		  

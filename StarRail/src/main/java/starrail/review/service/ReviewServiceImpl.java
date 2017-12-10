@@ -276,11 +276,10 @@ public class ReviewServiceImpl implements ReviewService {
 					
 				// 유사한 아이템 출력 = '현재 아이템ID | 추천된 아이템ID | 유사도' ==> 유사도가 1에 가까울수록 추천순위가 높은것임
 				for (RecommendedItem recommendation : recommendations) {
-					System.out.println("추천 결과 : " + m_No + "," + recommendation.getItemID());
+					//System.out.println("추천 결과 : " + m_No + "," + recommendation.getItemID());
 					list.add((int) recommendation.getItemID());
-					System.out.println(list);
-					System.out.println("dd");
 				}
+				System.out.println(list);
 
 			} catch (IOException e) {
 				System.out.println("there was an error.");
@@ -319,12 +318,17 @@ public class ReviewServiceImpl implements ReviewService {
 		@Override
 		public void registMemberRecommend_service(Member_RecommendVO mr) {
 			dao.insertMemberRecommend(mr);
+			
 			System.out.println("서비스입니다");
+			//System.out.println(mr);
 		}
 
 		@Override
-		public List<Integer> selectCheckR_no_service(int r_no) {
-			return dao.selectCheckR_no(r_no);
+		public List<Integer> selectCheckR_no_service(Member_RecommendVO mr) {
+			int xxx = dao.selectCheckR_no(mr).get(0);			
+			//System.out.println("-----22테스트 : " + xxx);
+			
+			return dao.selectCheckR_no(mr);
 		}
 
 		@Override
@@ -367,40 +371,67 @@ public class ReviewServiceImpl implements ReviewService {
 			bw.close();
 			
 			
-			PearsonRecommender(m_no);
+			List<Integer> userRecommend =  UserRecommender(m_no);
 			
-			return null;
+			return userRecommend;
 		}
 		
 		
 		
-		public void PearsonRecommender(int m_no) throws Exception {
+		public List<Integer> UserRecommender(int m_no) throws Exception {
 
 			System.out.println("피어슨");
 			
-			// 데이터 모델 생성
-			DataModel dm = new FileDataModel(new File("C:\\data\\review_prefer.csv"));
+			List<Integer> list = new ArrayList<Integer>();
 
-			// 피어슨 - 유사도 모델 생성
-			UserSimilarity sim = new PearsonCorrelationSimilarity(dm);
+			try {			
+				// 데이터 모델 생성
+				DataModel dm = new FileDataModel(new File("C:\\data\\member_prefer.csv"));
+				
+				// 유사도 모델 : ItemSimilarity 사용
+				UserSimilarity sim = new LogLikelihoodSimilarity(dm);
+				
+				UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, sim, dm);
 
-			// 가장 유사한 유저 2명을 기준으로 잡음
-			UserNeighborhood neighborhood = new NearestNUserNeighborhood(2, sim, dm);
+				// 추천기 선택 : ItemBased
+				GenericUserBasedRecommender recommender = new GenericUserBasedRecommender(dm, neighborhood, sim);
 
-			// 사용자 추천기 생성
-			Recommender recommender = new GenericUserBasedRecommender(dm, neighborhood, sim);
+				int x = 1;
 
-			// 1번 유저에게 3개의 아이템 추천
-			List<RecommendedItem> recommendations = recommender.recommend(1, 3);
+				System.out.println("22LogLikelihoodSimilarity 이용" + m_no);			
+					
+				// 현재 item ID -> id는 오류를 방지하기 위해 long타입 사용
+				long m_No = m_no;
+					
+				// 현재 item아이디와 가장 유사한 5개의 아이템 추천
+				List<RecommendedItem> recommendations = recommender.recommend(m_No, 4);
+					
+				// 유사한 아이템 출력 = '현재 아이템ID | 추천된 아이템ID | 유사도' ==> 유사도가 1에 가까울수록 추천순위가 높은것임
+				for (RecommendedItem recommendation : recommendations) {
+					//System.out.println("피어슨 추천 결과 : " + m_No + "," + recommendation.getItemID());
+					list.add((int) recommendation.getItemID());
+				}
+				System.out.println(list);
 
-			for (RecommendedItem recommendation : recommendations) {
-				//System.out.println("피어슨 recommendation" + recommendation.getItemID());
+			} catch (IOException e) {
+				System.out.println("there was an error.");
+				e.printStackTrace();
+			} catch (TasteException e) {
+				System.out.println("there was an Taste Exception.");
+				e.printStackTrace();
 			}
+			
+			return list;	
 		}
 
 		@Override
 		public void updateMr_count_service(Member_RecommendVO mr) {
 			dao.updateMr_count(mr);
+		}
+
+		@Override
+		public List<ReviewVO> list_userBased_servie(List<Integer> r_noList) {
+			return dao.list_userBased(r_noList);
 		}		
 		
 		// 추천 끝

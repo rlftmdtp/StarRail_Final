@@ -45,7 +45,7 @@
 							<!-- 예산경비 등록 폼 -->
 							<form action="#" id="expenseslist">
 								<div class="hero-widget well well-sm"
-									style="background-color: #FFFFFF; height: 830px;">
+									style="background-color: #FFFFFF; height: 630px;">
 									<input type="hidden" class="m_id" value="${m_id }" name="m_id">
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1"
@@ -70,16 +70,14 @@
 									</div>
 
 
-									<div class="input-daterange input-group" id="flight-datepicker"
-										style="margin-top: 10px;">
-										<span class="input-group-addon" id="basic-addon1"
-											style="width: 30px;"> <span
-											class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
-										<span class="fontawesome-calendar"></span> <input
-											class="input-sm form-control" type="text"
-											id="datepicker_expense" name="e_sdate" placeholder="출발일"
-											data-date-format="DD, MM d" style="size: 5px" /> <span
-											class="date-text date-depart"></span>
+									<div class="input-group" id="flight-datepicker" style="margin-top: 10px;">
+										<span class="input-group-addon" id="basic-addon1" style="width: 32px;"> 
+											<span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span>
+										</span>
+										<!-- <span class="fontawesome-calendar"></span> -->
+										<input class="form-control" type="text" id="datepicker_expense" name="e_sdate" placeholder="출발일"
+											data-date-format="DD, MM d" style="font-size: 11px;  font-weight:normal; size:50px; width: 50px; " />
+										<span class="date-text date-depart"></span>
 									</div>
 
 									<div class="input-group"
@@ -91,12 +89,10 @@
 									</div>
 
 									<div class="input-group">
-										<span class="input-group-addon" id="basic-addon1"
-											style="width: 30px;"> <span
-											class="glyphicon glyphicon-calendar" aria-hidden="true">
-										</span></span> <input type="text" class="form-control" id="endDate"
-											name="e_edate" placeholder="도착일"
-											aria-describedby="basic-addon1">
+										<span class="input-group-addon" id="basic-addon1" style="width: 30px;"> 
+											<span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span>
+										</span> 
+									<input type="text" class="form-control" id="endDate" name="e_edate" placeholder="도착일" aria-describedby="basic-addon1">
 									</div>
 
 									<div class="input-group">
@@ -110,7 +106,7 @@
 
 									<div class="input-group">
 										<input type="button" value="저장" id="submit1"
-											class="btn btn-bordered-warning" data-toggle="modal" >
+											class="btn btn-primary" style="background-color: #F0AD4E; border-color: #F0AD4E" data-toggle="modal" >
 										&nbsp;&nbsp;
 
 										<div class="modal-footer" style="border: 1px #eee;">
@@ -145,30 +141,29 @@
 								<div class="btn-toolbar"
 									style="margin-top: 10px; margin-bottom: 10px;">
 									<div class="btn-group">
-										<button class="btn" data="food"
-											style="width: 40px; height: 40px;">
+										<button class="btn btn-primary" data="food"
+											style="width: 40px; height: 40px; background-color: #F0AD4E; border-color: #F0AD4E;">
 											<img src="/starrail/resources/images/expenses/dinner.png" />
 										</button>
 
-										<button class="btn" data="shopping"
-											style="width: 40px; height: 40px;">
+										<button class="btn btn-primary" data="shopping"
+											style="width: 40px; height: 40px; background-color: #F0AD4E; border-color: #F0AD4E;">
 											<img src="/starrail/resources/images/expenses/shopping.png" />
 										</button>
 
-										<button class="btn" data="hotel"
-											style="width: 40px; height: 40px;">
+										<button class="btn btn-primary" data="hotel"
+											style="width: 40px; height: 40px; background-color: #F0AD4E; border-color: #F0AD4E;">
 											<img src="/starrail/resources/images/expenses/bed.png" />
 										</button>
 
-										<button class="btn" data="bus"
-											style="width: 40px; height: 40px;">
+										<button class="btn btn-primary" data="bus"
+											style="width: 40px; height: 40px; background-color: #F0AD4E; border-color: #F0AD4E;">
 											<img src="/starrail/resources/images/expenses/bus.png" />
 										</button>
 
-										<button class="btn" data="etc"
-											style="width: 40px; height: 40px;">
-											<img
-												src="/starrail/resources/images/expenses/001-speech-bubble.png" />
+										<button class="btn btn-primary" data="etc"
+											style="width: 40px; height: 40px; background-color: #F0AD4E; border-color: #F0AD4E;">
+											<img src="/starrail/resources/images/expenses/001-speech-bubble.png" />
 										</button>
 									</div>
 								</div>
@@ -193,7 +188,7 @@
 
 								<div class="input-group">
 									<input type="button" value="등록" class="btn btn-primary"
-										data-toggle="modal" onclick="expense_save()">
+										data-toggle="modal" onclick="expense_save()" style="background-color: #F0AD4E; border-color: #F0AD4E">
 								</div>
 							</div>
 						</form>
@@ -214,7 +209,7 @@
 
 								<div class="tab-content row-md-5">
 									<ul class="list-group">
-										<li class="list-group-item pay" style="height: 200px"></li>
+										<li class="list-group-item pay" style="height: 150px"></li>
 									</ul>
 								</div>
 
@@ -230,7 +225,7 @@
 
 						<!-- 실시간 도표 -->
 
-							<div id="piechart" style="width: 600px; height: 500px; margin-top: 350px; margin-left: 400px; "></div>
+							<div id="piechart" style="width: 500px; height: 400px; margin-top: 300px; margin-left: 450px; "></div>
 				</div>
 			</div>
 		</div>
@@ -253,7 +248,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 
-<!--  <script type="text/javascript">
+  <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
       var doubleArray;
@@ -261,22 +256,17 @@
       
       function drawChart() {
 
-    	doubleArray = [['Task','djfksljf'],['fdjsk',123321],['432',321123]];
         var data = google.visualization.arrayToDataTable(
-        		doubleArray
-        /* 		[
+        		[
           ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ] */
+          ['No Data',1]
+         
+        ] 
         		
         );
 
         var options = {
-          title: 'My Daily Activities'
+          title: 'My Expense'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -284,7 +274,7 @@
         chart.draw(data, options);
       }
     </script>
- -->
+
 
 <!--5일차,7일차 체크박스 클릭했을 때, 하나만 눌리게 -->
 <script type="text/javascript">
@@ -355,7 +345,7 @@
 				 //map에서 꺼내기 위한 each문 두번
 				$.each(data, function(index, item) {
 					$('#thumbnail').append("<div class='col-md-4'><img src='/starrail/resources/images/expenses/slide6.jpg' class='img-responsive img-radio'/>"
-							+ "<button type='button' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
+							+ "<button type='button' style='background-color: #FF8224; border-color: #FF8224;' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
 							+ item["c_name"]
 							+ "</button></div>");
 				}); 
@@ -377,7 +367,6 @@
 			onSelect : function(StartDate) {
 				$('#datepicker_expense').empty(); //출발역 목록 비우기
 				$('#endDate').empty(); //도착역 목록 비우기
-
 				tripDateStart = new Date(StartDate);
 				$('input[name="tripLong"]').removeAttr('disabled');
 				$('input[name="tripLong"]').prop('checked', false);
@@ -419,17 +408,17 @@
 							$('#tabnavi').empty();
 							for (var i = 0; i <= parseInt(interval); i++) {
 
-								$('.dayButton').append('<input type="button" value='
+								$('.dayButton').append('<input type="button" style="background-color: #FF8224; border-color: #FF8224" value='
 														+ (i + 1)
-														+ '일차  class="ed_date" id="'
+														+ '일차  class="ed_date btn btn-primary" id="'
 														+ (tripDateStart.getFullYear()
 														+ '/'
 														+ (tripDateStart.getMonth() + 1)
 														+ '/' + tripDateStart.getDate())
 														+ '"> </input>');
-								$('#tabnavi').append('<input type="button" value='
+								$('#tabnavi').append('<input type="button" style="background-color: #FF8224; border-color: #FF8224" value='
 										+ (i + 1)
-										+ '일차  class="listed_date" id="'
+										+ '일차  class="listed_date btn btn-primary" id="'
 										+ (tripDateStart.getFullYear()
 										+ '/'
 										+ (tripDateStart.getMonth() + 1)

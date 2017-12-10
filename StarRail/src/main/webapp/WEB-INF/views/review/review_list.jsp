@@ -17,11 +17,10 @@
 <script src="/starrail/resources/bootstrap/js/bootstrap.js"></script>
 
 
-<scriptsrc="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<<<<<<< HEAD
 
 <script src="/starrail/resources/js/review/recommend.js"></script>
 

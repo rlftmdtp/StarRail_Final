@@ -84,7 +84,7 @@ p{
 }
 
 .selected {
-	background-color: yellow;
+	background-color: red;
 }
 
 /* 지출내역에 보여지는 list form */

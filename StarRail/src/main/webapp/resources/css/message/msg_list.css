@@ -25,9 +25,10 @@ body {
 }
 
 .mail-box .sm-side {
-	background: none repeat scroll 0 0 #e5e8ef;
+	background: none repeat scroll 0 0 #e3b78282;
 	border-radius: 4px 0 0 4px;
 	width: 20%;
+	height: 700px;
 }
 
 .mail-box .lg-side {
@@ -37,7 +38,7 @@ body {
 }
 
 .mail-box .sm-side .user-head {
-	background: none repeat scroll 0 0 #ABABAB;
+	background: none repeat scroll 0 0 #f0ad4ea6;
 	border-radius: 4px 0 0;
 	color: #fff;
 	min-height: 80px;
@@ -88,7 +89,7 @@ a.mail-dropdown {
 }
 
 .btn-compose {
-	background: none repeat scroll 0 0 #ff6c60;
+	background: none repeat scroll 0 0 #ff6c60b3;
 	color: #fff;
 	padding: 12px 0;
 	text-align: center;
@@ -127,7 +128,7 @@ ul.inbox-nav li a {
 
 ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus
 	{
-	background: none repeat scroll 0 0 #d5d7de;
+	background: none repeat scroll 0 0 #e3b782;
 	color: #6a6a6a;
 }
 
@@ -176,7 +177,7 @@ ul.labels-info li a i {
 }
 
 .inbox-head {
-	background: none repeat scroll 0 0 #D5D5D5;
+	background: none repeat scroll 0 0 #e3b78282;
 	border-radius: 0 4px 0 0;
 	color: #fff;
 	min-height: 80px;
@@ -213,7 +214,7 @@ ul.labels-info li a i {
 }
 
 .table-inbox tr.unread td {
-	background: none repeat scroll 0 0 #f7f7f7;
+	background: none repeat scroll 0 0 #e3b78212;
 	font-weight: 600;
 }
 

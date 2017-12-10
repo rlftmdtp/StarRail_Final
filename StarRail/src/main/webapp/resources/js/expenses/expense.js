@@ -52,18 +52,18 @@ $(function() {
 								
 										/* 일수구해서 버튼만들어주기 */
 										for (var i = 0; i <= parseInt(interval); i++) {
-											$('.dayButton').append('<input type="button" value='
+											$('.dayButton').append('<input type="button"  value='
 																	+ (i + 1)
-																	+ '일차  class="ed_date" id="'
+																	+ '일차  class="ed_date btn btn-primary" style="background-color: #FF8224; border-color: #FF8224" id="'
 																	+ (startDate.getFullYear()
 																	+ '/'
 																	+ (startDate.getMonth() + 1)
 																	+ '/' + startDate.getDate())
 																	+ '"> </input>');
 
-											$('#tabnavi').append('<input type="button" value='
+											$('#tabnavi').append('<input type="button"  value='
 																	+ (i + 1)
-																	+ '일차  class="listed_date" id="'
+																	+ '일차  class="listed_date btn btn-primary" style="background-color: #FF8224; border-color: #FF8224" id="'
 																	+ (startDate.getFullYear()
 																	+ '/'
 																	+ (startDate.getMonth() + 1)

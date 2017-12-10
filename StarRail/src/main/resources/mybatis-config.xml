@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
 	<typeAliases>
 		<!--  패키지만 넣으면 aliases는 자동으로 클래스명으로 지정된다. -->
 		<package name="starrail.map.domain"/>
@@ -14,10 +15,7 @@
 		<package name="starrail.expenses.domain"/>
 		<package name="starrail.partner.domain"/>
 		<package name="starrail.sharetext.domain"/>
-
-
 	</typeAliases>
-	
 	
 </configuration>
 

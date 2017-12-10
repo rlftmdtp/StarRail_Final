@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
+
+import starrail.course.domain.CourseVO;
 import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 import starrail.expenses.persistence.ExpensesDAO;
@@ -72,15 +74,16 @@ public class ExpensesServiceImpl implements ExpensesService {
 	}
 
 	@Override
-	public List<Map<String, Object>> course(String id) throws Exception {
+	public List<CourseVO> course(String id) throws Exception {
 		System.out.println("service m_id는 : " +id);
-		List<Map<String, Object>> list = new ArrayList<>();	
+		List<CourseVO> list = new ArrayList<>();	
 		
 		list = dao.course(id);
 		
 		for(int i=0; i<list.size(); i++){
-			System.out.println((i+1)+"c_id : "+list.get(i).get("c_name"));
-			System.out.println("c_id : "+list.get(i).get("c_id"));
+			System.out.println((i+1)+"c_name : "+list.get(i).getC_name());
+			System.out.println("c_id : "+list.get(i).getC_id());
+			System.out.println("c_filename : "+list.get(i).getC_filename());
 		}
 		
 		System.out.println("service list : " +list);

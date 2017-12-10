@@ -146,4 +146,13 @@ $(function() {
 				
 			});	
 	/* 썸네일 이미지 클릭시 대표 이미지 바뀜 + ajax로 일정 가져오고 버튼 생성 끝 */
+	
+	/*쪽지 보내기 눌렀을 때*/
+	$(document).on('click', '#partner-list-button', function(){
+		var child = window.open('/starrail/message/msg_insertform', 'childWindow',
+				'resizable=no, width=360, height=360, left=500, top=200, menubar=no, status=no, scrollbars=no');
+		
+	});
+
+		
 });

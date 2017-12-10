@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.math3.analysis.solvers.RiddersSolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -243,21 +244,26 @@ public class ReviewController {
 			// start 추천			
 		Member_RecommendVO mr = new Member_RecommendVO();
 			mr.setMr_no(service.selectMr_no_service()+1);
-			mr.setM_id(m_id);
+			mr.setM_id(user.getM_id());
 			mr.setR_no(r_no);
 			
-			System.out.println(mr);
+			int checkR_no = service.selectCheckR_no_service(mr).get(0);
+			System.out.println("===" + checkR_no);
 			
 			// member_Recommend테이블에서 r_no가 중복되면 안됨 
-			if(service.selectCheckR_no_service(r_no).get(0) == 0){
+			if(checkR_no == 2){
+				System.out.println("****************컨트롤러");
 				service.registMemberRecommend_service(mr);
-			}else if(service.selectCheckR_no_service(r_no).get(0) > 0){
+			}
+			else if(checkR_no == 1){
 				service.updateMr_count_service(mr);
 			}
 			
-			//System.out.println("서비스 맵 결과  :  " + service.list_MemberRecommend_service());
-			service.list_reviewRecommend(m_no);
+			// 추천된 결과를 저장하는 리스트
+			List<Integer> r_noList = service.list_reviewRecommend(m_no);
+			System.out.println("$$$$$$$$$ : " + service.list_userBased_servie(r_noList));
 			
+			model.addAttribute("recommendList", service.list_userBased_servie(r_noList));
 			// end 추천
 		}
 		

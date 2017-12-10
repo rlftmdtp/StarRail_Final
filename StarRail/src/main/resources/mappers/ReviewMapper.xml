@@ -46,8 +46,8 @@
 		select count(MR_NO) FROM MEMBER_RECOMMEND
 	</select>
 	
-	<select id="MemberRecommend_r_noSelect" resultType="Integer">
-		select count(*) FROM MEMBER_RECOMMEND where r_no = #{r_no}
+	<select id="MemberRecommend_r_noSelect" resultType="Member_RecommendVO">
+		select count(*) FROM MEMBER_RECOMMEND where r_no = #{r_no} and M_ID=#{m_id}
 	</select>
 	
 	<update id="Mr_count_Update" parameterType="Member_RecommendVO">
@@ -65,6 +65,17 @@
 			  from MEMBER m, MEMBER_RECOMMEND mr
 			  where m.M_ID = mr.M_ID
 			  ORDER by m.M_NO
+	</select>
+	
+	<select id="userBasedRecommend_Select" resultType="ReviewVO" parameterType="java.util.ArrayList">
+		select *
+			from review
+  			<where>
+  				R_NO IN
+  				<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+			    	#{item.value}
+				</foreach>  				
+  			</where>
 	</select>
 	
 <!-- end 추천 -->

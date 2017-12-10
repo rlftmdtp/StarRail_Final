@@ -1,5 +1,6 @@
 package starrail.review.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -191,13 +192,19 @@ public class ReviewDaoImpl implements ReviewDao{
 	public void insertMemberRecommend(Member_RecommendVO mr) {
 		session.insert(namespace+".member_recommend_Insert", mr);
 		System.out.println("dao입니다");
+		System.out.println(mr);
 	}
 	
 	@Override
-	public List<Integer> selectCheckR_no(int r_no) {
-		System.out.println("ddddd");
-		System.out.println("dao 테스트  :  " + session.selectList(namespace+".MemberRecommend_r_noSelect", r_no));
-		return session.selectList(namespace+".MemberRecommend_r_noSelect", r_no);
+	public List<Integer> selectCheckR_no(Member_RecommendVO mr) {
+		List<Integer> list = new ArrayList<Integer>();
+		
+		if((session.selectList(namespace+".MemberRecommend_r_noSelect", mr)).get(0) == null){
+			list.add(2);
+		}
+		//System.out.println("**dao 테스트  :  " + list);
+		
+		return list;
 	}
 	
 	@Override
@@ -208,6 +215,11 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public void updateMr_count(Member_RecommendVO mr) {
 		session.update(namespace+".Mr_count_Update", mr);
+	}
+
+	@Override
+	public List<ReviewVO> list_userBased(List<Integer> r_noList) {
+		return session.selectList(namespace+".userBasedRecommend_Select", r_noList);
 	}
 	
 	// 추천 끝

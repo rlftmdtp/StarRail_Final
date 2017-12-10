@@ -1,6 +1,8 @@
 package starrail.course.domain;
 
-public class CourseVO {
+import java.io.Serializable;
+
+public class CourseVO implements Serializable{
 
 	private int c_id;
 	private String m_id;

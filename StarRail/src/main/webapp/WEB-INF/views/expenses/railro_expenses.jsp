@@ -344,11 +344,18 @@
 				var c_id =0;
 				 //map에서 꺼내기 위한 each문 두번
 				$.each(data, function(index, item) {
+					alert(item)
+					$('#thumbnail').append("<div class='col-md-4'><img src ='" + item["c_filename"]
+							+ "' class='img-responsive img-radio'> <button type='button' style='background-color: #FF8224; border-color: #FF8224;' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
+							+ item["c_name"]
+							+ "</button></div>");
+				}); 
+/* 				$.each(data, function(index, item) {
 					$('#thumbnail').append("<div class='col-md-4'><img src='/starrail/resources/images/expenses/slide6.jpg' class='img-responsive img-radio'/>"
 							+ "<button type='button' style='background-color: #FF8224; border-color: #FF8224;' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
 							+ item["c_name"]
 							+ "</button></div>");
-				}); 
+				});  */
 
 				
 			}

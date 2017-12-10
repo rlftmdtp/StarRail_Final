@@ -45,10 +45,8 @@
 	src="/starrail/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 <body>
-	<header class="header_color">
-	 <%@include file="../main/nav_page.jsp"%>
-	 <div style="margin-top: 30px;"></div>
-	 </header>
+	<%@include file="../main/nav_page.jsp"%>
+	<div style="margin-top: 30px;"></div>   
 <div class ="message" style="width: 1080px; margin :0 auto;">	 
 	<div class="mail-box">
 		<aside class="sm-side">

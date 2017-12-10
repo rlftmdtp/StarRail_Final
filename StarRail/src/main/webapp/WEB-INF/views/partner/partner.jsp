@@ -95,51 +95,68 @@
         
         
         
-        <div class="col-lg-5" style="margin-top: 50px;">
+        <div class="col-lg-5" style="margin-top: 100px;">
           <h1>Course schedule</h1>
           <p></p> 
           
+          <div id="courseSearch_container" style="margin-bottom: 30px; width: 850px;">
+		     <form action="">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="input-group">
+						   <input type="text" class="form-control SearchBar" style="font-size: 18px;" placeholder="Search for...">
+						   <span class="input-group-btn">
+						   <button class="btn SearchButton1 btn-danger" type="submit" style="background-color:#dc3545;">
+						     <strong><span class=" glyphicon glyphicon-search SearchIcon" style="font-size: 20px; color: white;"></span></strong>
+						   </button>
+						   </span>
+						 </div><!-- /input-group -->
+					</div><!-- /.col-lg-6 -->
+				</div>
+			  </form>	        
+		  </div>
+          
            <!-- 코스선택 시 나오는 일정 시작 -->
            <div class="row">
-        <div>
-          <div class="card h-100">
-            <div class="card-body" style="width: 473px;">
-              <h2 class="card-title">Click One</h2>
-                             <div id="schedule_deatil">
-                  <form action="">
-                     <div id="courseDetailInfo">
-                        <input type="hidden" name="cd_id1" id="cd_id1">
-                        <input type="hidden" name="cd_id2" id="cd_id2">
-                        <input type="hidden" name="cd_id3" id="cd_id3">
-                        <input type="hidden" name="cd_id4" id="cd_id4">
-                        <input type="hidden" name="cd_id5" id="cd_id5">
-                        <input type="hidden" name="cd_id6" id="cd_id6">
-                        <input type="hidden" name="cd_id7" id="cd_id7">
-                     </div>
-                     
-                     <br>
-                     <table class="table" id="scheduleTable" width="200"
-                        cellpadding="5" cellspacing="2" align="center"
-                        style="table-layout: fixed; word-break: break-all;">
-                        <thead>
-                           <tr>
-                              <th>일정</th>
-                              <th>출발역</th>
-                              <th>도착역</th>
-                              <th>날짜</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>                        
-                     </table>
-                  </form>
-               </div>
-             </div>
-            <div class="card-footer">
-              <div id="scedule-button"></div>
-            </div>
-          </div>
-        </div>
+		        <div id = "courceDetail_container">
+		          <div class="card h-100">
+		            <div class="card-body" style="width: 473px;">
+		              <h2 class="card-title">Click One</h2>
+		                             <div id="schedule_deatil">
+		                  <form action="">
+		                     <div id="courseDetailInfo">
+		                        <input type="hidden" name="cd_id1" id="cd_id1">
+		                        <input type="hidden" name="cd_id2" id="cd_id2">
+		                        <input type="hidden" name="cd_id3" id="cd_id3">
+		                        <input type="hidden" name="cd_id4" id="cd_id4">
+		                        <input type="hidden" name="cd_id5" id="cd_id5">
+		                        <input type="hidden" name="cd_id6" id="cd_id6">
+		                        <input type="hidden" name="cd_id7" id="cd_id7">
+		                     </div>
+		                     
+		                     <br>
+		                     <table class="table" id="scheduleTable" width="200"
+		                        cellpadding="5" cellspacing="2" align="center"
+		                        style="table-layout: fixed; word-break: break-all;">
+		                        <thead>
+		                           <tr>
+		                              <th>일정</th>
+		                              <th>출발역</th>
+		                              <th>도착역</th>
+		                              <th>날짜</th>
+		                           </tr>
+		                        </thead>
+		                        <tbody>
+		                        </tbody>                        
+		                     </table>
+		                  </form>
+		               </div>
+		             </div>
+		            <div class="card-footer">
+		              <div id="scedule-button"></div>
+		            </div>
+		          </div>
+		        </div>	        
         </div>
            
            

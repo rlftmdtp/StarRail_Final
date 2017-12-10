@@ -1,6 +1,7 @@
 package starrail.main.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class MainController {
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public void mainGET() throws Exception{
+
 		
 	}
 	

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="starrail.sharetext.mappers.ShareMapper">
+
+	<!-- ********** -->
+	<!--       글등록        -->
+	<!-- ********** -->
+ 	<insert id="create" parameterType="ShareTextVO">
+ 		insert into shareText(sh_no, c_id, m_id, sh_subject, sh_title, sh_content, sh_pw, sh_date, sh_hit, sh_shareok)
+ 			values(sharetext_seq.nextval, #{c_id}, #{m_id}, #{sh_subject}, #{sh_title}, #{sh_content}, #{sh_pw}
+ 						, sysdate , 0 , 'Y')
+ 	</insert>
+
+ 	<!-- ********** -->
+	<!--      글 디테일      -->
+	<!-- ********** -->
+	<select id="read" resultType="ShareTextVO">
+	select 
+		sh_no, c_id, m_id, sh_subject, sh_title, sh_content, sh_date, sh_hit, replycnt
+	from
+		shareText
+		where  sh_no=#{sh_no}	
+	</select>
+ 	
+ 	<!-- ********** -->
+	<!--      글 수정        -->
+	<!-- ********** -->
+	<update id="update" parameterType="ShareTextVO">
+		update shareText set sh_title =#{sh_title}, sh_content =#{sh_content}
+		where sh_no = #{sh_no}
+	</update>
+	
+	
+	<!-- ********** -->
+	<!--      글 삭제        -->
+	<!-- ********** -->
+	<delete id="delete">
+		delete from shareText where sh_no = #{sh_no}
+	</delete>
+	
+	<!-- ********** -->
+	<!--      글 목록        -->
+	<!-- ********** -->
+ 	<select id="listAll" resultType="ShareTextVO">
+ 		<![CDATA[
+			 select 
+			   sh_no, sh_subject, sh_title, m_id, sh_date, sh_hit
+			 from 
+			   shareText 			   
+			 where sh_no > 0
+		]]>  	 
+			 
+		<![CDATA[	  
+			 order by sh_no desc,  sh_date desc
+ 		]]>  
+ 	</select>
+ 	
+ 	<!-- 코스정보 가지고 오기 -->
+ 	<select id="coursedetail" resultType="HashMap">
+ 		select *
+ 		from 
+ 		courseDetail
+ 		where c_id=#{c_id}
+ 	</select>
+ 	
+ 	<!-- c_id정보 가지고 오기 -->
+ 	
+ 	<select id="coursedetail2" resultType="CourseDetailVO">
+ 		select c.*
+ 		from 
+ 		sharetext s, courseDetail c 
+ 		where s.sh_no = #{sh_no}  AND s.c_id = c.c_id
+ 	
+ 	</select>
+ 	
+ 	<!-- <자기 아이디로 로그인해서 저장된 코스정보> -->
+ 	<select id="coursedetail3" resultType="CourseDetailVO" parameterType="String">
+ 		select cd.* 
+		from member m, COURSE c,courseDetail cd 
+		where m.m_id = #{m_id}  AND m.m_id = c.m_id AND c.C_ID = cd.c_id 	
+ 	</select>
+	<!-- 카운트 숫자 페이징 -->
+	<select id="countPaging" resultType="int">
+ 		<![CDATA[	  
+			 select count(sh_no)
+			 	from sharetext
+			 	where sh_no>0
+ 		]]>
+ 		
+ 		<include refid="search"></include>
+ 	</select> 
+	
+	<select id="selectCourse" resultType="CourseVO">
+		select * from course where m_id = #{m_id}
+	</select>
+	
+	<select id="listCriteria" resultType="ShareTextVO" parameterType="ShareTextCriteria">
+		<![CDATA[
+			select *
+				from shareText
+				where sh_no>0
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+			order by sh_no desc, sh_date desc
+		]]>
+	</select>
+	
+	
+	 	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and sh_title like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and sh_content like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and m_id like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( sh_title like '%'|| #{keyword}||'%' OR sh_content like
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( sh_content like '%'|| #{keyword}||'%' OR m_id like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( sh_title like '%'|| #{keyword}||'%'
+				OR
+				sh_content like '%'|| #{keyword}||'%'
+				OR
+				m_id like '%'|| #{keyword}||'%')
+			</if>
+		</if>
+		</sql> 
+	
+
+	<update id="updateReplyCnt">
+		update sharetext set replycnt = replycnt + #{amount}
+			where sh_no = #{sh_no}
+	</update>
+
+	<select id="getSh_no" resultType="int">
+		select sh_no from sharereply where sr_no = #{sr_no}
+	</select>
+	
+	 <update id="updateViewCnt">
+		update sharetext set sh_hit = sh_hit + 1 
+			where sh_no = #{sh_no}
+	</update> 
+	
+	<select id="maxNum" resultType="int">
+		select MAX(sh_no) from shareText	</select> 
+	
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+

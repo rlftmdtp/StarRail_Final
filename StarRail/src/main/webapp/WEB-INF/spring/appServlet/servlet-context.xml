@@ -61,7 +61,12 @@
 		</interceptor>
 
 		<interceptor>
-			<mapping path="/map/search" />
+			<mapping path="/expenses/railro_expenses" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/message/msg_list" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 

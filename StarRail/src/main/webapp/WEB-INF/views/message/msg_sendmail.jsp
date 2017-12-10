@@ -55,14 +55,14 @@
 		<div class="user-head">
 
 			<div class="user-name">
-				<h5>${messageVO.m_id }</h5>
-				<span>>${messageVO.m_id }@kosta.167</span>
+				<h5>${m_id }</h5>
+				<span>>${m_id }@kosta.167</span>
 			</div>
 
 		</div>
 		<div class="inbox-body">
 			<input type="button" value="쪽지보내기" data-toggle="modal"
-				onclick="openTest()" class="btn btn-compose">
+				id="openTest" class="btn btn-compose">
 
 
 		</div>
@@ -164,12 +164,13 @@
 
 <!-- 쪽지보내기 눌렀을 때 자식창 -->
 <script type="text/javascript">
-	function openTest() {
-		var child = window.open(
-						'/starrail/message/msg_insertform',
-						'childWindow',
-						'resizable=no, width=360, height=340, left=500, top=200, menubar=no, status=no, scrollbars=no');
-	};
+$('#openTest').on('click', function(){
+	var child = window.open(
+			'/starrail/message/msg_insertform?msg_sendid=""',
+			'childWindow',
+			'resizable=no, width=360, height=360, left=500, top=200, menubar=no, status=no, scrollbars=no');
+});
+
 </script>
 
 

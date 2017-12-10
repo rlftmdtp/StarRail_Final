@@ -18,10 +18,11 @@ public interface ReviewDao {
 	public List<ReviewVO> reviewRecommend(String tag, ReviewSearchCriteria cri);
 	public Integer reviewRecommendCount(String tag);
 	public Integer selectMr_no();
-	public List<Integer> selectCheckR_no(int r_no);
+	public List<Integer> selectCheckR_no(Member_RecommendVO mr);
 	public void insertMemberRecommend(Member_RecommendVO mr);
 	public List<Map<String, Integer>> list_MemberRecommend();
 	public void updateMr_count(Member_RecommendVO mr);
+	public List<ReviewVO> list_userBased(List<Integer> r_noList);
 	// 추천 end
 	
 	

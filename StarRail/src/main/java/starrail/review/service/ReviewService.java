@@ -19,11 +19,12 @@ public interface ReviewService {
 	public List<ReviewVO> reviewRecommend_service(String tag, ReviewSearchCriteria cri);
 	public Integer reviewRecommendCount_service(String tag);
 	public Integer selectMr_no_service();
-	public List<Integer> selectCheckR_no_service(int r_no);
+	public List<Integer> selectCheckR_no_service(Member_RecommendVO mr);
 	public void registMemberRecommend_service(Member_RecommendVO mr);
 	public List<Map<String, Integer>> list_MemberRecommend_service();
 	public List<Integer> list_reviewRecommend(int m_no) throws Exception;
 	public void updateMr_count_service(Member_RecommendVO mr);
+	public List<ReviewVO> list_userBased_servie(List<Integer> r_noList);
 	// 추천 끝
 	
 	

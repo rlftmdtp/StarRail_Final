@@ -17,7 +17,7 @@
 
 .beds-baths.active span.icon {    			
 	opacity: 0;		
-    color: #fff;
+    color: #000;
     font-size: 20px;   
 
 }
@@ -49,7 +49,13 @@
     background: #7BB712;   
 }
 
+#dateSetting .btn-default.active{
+	background: #8bccfc;
+}
 
+#dateSetting .btn-default{
+	background: #eef7ff;
+}
 
 .beds-baths {
     width: 100px;   
@@ -58,7 +64,12 @@
 #beds-baths-group {
     width:1000px;   
 }
-#beds-baths-group  label {margin-right:10px; border-radius: 10px;}
+#beds-baths-group  label {
+	margin-right:10px;
+	border-radius: 10px;
+}
+
+
 .beds-baths-word {
     position: absolute;
     left: 0;
@@ -70,11 +81,11 @@
     margin: 0 auto;
     font-size: 14px;
     font-weight: bold;
-    color: #909090;
+    color: #808080;
 }
 
 .beds-baths.active .beds-baths-word {
-    color: #fff;
+    color: #000;
 }
 
 .mobile-br {
@@ -140,7 +151,7 @@ margin-top: -1px;
 }
 
     .beds-baths.active .beds-baths-word {
-        color: #fff;
+        color: #000;
     }
     
     .beds-baths-clearfix {

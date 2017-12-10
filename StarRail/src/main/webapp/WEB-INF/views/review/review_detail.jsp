@@ -7,7 +7,19 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<style type="text/css">
+div #reviewDetail_container{
+	margin: 30px 40px;   
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    height: 530px;
+}
+</style>
 
 
 	<%@include file="../main/nav_page.jsp"%>
@@ -84,12 +96,16 @@
 
 
     <!-- start Bootstrap으로 바꾼 Html코드 -->
-	<div class="container">
-		<div class="row">
+	<div class="container" >
 			<div class="">
-	         <h1>Board Detail</h1>
-	    	 <div class="well profile" style="margin-top: 20px;">
-	            <div class="col-md-12">
+	        	 <h1 class="my-4" style="margin-top: 10px; margin-left: 20px;">
+			     <span style="font-size: 30px; color: #F0AD4E; font-weight: bold;">Review Detail&nbsp;</span>
+			     <small>${reviewVO.r_no}번 글</small>
+			     </h1> 
+	               
+	         
+		    	 <div  id="reviewDetail_container">
+		            <div class="col-md-12">
 	            
 	            	<!-- start 글 내용 -->
 	                <div class="col-md-12 col-sm-8">
@@ -136,7 +152,7 @@
 	            </div>                   
 	             <!-- end 별점 -->     
 	                 
-	             <div class="col-xs-12 divider1 text-center">
+	             <div class="col-xs-12 divider1 text-center" style="margin: 20px 20px;">
 	                <div class="col-xs-12 col-sm-6 emphasis">
 	                    <h2><strong> ${reviewVO.r_hit} </strong></h2>    
 	                    <p><strong>조회수</strong></p>                
@@ -174,10 +190,48 @@
 	                
 	            </div>
 	            <!-- end 수정 삭제 목록으로 돌아가는 버튼이 들어가는 div --> 
-	    	 </div>                 
+	    	 </div>  
+	    	 
+	    	 <hr>
+	    	 
+	    	 <div id="recommendList_container" class="col-md-12" style="margin-top: 100px;">
+		    	 <h1 class="my-4" style="margin-top: 10px; margin-left: 20px;">
+			     <span style="font-size: 30px; color: #F0AD4E; font-weight: bold;">Review Recommendation&nbsp;</span>
+			     <small>이 후기를 조회한 사람이 읽은 다른 후기 추천</small>
+			     </h1>
+			     
+		     <c:if test="${!empty recommendList}">
+		     <c:forEach items="${recommendList}" var="reviewVO" varStatus="status">
+		     	<div id="recommendList"  style="margin: 60px 40px;" class="col-md-3" >
+					
+		            	<h3>		                    
+			            				                   	
+			                   	<div >
+								    <div id="tb-testimonial" class="testimonial testimonial-warning">
+								       <div class="testimonial-section">
+								            추천수 : <strong>${status.current.r_recomm}</strong>       
+								       </div>
+								       <div class="testimonial-desc">
+								           <img src="/starrail/resources/images2/partner/M.png" alt="" />
+								           <div class="testimonial-writer">
+								               <div class="testimonial-writer-name" style="padding-top: 5px;">${status.current.r_no}번 글</div>
+								               <div class="testimonial-writer-designation" style="padding-top: 5px; padding-bottom: 5px;">${status.current.m_id}</div>
+								               <a href="/starrail/review/review_detail?page=${cri.page }&perPageNum=${cri.perPageNum }&r_no=${reviewVO.r_no}&m_id=${m_id}" class="testimonial-writer-company" style="font-weight: bold;">${status.current.r_title}</a>
+								            </div>
+								       </div>
+								    </div>   
+							   </div> 	              	
+			                   	
+			             		                                       	
+		                 </h3>
+		         	   	
+	         	</div>	
+	         	</c:forEach>	
+	         	</c:if>  
+	    	 </div>	    	 
+	    	                
 			</div>
 		</div>
-	</div>
     <!-- end Bootstrap으로 바꾼 Html코드 -->
     </form>
 </section>

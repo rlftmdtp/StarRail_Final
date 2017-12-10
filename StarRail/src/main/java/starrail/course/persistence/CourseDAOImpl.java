@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
 import starrail.course.domain.IssueInfoVO;
+import starrail.course.domain.StationCoorVO;
 
 @Repository
 public class CourseDAOImpl implements CourseDAO {
@@ -65,6 +66,12 @@ public class CourseDAOImpl implements CourseDAO {
 	@Override
 	public void courseDetailDelete(Integer c_id) throws Exception {
 		session.delete(namespace+".courseDetailDelete", c_id);
+	}
+
+	@Override
+	public StationCoorVO getCoordinate(String stc_name) throws Exception {
+		
+		return session.selectOne(namespace+".getCoordinate", stc_name);
 	}
 
 }

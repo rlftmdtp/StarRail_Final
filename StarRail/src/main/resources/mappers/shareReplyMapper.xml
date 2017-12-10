@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="starrail.sharetext.mappers.shareReplyMapper">
+
+	<select id="list" resultType="SharetextReplyVO">
+		select * 
+		from sharereply
+		where sh_no = #{sh_no}
+		order by sr_no desc
+	</select>
+
+	<insert id="create" parameterType="SharetextReplyVO">
+		insert into shareReply (sr_no, sh_no, sr_content, replyer)
+		values(seq_sharereply.nextval, #{sh_no}, #{sr_content}, #{replyer})
+	</insert>
+
+	<update id="update" parameterType="SharetextReplyVO">
+		update shareReply 
+			set sr_content = #{sr_content}, updatesr_date = sysdate
+		where 
+			sr_no = #{sr_no}
+	</update>
+
+	<delete id="delete">
+		delete from shareReply where sr_no = #{sr_no}
+	</delete>
+
+	<select id="listPage" resultType="SharetextReplyVO">
+	  <![CDATA[
+		 select 
+		   sr_no, sh_no, sr_content, replyer, sr_date, updatesr_date
+		 from
+		   (
+		   select /*+INDEX_DESC(sharereply pk_reply))*/
+		     rownum rn, sr_no, sh_no, sr_content, replyer, sr_date, updatesr_date
+		   from sharereply
+		   where sh_no = #{sh_no}
+		   and sr_no > 0
+		   and rownum <= #{scri.page} * #{scri.perPageNum}
+		   )
+		where rn > ( #{scri.page} -1) * #{scri.perPageNum}
+	  ]]>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(sh_no) from sharereply
+		where sh_no =#{sh_no}
+	</select>
+
+
+	<select id="getSh_no" resultType="int" >
+		select sh_no from shareReply
+		where sr_no=#{sr_no}
+	</select>
+	
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+

@@ -47,6 +47,7 @@ public class PartnerDAOImpl implements PartnerDAO {
 
 	@Override
 	public List<UserVO> partnerSearch_List(CourseDetailVO courseDetailVO) {
+		System.out.println("+++++++++++++ : " + session.selectList(namespace+".partnerSearch_Select", courseDetailVO));
 		return session.selectList(namespace+".partnerSearch_Select", courseDetailVO);
 	}
 

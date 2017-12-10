@@ -73,6 +73,11 @@
 			<mapping path="/recommend/recommend" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
+
+		<interceptor>
+			<mapping path="/review/review_list" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
 	</interceptors>
 
 	<!-- review 파일 업로드 -->

@@ -26,7 +26,9 @@
 <body>
 
 	<section class="box-position">
-
+	<div class="logo" style="margin-left: 130px;" >
+		<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 100px; ">
+	</div>
 		<div class="  col-xs-12 col-md-3 col-sm-4 pull-right">
 
 			<div class="panel panel-default">
@@ -41,9 +43,9 @@
 				</div>
 
 				<!-- Message body	-->
-				<div class="panel-body msg_container_base">
+				<div class="panel-body msg_container_base" >
 					<br />
-					<form action="#">
+					<form action="#" >
 						<table>
 							<tr class="form-group">
 								<th id="msg_sendid">보낸사람 : ${messageVO.msg_sendid }</th>
@@ -54,14 +56,14 @@
 								</th>
 							</tr>
 							<tr class="form-group">
-								<td colspan="2" class="form-control" id="msg_content">
+								<td colspan="2" class="form-control" id="msg_content" style="width: 380px;">
 									${messageVO.msg_content }
 								</td>
 							</tr>
 
 							<tr class="form-group">
 								<td colspan="2">
-								<input type = "submit" id="submit" class="form-control" value="확인">
+								<input type = "submit" id="submit" class="form-control" style="width: 380px;" value="확인">
 								</td>
 							</tr>
 

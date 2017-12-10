@@ -1,8 +1,21 @@
+<%@page import="starrail.main.domain.UserVO"%>
+<%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
+<%
+	HttpSession session = request.getSession();
+	String m_name = "";
+	
+	if((session.getAttribute("login")) != null){
+		UserVO user = (UserVO)session.getAttribute("login");
+		m_name = user.getM_name();
+	}else{
+		m_name = "User";
+	}	
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -88,46 +101,37 @@
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Course</a>
 		          <ul class="dropdown-menu">
-		            <li><a href="#">Planner <span class="glyphicon glyphicon glyphicon-pencil pull-right"></span></a></li>
+		            <li><a href="/starrail/course/makeCourse">Planner <span class="glyphicon glyphicon glyphicon-pencil pull-right"></span></a></li>
 		            <li class="divider"></li>
 		            <li><a href="/starrail/partner/partner">Partner  <span class="glyphicon glyphicon-sunglasses pull-right"></span></a></li>
 		            <li class="divider"></li>
-		            <li><a href="#">Expense <span class="glyphicon glyphicon-piggy-bank pull-right"></span></a></li>
+		            <li><a href="/starrail/expenses/railro_expenses">Expense <span class="glyphicon glyphicon-piggy-bank pull-right"></span></a></li>
 		            <!-- <li class="divider"></li> -->
 		            <!-- <li><a href="#"> <span class="glyphicon glyphicon-log-out pull-right"></span></a></li> -->
 		          </ul>
 		        </li>
 		      </ul>&nbsp;&nbsp;&nbsp;&nbsp;	
 		      
-		       <ul class="nav navbar-nav">
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;Recommend</a>
-		          <ul class="dropdown-menu">
-		            <li><a href="/starrail/recommend/recommend">Course  <span class="glyphicon glyphicon glyphicon-star pull-right"></span></a></li>
-		            <li class="divider"></li>
-		            <li><a href="#">Travel Information <span class="glyphicon glyphicon glyphicon-map-marker pull-right"></span></a></li>
-		          </ul>
-		        </li>
-		      </ul>&nbsp;&nbsp;&nbsp;&nbsp;	
 			 
 			 <ul class="nav navbar-nav">	<!-- id="navbarResponsive" -->
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"	href="#">&nbsp;&nbsp;Share&nbsp;&nbsp;</a></li>&nbsp;&nbsp;&nbsp;&nbsp;					
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"	href="#">Postscript</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger"	href="/starrail/map/search">&nbsp;&nbsp;Map&nbsp;&nbsp;</a></li>&nbsp;&nbsp;&nbsp;&nbsp;					
+				<li class="nav-item"><a class="nav-link js-scroll-trigger"	href="/starrail/sharetext/sharetext_listPage">&nbsp;&nbsp;Share&nbsp;&nbsp;</a></li>&nbsp;&nbsp;&nbsp;&nbsp;					
+				<li class="nav-item"><a class="nav-link js-scroll-trigger"	href="/starrail/review/review_list">Postscript</a></li>
 			</ul>
 			
 			
 			
 	      <ul class="nav navbar-nav" style="margin-left: 140px;">
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">User<span class="glyphicon glyphicon-user pull-right"></span></a>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=m_name %><span class="glyphicon glyphicon-user pull-right"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Login <span class="glyphicon glyphicon glyphicon-log-in pull-right"></span></a></li>
+	            <li><a href="/starrail/main/login">Login <span class="glyphicon glyphicon glyphicon-log-in pull-right"></span></a></li>
 	            <li class="divider"></li>
 	            <li><a href="#">My Page <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
+	            <li><a href="/starrail/message/msg_list">Messages <span class="badge pull-right"> 42 </span></a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">Reservation <span class="glyphicon glyphicon glyphicon-credit-card pull-right"></span></a></li>
+	            <li><a href="/starrail/reservation/Reservation_view">Reservation <span class="glyphicon glyphicon glyphicon-credit-card pull-right"></span></a></li>
 	            <!-- <li class="divider"></li> -->
 	            <!-- <li><a href="#"> <span class="glyphicon glyphicon-log-out pull-right"></span></a></li> -->
 	          </ul>

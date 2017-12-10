@@ -1,5 +1,6 @@
 package starrail.review.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import starrail.review.domain.FileVO;
+import starrail.review.domain.Hash_SearchVO;
+import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewVO;
 import starrail.review.domain.ReviewCriteria;
 import starrail.review.domain.ReviewSearchCriteria;
@@ -21,37 +24,38 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	private static String namespace = "railro.review.mapper.ReviewMapper";
 	
-	@Override	//ÈÄ±â°Ô½ÃÆÇ µî·Ï
+	
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ë“±ë¡
 	public void insertReview(ReviewVO review) throws Exception{
 		session.insert(namespace + ".insertReview", review);
 	}
 	
-	@Override	//ÈÄ±â°Ô½ÃÆÇ »ó¼¼º¸±â
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public ReviewVO selectReview(Integer r_no) throws Exception{
 		return session.selectOne(namespace + ".detailReview", r_no);
 	}
 	
-	@Override	//ÈÄ±â°Ô½ÃÆÇ ¼öÁ¤
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ìˆ˜ì •
 	public void updateReview(ReviewVO review) throws Exception{
 		session.update(namespace + ".updateReview", review);
 	}
 	
-	@Override	//ÈÄ±â°Ô½ÃÆÇ »èÁ¦
+	@Override	//í›„ê¸°ê²Œì‹œíŒ ì‚­ì œ
 	public void deleteReview(Integer r_no) throws Exception{
 		session.delete(namespace + ".deleteReview", r_no);
 	}
 	
-	@Override	//ÀüÃ¼ °Ô½ÃÆÇ
+	@Override	//ì „ì²´ ê²Œì‹œíŒ
 	public List<ReviewVO> listReview() throws Exception{
 		return session.selectList(namespace+".listReview");
 	}
 
-	@Override //±Û¹øÈ£ + 1
+	@Override //ê¸€ë²ˆí˜¸ + 1
 	public Integer selectR_no() {
 		return session.selectOne(namespace+".selectR_no");
 	}
 
-	@Override	//ÆäÀÌÂ¡
+	@Override	//í˜ì´ì§•
 	public List<ReviewVO> listPage(int Page) throws Exception {
 		if(Page <= 0){
 			Page = 1;
@@ -61,17 +65,17 @@ public class ReviewDaoImpl implements ReviewDao{
 		return session.selectList(namespace+".listPage", Page, new RowBounds(Page, 10));
 	}
 
-	@Override	//ÀüÃ¼°Ô½ÃÆÇ + ÆäÀÌÂ¡Ã³¸®
+	@Override	//ì „ì²´ê²Œì‹œíŒ + í˜ì´ì§•ì²˜ë¦¬
 	public List<ReviewVO> listCriteria(ReviewCriteria cri) throws Exception {
 		return session.selectList(namespace+".listCriteria", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
-	@Override	//ÃÑ °Ô½Ã¹°ÀÌ ¸î°³ÀÎÁö 
+	@Override	//ì´ ê²Œì‹œë¬¼ì´ ëª‡ê°œì¸ì§€ 
 	public int countPaging(ReviewCriteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging", cri);
 	}
 
-	@Override	//ÀüÃ¼°Ô½ÃÆÇ + ÆäÀÌÂ¡ + °Ë»ö
+	@Override	//ì „ì²´ê²Œì‹œíŒ + í˜ì´ì§• + ê²€ìƒ‰
 	public List<ReviewVO> listSearch(ReviewSearchCriteria cri) throws Exception {
 		return session.selectList(namespace+".listSearch", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
@@ -81,22 +85,22 @@ public class ReviewDaoImpl implements ReviewDao{
 		return session.selectOne(namespace+".listSearchCount", cri);
 	}
 
-	@Override	//ÆÄÀÏ ÀúÀå
+	@Override	//íŒŒì¼ ì €ì¥
 	public void addAttach(FileVO fileVO) throws Exception {
 		session.insert(namespace+".addAttach", fileVO);
 	}
 
-	@Override	//ÆÄÀÏ ºÒ·¯¿À±â 
+	@Override	//íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸° 
 	public List<String> getAttach(Integer r_no) throws Exception {
 		return session.selectList(namespace+".getAttach", r_no);
 	}
 
-	@Override	//ÆÄÀÏ »èÁ¦
+	@Override	//íŒŒì¼ ì‚­ì œ
 	public void deleteAttach(Integer r_no) throws Exception {
 		session.delete(namespace+".deleteAttach", r_no);
 	}
 
-	@Override	//ÆÄÀÏ ¼öÁ¤
+	@Override	//íŒŒì¼ ìˆ˜ì •
 	public void repalceAttach(String rf_fullname, Integer r_no) throws Exception {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		
@@ -107,17 +111,17 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 
 	
-	@Override	//°Ô½Ã¹° Á¶È¸¼ö
+	@Override	//ê²Œì‹œë¬¼ ì¡°íšŒìˆ˜
 	public void updateR_hit(Integer r_no) throws Exception {
 		session.update(namespace+".updateR_hit", r_no);
 	}
 
-	@Override	//±Û¹øÈ£+1
+	@Override	//ê¸€ë²ˆí˜¸+1
 	public int getR_no() throws Exception {
 		return session.selectOne(namespace+".maxNum");
 	}
 
-	@Override	//³» ÅÂ±× Ãß°¡ÇÏ±â
+	@Override	//ë‚´ íƒœê·¸ ì¶”ê°€í•˜ê¸°
 	public void tagAdd(Map<String, Object>paramMap) throws Exception {
 		System.out.println("dao paramMap : " + paramMap);
 		session.insert(namespace+".addHash", paramMap);
@@ -128,7 +132,7 @@ public class ReviewDaoImpl implements ReviewDao{
 		return session.selectOne(namespace+".selectH_no");
 	}
 
-	@Override	//ÀüÃ¼ ÅÂ±× °¡Á®¿À±â
+	@Override	//ì „ì²´ íƒœê·¸ ê°€ì ¸ì˜¤ê¸°
 	public List<String> HashSearch() throws Exception {
 		return session.selectList(namespace+".tagGet");
 	}
@@ -152,5 +156,83 @@ public class ReviewDaoImpl implements ReviewDao{
 	public Integer select_hs_no() throws Exception {
 		return session.selectOne(namespace+".select_hs_no");
 	}
+
+	//-------------------------------------------------------------------------------------------------------------
+
+	// ì¶”ì²œ ì‹œì‘
+	@Override
+	public List<Map<String, Integer>> preferList() {
+		return session.selectList(namespace+".prefer_Select");
+	}
+
+	@Override
+	public List<Hash_SearchVO> tagRecommend(List<Integer> list) {
+		//System.out.println("dao : "+ session.selectList(namespace+".tagRecommend_Select", list));
+		return session.selectList(namespace+".tagRecommend_Select", list);
+	}
+	
+	@Override
+	public List<ReviewVO> reviewRecommend(String tag, ReviewSearchCriteria cri) {
+		return session.selectList(namespace+".reviewRecommend_Select", tag, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
+	}
+	
+	@Override
+	public Integer reviewRecommendCount(String tag) {
+		return session.selectOne(namespace+".reviewRecommendCount_Select", tag);
+	}
+	
+
+
+	@Override
+	public Integer selectMr_no() {
+		return session.selectOne(namespace+".mr_noSelect");
+	}
+	
+	@Override
+	public void insertMemberRecommend(Member_RecommendVO mr) {
+		session.insert(namespace+".member_recommend_Insert", mr);
+		System.out.println("daoì…ë‹ˆë‹¤");
+		System.out.println(mr);
+	}
+	
+	@Override
+	public List<Integer> selectCheckR_no(Member_RecommendVO mr) {
+		List<Integer> list = new ArrayList<Integer>();
+		
+		if((session.selectList(namespace+".MemberRecommend_r_noSelect", mr)).get(0) == null){
+			list.add(2);
+		}
+		//System.out.println("**dao í…ŒìŠ¤íŠ¸  :  " + list);
+		
+		return list;
+	}
+	
+	@Override
+	public List<Map<String, Integer>> list_MemberRecommend() {
+		return session.selectList(namespace+".member_recommendList_Select");
+	}
+	
+	@Override
+	public void updateMr_count(Member_RecommendVO mr) {
+		session.update(namespace+".Mr_count_Update", mr);
+	}
+
+	@Override
+	public List<ReviewVO> list_userBased(List<Integer> r_noList) {
+		return session.selectList(namespace+".userBasedRecommend_Select", r_noList);
+	}
+	
+	// ì¶”ì²œ ë
+
+
+
+
+
+
+
+
+
+
+
 	
 }

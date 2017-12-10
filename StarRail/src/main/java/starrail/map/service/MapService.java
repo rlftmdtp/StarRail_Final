@@ -4,6 +4,7 @@ import java.util.List;
 
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
+import starrail.map.domain.BlogVO;
 import starrail.map.domain.FoodVO;
 import starrail.map.domain.StationXYVO;
 import starrail.map.domain.StayVO;
@@ -18,7 +19,8 @@ public interface MapService {
 	public List<FoodVO> foodList(String station) throws Exception;
 	public List<StayVO> stayList(String station) throws Exception;
 	public List<TourVO> tourList(String station) throws Exception;
-	public void dataLab(String station) throws Exception;
+	public List<BlogVO> dataBlog(String title) throws Exception;
+	public Double dataLab(String title) throws Exception;
 	public List<CourseDetailVO> courseDetailList(String c_id);
 	
 	

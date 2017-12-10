@@ -25,7 +25,6 @@ a:focus, a:hover {
 }
 
 hr {
-	max-width: 100px;
 	margin: 25px auto 0;
 	border-width: 1px;
 	border-color: rgba(34, 34, 34, .1)
@@ -428,7 +427,7 @@ footer ul li a.active, footer ul li a:active, footer ul li a:focus,
 }
 
 .btn {
-	border-radius: 300px;
+	/* border-radius: 300px; */
 	font-family: Lato, Helvetica, Arial, sans-serif;
 	letter-spacing: 2px;
 	text-transform: uppercase

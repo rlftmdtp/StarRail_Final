@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-
-import starrail.expenses.domain.ExpenseCourseVO;
 import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 import starrail.expenses.persistence.ExpensesDAO;
@@ -18,7 +16,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 	@Inject
 	private ExpensesDAO dao;
 
-	@Override // ¿¹»ó°æºñ ÀúÀåÇÏ±â
+	@Override // ì˜ˆìƒê²½ë¹„ ì €ì¥í•˜ê¸°
 	public void expensesRegist(ExpensesVO expensesVO) throws Exception {
 
 		if (dao.selectE_no() != null) {
@@ -32,38 +30,39 @@ public class ExpensesServiceImpl implements ExpensesService {
 	
 	@Override
 	public Integer totalMoney(int e_no, int ed_amount) throws Exception {
-		// ÃÑ ÀÜ¾× - »ç¿ë±İ¾× °è»êÇØÁÖ±â
+		// ì´ ì”ì•¡ - ì‚¬ìš©ê¸ˆì•¡ ê³„ì‚°í•´ì£¼ê¸°
+		System.out.println(e_no);
 		int total = dao.totalMoney(e_no) - ed_amount;
 		
-		System.out.println("¼­ºñ½º °è»ê±â : dao.totalMoney(e_no) : " + dao.totalMoney(e_no));
-		System.out.println("¼­ºñ½º °è»ê±â : ed_amount : " + ed_amount);
-		System.out.println("¼­ºñ½º °è»ê±â : total : " + total);
+		System.out.println("ì„œë¹„ìŠ¤ ê³„ì‚°ê¸° : dao.totalMoney(e_no) : " + dao.totalMoney(e_no));
+		System.out.println("ì„œë¹„ìŠ¤ ê³„ì‚°ê¸° : ed_amount : " + ed_amount);
+		System.out.println("ì„œë¹„ìŠ¤ ê³„ì‚°ê¸° : total : " + total);
 		return total;
 	}
 
-	@Override	//ÁöÃâ³»¿ª ÀúÀå
+	@Override	//ì§€ì¶œë‚´ì—­ ì €ì¥
 	public void amountRegist(StatementVO statementVO, Integer total) throws Exception {
 		if (dao.selectEd_no() != null) {
 			statementVO.setEd_no(dao.selectEd_no() + 1);
 		} else {
 			statementVO.setEd_no(1);
 		}
-
-		// totalÇÏ°í e_no°°ÀÌ ³Ñ±â±â
+		System.out.println("ì„œë¹„ìŠ¤ë¡œ ì˜¤ë‹ˆ? " + statementVO.getE_no());
+		// totalí•˜ê³  e_noê°™ì´ ë„˜ê¸°ê¸°
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("total", total);
 		map.put("e_no", statementVO.getE_no());
-		dao.updateExpenses(map); // °¡Á®¿Â totalÀ» ÃÑÀÜ¾×¿¡ updateÇØÁÖ°í
-		dao.amountInsert(statementVO); // ÁöÃâ³»¿ª¿¡´Â insertÇØÁÜ
+		dao.updateExpenses(map); // ê°€ì ¸ì˜¨ totalì„ ì´ì”ì•¡ì— updateí•´ì£¼ê³ 
+		dao.amountInsert(statementVO); // ì§€ì¶œë‚´ì—­ì—ëŠ” insertí•´ì¤Œ
 	}
 
-	@Override	//¿À´Ã »ç¿ëÇÑ ÃÑ ±İ¾×
+	@Override	//ì˜¤ëŠ˜ ì‚¬ìš©í•œ ì´ ê¸ˆì•¡
 	public int todayTotal(int e_no, String ed_date) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("e_no", e_no);
 		map.put("ed_date", ed_date);
 
-		//ÀÜ¾×ÀÌ ¾øÀ¸¸é 0
+		//ì”ì•¡ì´ ì—†ìœ¼ë©´ 0
 		if(dao.todayTotal(map)==null){
 			return 0;
 		}else{
@@ -74,7 +73,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 
 	@Override
 	public List<Map<String, Object>> course(String id) throws Exception {
-		System.out.println("service m_id´Â : " +id);
+		System.out.println("service m_idëŠ” : " +id);
 		List<Map<String, Object>> list = new ArrayList<>();	
 		
 		list = dao.course(id);
@@ -105,21 +104,82 @@ public class ExpensesServiceImpl implements ExpensesService {
 	@Override
 	public List<Map<String, Object>> recallData(int e_no) throws Exception {
 		List<Map<String, Object>> list = new ArrayList<>();
-		
+		System.out.println("ì„œë¹„ìŠ¤e_no : " + e_no);
 		list = dao.recallData(e_no);
 		for(int i=0; i<list.size(); i++){
 			System.out.println("e_no : " + list.get(i).get("e_no"));
 			System.out.println("e_sdate : " + list.get(i).get("e_sdate"));
 			System.out.println("e_edate : " + list.get(i).get("e_edate"));
+			
+		}
+				
+		return list;
+		
+	}
+
+
+	@Override		//í•´ë‹¹ ë‚ ì§œ ë¦¬ìŠ¤íŠ¸ ë½‘ì•„ì˜¤ê¸°
+	public List<Map<String, Object>> listData(int e_no, String ed_date) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		List<Map<String, Object>> list = new ArrayList<>();
+		map.put("e_no", e_no);
+		map.put("ed_date", ed_date);
+		System.out.println("ì„œë¹„ìŠ¤ëº´ì•¡ : " +map);
+
+		list = dao.listData(map);
+		for (int i = 0; i < list.size(); i++) {
 			System.out.println("e_total : " + list.get(i).get("e_total"));
-			System.out.println("ed_no : " + list.get(i).get("ed_no"));
 			System.out.println("ed_date : " + list.get(i).get("ed_date"));
 			System.out.println("ed_kategorie : " + list.get(i).get("ed_kategorie"));
 			System.out.println("ed_katename : " + list.get(i).get("ed_katename"));
 			System.out.println("ed_amount : " + list.get(i).get("ed_amount"));
 		}
-				
-		return list;
 		
+		return list;
+	}
+
+
+	@Override
+	public Map<String, Integer> chart(int e_no) throws Exception {
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = dao.chart(e_no);
+		System.out.println("ì„œë¹„ìŠ¤ : " + list);
+		int shopping =0;
+		int food =0;
+		int bus =0;
+		int hotel =0;
+		int etc =0;
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).get("ed_kategorie").equals("shopping")){
+				System.out.println("í˜¸ì´ì§œ");
+				shopping += Integer.parseInt(list.get(i).get("ed_amount").toString());
+				System.out.println("shopping : " + shopping);
+				
+			}else if(list.get(i).get("ed_kategorie").equals("food")){
+				food += Integer.parseInt(list.get(i).get("ed_amount").toString());
+				System.out.println("food : " + food);
+				
+			}else if(list.get(i).get("ed_kategorie").equals("bus")){
+				bus += Integer.parseInt(list.get(i).get("ed_amount").toString());
+				System.out.println("bus : " + bus);
+				
+			}else if(list.get(i).get("ed_kategorie").equals("hotel")){
+				hotel += Integer.parseInt(list.get(i).get("ed_amount").toString());
+				System.out.println("hotel : " + hotel);
+				
+			}else if(list.get(i).get("ed_kategorie").equals("etc")){
+				etc += Integer.parseInt(list.get(i).get("ed_amount").toString());
+				System.out.println("etc : " + etc);
+			}
+
+		}
+		Map<String, Integer> map = new HashMap<>();
+		map.put("shopping", shopping);
+		map.put("food", food);
+		map.put("bus", bus);
+		map.put("hotel", hotel);
+		map.put("etc", etc);
+		System.out.println(map);
+		return map;
 	}
 }

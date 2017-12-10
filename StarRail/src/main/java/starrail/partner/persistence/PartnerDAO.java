@@ -2,10 +2,12 @@ package starrail.partner.persistence;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
 import starrail.main.domain.UserVO;
+import starrail.partner.domain.PartnerListVO;
 
 public interface PartnerDAO {
 	public List<CourseVO> myCourse_List(UserVO userVO);

@@ -7,6 +7,7 @@ import java.util.Map;
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
 import starrail.main.domain.UserVO;
+import starrail.partner.domain.PartnerListVO;
 
 public interface PartnerService {
 	public List<CourseVO> myCourse_List_service(UserVO userVO);

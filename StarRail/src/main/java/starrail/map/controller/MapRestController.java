@@ -23,11 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import starrail.course.domain.CourseDetailVO;
+import starrail.map.domain.BlogVO;
 import starrail.map.domain.FoodVO;
 import starrail.map.domain.StationXYVO;
 import starrail.map.domain.StayVO;
 import starrail.map.domain.TourVO;
 import starrail.map.service.MapService;
+import starrail.review.domain.ReviewCriteria;
+import starrail.review.domain.ReviewPageMaker;
 
 @RestController
 @RequestMapping("/maprest/*")
@@ -70,8 +73,8 @@ public class MapRestController {
 		return stationXY;
 	}
 	
-	@RequestMapping(value="/tourlist/{station}", method=RequestMethod.GET)
-	public ResponseEntity<Map<String,Object>> tourList(@PathVariable("station") String station){
+	@RequestMapping(value="/food/{station}", method=RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> foodList(@PathVariable("station") String station){
 		
 		ResponseEntity<Map<String,Object>> entity = null;
 		
@@ -79,35 +82,107 @@ public class MapRestController {
 			Map<String,Object> map = new HashMap<String,Object>();
 			
 			List<FoodVO> foodList = service.foodList(station);
-			List<StayVO> stayList = service.stayList(station);
-			List<TourVO> tourList = service.tourList(station);
-			
-			// 각 지점과 거리를 구하는 로직....?
-			//---------------------------
 			
 			map.put("foodList", foodList);			
-			//map.put("stayList", stayList);			
-			//map.put("tourList", tourList);
 			
 			entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return entity;
 	}
 	
-	@RequestMapping(value="/datalab/{station}", method=RequestMethod.GET)
-	public void dataLab(@PathVariable("station") String station){
-		System.out.println("datalabController " + station);
+	@RequestMapping(value="/stay/{station}", method=RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> stayList(@PathVariable("station") String station){
+		
+		ResponseEntity<Map<String,Object>> entity = null;
 		
 		try {
-			service.dataLab(station);
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			List<StayVO> stayList = service.stayList(station);
+			
+			map.put("stayList", stayList);			
+			
+			entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return entity;
+	}
+	
+	@RequestMapping(value="/tour/{station}", method=RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> tourList(@PathVariable("station") String station){
 		
+		ResponseEntity<Map<String,Object>> entity = null;
+		
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			List<TourVO> tourList = service.tourList(station);
+			
+			map.put("tourList", tourList);			
+			
+			entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value="/datablog/{blogtitle}/{page}", method=RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>>  dataBlog(@PathVariable("blogtitle") String blogtitle
+			,@PathVariable("page") Integer page){
+		System.out.println("datablogController " + blogtitle);
+		
+		ResponseEntity<Map<String,Object>> entity = null;
+		
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			ReviewCriteria cri = new ReviewCriteria();
+			cri.setPage(page);
+			
+			ReviewPageMaker pageMaker = new ReviewPageMaker();
+			pageMaker.setCri(cri);
+			
+			List<BlogVO> tempList = service.dataBlog(blogtitle); // 전부가 왔다.
+			
+			List<BlogVO> blogList = new ArrayList<BlogVO>();
+			for(int i=(page*3-3); i<page*3; i++)
+			{
+				System.out.println("blog의 몇번째 개수인가" + i);
+				blogList.add(tempList.get(i));
+			}
+	
+			map.put("blogList", blogList);
+			
+			pageMaker.setTotalCount(tempList.size());
+			map.put("pageMaker", pageMaker);
+			
+			entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;	
+	}
+	
+	@RequestMapping(value="/datalab/{labtitle}", method=RequestMethod.GET)
+	public ResponseEntity<Map<String,Double>>  dataLab(@PathVariable("labtitle") String labtitle){
+		System.out.println("dataLabController " + labtitle);
+		
+		ResponseEntity<Map<String,Double>> entity = null;
+		
+		try {
+			Map<String,Double> map = new HashMap<String,Double>();
+			Double ratio = service.dataLab(labtitle);
+			
+			map.put("ratio", ratio);
+			entity = new ResponseEntity<Map<String,Double>>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return entity;	
 	}
 }

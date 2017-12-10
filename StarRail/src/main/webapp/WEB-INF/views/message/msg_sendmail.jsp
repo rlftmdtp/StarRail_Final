@@ -1,30 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	<%@ page session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" type="text/css"
-	href="/starrail/resources/css/main/header_footer.css">
-<link rel='stylesheet prefetch'
-	href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
 <link rel="stylesheet" type="text/css"
 	href="/starrail/resources/css/message/msg_list.css">
+	<!-- Bootstrap core CSS -->
+<link href="/starrail/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Custom fonts for this template -->
+<link rel="stylesheet"
+	href="/starrail/resources/vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="/starrail/resources/vendor/simple-line-icons/css/simple-line-icons.css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Muli"
+	rel="stylesheet">
+<!-- Plugin CSS -->
+<link rel="stylesheet"
+	href="/starrail/resources/device-mockups/device-mockups.min.css">
+<link href="/starrail/resources/css/partner/small-business.css"
+	rel="stylesheet">
+<!-- Custom styles for this template -->
+
+
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="/starrail/resources/bootstrap/js/bootstrap.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script
+	src="/starrail/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Plugin JavaScript -->
+<script
+	src="/starrail/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 <body>
-
+	<header class="header_color">
+	 <%@include file="../main/nav_page.jsp"%>
+	 <div style="margin-top: 30px;"></div>
+	 </header>
+<div class ="message" style="width: 1080px; margin :0 auto;">	 
 	<div class="mail-box">
 		<aside class="sm-side">
 		<div class="user-head">
@@ -43,11 +68,11 @@
 		</div>
 		<ul class="inbox-nav inbox-divider">
 			<li class="active"><a href="/starrail/message/msg_list"><i class="fa fa-inbox"></i>
-					받은쪽지함 <span class="label label-danger pull-right">${updatenum }</span></a></li>
-			<li><a href="#"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-<!-- 			<li><a href="#"><i class="fa fa-bookmark-o"></i> 모아두기</a></li>
+					받은쪽지함 <span class="label label-danger pull-right" style="background-color: #ff6c60b3;">${updatenum }</span></a></li>
+			<li><a href="/starrail/message/msg_sendmail"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
+ 			<li><a href="#"><i class="fa fa-bookmark-o"></i> 모아두기</a></li>
 			<li><a href="#"><i class=" fa fa-external-link"></i> 이게 뭐지</a></li>
-			<li><a href="/starrail/message/msg_garbage"><i class=" fa fa-trash-o"></i> 휴지통</a></li> -->
+			<li><a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a></li> 
 		</ul>
 
 
@@ -56,8 +81,9 @@
 		<aside class="lg-side">
 		<div class="inbox-head">
 			<h3>보낸 쪽지함</h3>
-
-		</div>
+		</div>		
+		
+		<!-- body -->
 		<div class="inbox-body">
 			<div class="mail-option">
 				<div class="chk-all">
@@ -130,6 +156,10 @@
 		</div>
 		</aside>
 	</div>
+	</div>	
+		<div style="margin-bottom: 0px;">
+        	<%@include file="../main/footer.jsp"%>	
+	</div>
 </body>
 
 <!-- 쪽지보내기 눌렀을 때 자식창 -->
@@ -138,7 +168,7 @@
 		var child = window.open(
 						'/starrail/message/msg_insertform',
 						'childWindow',
-						'resizable=no, width=360, height=380, left=500, top=200, menubar=no, status=no, scrollbars=no');
+						'resizable=no, width=360, height=340, left=500, top=200, menubar=no, status=no, scrollbars=no');
 	};
 </script>
 

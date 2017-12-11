@@ -26,6 +26,7 @@
 	<context:component-scan base-package="starrail.expenses.controller" />
 	<context:component-scan base-package="starrail.partner.controller" />
 	<context:component-scan base-package="starrail.recommender.controller" />
+	<context:component-scan base-package="starrail.mypage.controller" />
 
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
@@ -78,6 +79,14 @@
 			<mapping path="/review/review_list" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
+		
+		
+		<interceptor>
+			<mapping path="/mypage/mypage" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		
+		
 	</interceptors>
 
 	<!-- review 파일 업로드 -->

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="starrail.mypage.mappers.mypageMapper">
+
+	<select id="courseList" resultType="courseVO" parameterType="String">
+		select * from course
+		where m_id = #{m_id}
+	</select>
+	
+<!-- 	<select id="reservationList" resultType="ReservationVO" parameterType="String">
+		select * from reservation
+		where m_id = #{m_id}
+	</select> -->
+	
+	<delete id="courseDelete" parameterType="Integer">
+		delete from course where c_id = #{c_id}
+	</delete>
+	
+	<delete id="courseDetailDelete" parameterType="Integer">
+		delete from coursedetail where c_id = #{c_id}
+	</delete>
+
+</mapper>

@@ -18,7 +18,7 @@ $(function() {
 	var cd_stime = null;
 	var cd_end = null;
 	var cd_etime = null;
-	
+
 	$("#thumnail a").click(
 			function(e) {
 				e.preventDefault();
@@ -89,6 +89,8 @@ $(function() {
 				
 				
 				var preindex = 0;
+				var msg_sendid = "";
+				
 				$(document).on("click", ".btn-danger", function() {	
 					
 					var index = $(this).attr('data-index');
@@ -117,6 +119,8 @@ $(function() {
 				    		  
 				    		  $("#partner-Profile").empty();
 				    		  $.each(data, function(index, item) {
+				    			  
+				    			  msg_sendid = item["m_id"];
 				    			  
 				    			  if(item["m_gender"] == "M"){
 				    				  var profile = "<div class='col-sm-3' id ='partner-profile-list' style='margin-bottom:10px;'>" 
@@ -154,7 +158,15 @@ $(function() {
 										
 										$("#partner-Profile").append(profile2);	
 				    				  
-				    			  }				    			
+				    			  }
+				    				/*쪽지 보내기 눌렀을 때*/
+				    				$(document).on('click', '#partner-list-button', function(){
+				    					var child = window.open('/starrail/message/msg_insertform?msg_sendid='+msg_sendid, 'childWindow',
+				    							'resizable=no, width=360, height=360, left=500, top=200, menubar=no, status=no, scrollbars=no');
+				    					
+				    				});
+				    			  
+				    			  
 				    		  })
 				    		  
 				    		  
@@ -164,4 +176,5 @@ $(function() {
 				
 			});	
 	/* 썸네일 이미지 클릭시 대표 이미지 바뀜 + ajax로 일정 가져오고 버튼 생성 끝 */
+
 });

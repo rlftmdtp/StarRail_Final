@@ -112,7 +112,7 @@ div #reviewDetail_container{
 	                    <h2>${reviewVO.r_title }</h2>
 	                    <p><h3><strong>Writer: </strong> ${reviewVO.m_id } </h3></p>
 	                    <p><h3><strong>Contents: </strong> ${reviewVO.r_content} </h3></p>
-	                    <br><br><br>
+	                    <br>
 	                    
 	                    <c:if test="${!empty hasgTag}">
 	                    	<p><h3><strong>Tag: </strong>		                    
@@ -121,11 +121,18 @@ div #reviewDetail_container{
 		                    	</c:forEach>		                                       	
 	                    	</h3></p>
 	                    </c:if>	 
-	                </div>         
+	                    
+	                     <c:if test="${!empty filename}">
+		                    <ul class="mailbox-attachments clearfix uploadedList" style="width: 80%;"></ul>
+	                    </c:if>	
+	                    
+	                    
+	                </div>  
+	                       
 	                <!-- end 글 내용 -->
 	                
 	                <!-- start 별점 -->    
-	                <div class="col-xs-12 col-sm-4 text-center1">
+	                <div class="col-xs-12 col-sm-4 text-center1" style="margin-top: -20px;">
 	                    <figure><h3>
 	                        <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive">
 	                        <figcaption class="ratings">
@@ -152,7 +159,7 @@ div #reviewDetail_container{
 	            </div>                   
 	             <!-- end 별점 -->     
 	                 
-	             <div class="col-xs-12 divider1 text-center" style="margin: 20px 20px;">
+	             <div class="col-xs-12 divider1 text-center" style="margin: 20px 20px; margin-top: -35px;">
 	                <div class="col-xs-12 col-sm-6 emphasis">
 	                    <h2><strong> ${reviewVO.r_hit} </strong></h2>    
 	                    <p><strong>조회수</strong></p>                
@@ -184,7 +191,7 @@ div #reviewDetail_container{
 	                
 	                <!-- start 목록 버튼을 누르면 onclick = list()실행하게됨 -->
 	                <div class="col-xs-12 col-sm-4 emphasis">
-						<button class="btn btn-danger btn-block" onclick="list()">
+						<button class="btn btn-danger btn-block" id="list">
 						<span class="fa fa-user"></span> List </button>
 	                </div>
 	                
@@ -243,24 +250,6 @@ div #reviewDetail_container{
     
     
     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-<!-- 후기삭제, 수정, 목록 -->
 <script type="text/javascript">
 	function remove() {
 		location.href = "/starrail/review/review_remove?r_no=${reviewVO.r_no }";
@@ -270,25 +259,34 @@ div #reviewDetail_container{
 		alert("수정~");
 		location.href = "review_modify?r_no=${review.r_no}";
 	} */
-
-	function list() {
-		alert("리스트러 가자");
+	
+	$('#list').on('click', function(){
 		location.href = "/starrail/review/review_list";
-	}
+	});
+	
 </script>
 
 <script src="/starrail/resources/js/upload.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
+
+
+
 <!-- 파일 업로드 뷰 -->
 <script id="templateAttach" type="text/x-handlebars-template">
-<li data-src='{{fullName}}'>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	</span>
-  </div>
-</li>                
+<form class='form-horizontal well' action='#' style='margin-top : -10px;'>
+	<li data-src='{{fullName}}'>
+		<div class='row' >
+			<div class='col-md-4'>
+				<img src='{{imgsrc}}' alt="Attachment" class='img-responsive img-radio'/>
+				<div style='background-color: #FF8224; border-color: #FF8224;' 
+					class='btn btn-primary btn-radio' id='thumbnailBtn' >
+					<a href="{{getLink}}">{{fileName}}</a>
+				</div>
+			</div>
+		</div>
+	</li>    
+</form>          
 </script>
 
 <script>

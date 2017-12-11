@@ -3,14 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%
-	String rec_id = request.getParameter("rec_id");
-	String m_id = (String) session.getAttribute("m_id");
-
-	if (rec_id == null) {
-		rec_id = "";
-	}
-%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,13 +24,14 @@
 				<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 90px; ">
 			</div>
 				<form action="msg_insertform" method="POST">
+					<input type='hidden' value=${m_id } name="msg_sendid"> 
 					<br style="clear: both">
 					<h3 style="margin-top:-20px;  margin-bottom: 20px; text-align: center;">Message</h3>
 				
 				<div class="message_form">
 					<div class="form-group"> 
 					 	<input type="text" class="form-control" name="m_id" 
-							value="<%=m_id%>" placeholder="받는 사람" size="35px" required>
+							value="${msg_sendid }" placeholder="받는 사람" size="35px" required>
 					</div> 
 
 					<div class="form-group">

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import starrail.review.domain.ReviewVO;
+import starrail.review.domain.FileVO;
 import starrail.review.domain.Hash_SearchVO;
 import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewCriteria;
@@ -72,5 +73,5 @@ public interface ReviewService {
 	
 	public void updateHash(String r_hash) throws Exception;
 	public void insertHash(String r_hash) throws Exception;
-	
+	public List<FileVO> file(int r_no) throws Exception;
 }

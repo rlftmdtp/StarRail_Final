@@ -9,7 +9,6 @@ public class StatementVO {
 	private String ed_kategorie;
 	private String ed_katename;
 	private int ed_amount;
-	private String ed_plma;
 	
 	public int getEd_no() {
 		return ed_no;
@@ -47,16 +46,10 @@ public class StatementVO {
 	public void setEd_amount(int ed_amount) {
 		this.ed_amount = ed_amount;
 	}
-	public String getEd_plma() {
-		return ed_plma;
-	}
-	public void setEd_plma(String ed_plma) {
-		this.ed_plma = ed_plma;
-	}
 	@Override
 	public String toString() {
 		return "StatementVO [ed_no=" + ed_no + ", e_no=" + e_no + ", ed_date=" + ed_date + ", ed_kategorie="
-				+ ed_kategorie + ", ed_katename=" + ed_katename + ", ed_amount=" + ed_amount + ", ed_plma=" + ed_plma
+				+ ed_kategorie + ", ed_katename=" + ed_katename + ", ed_amount=" + ed_amount 
 				+ "]";
 	}
 	

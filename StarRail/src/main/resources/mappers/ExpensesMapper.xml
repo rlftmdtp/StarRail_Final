@@ -31,7 +31,7 @@
 	<!-- 지출내역등록 -->
 	<insert id="amountInsert" parameterType="StatementVO">
 		insert into expenses_detail 
-		values(#{ed_no}, #{e_no}, #{ed_date}, #{ed_kategorie}, #{ed_katename}, #{ed_amount}, #{ed_plma})
+		values(#{ed_no}, #{e_no}, #{ed_date}, #{ed_kategorie}, #{ed_katename}, #{ed_amount})
 	</insert>
 	
 	<select id="selectEd_no" resultType="Integer">
@@ -47,9 +47,10 @@
 	</select>
 	
 	<!-- 예상 경비에서 코스 불러오기 -->
-	<select id="course" resultType="Map">
+	<select id="course" resultType="CourseVO">
 	<![CDATA[ select course.*
-		from (select c.c_id "c_id", c.c_name "c_name" 
+		from (select c.c_id as c_id, m.m_id as m_id, c.i_name as i_name,
+				 c.c_name as c_name, c.c_filename as c_filename 
           	  from course c, member m 
           	  where c.m_id = m.m_id
           	  AND m.M_ID = #{id}
@@ -57,6 +58,7 @@
     	where ROWNUM <=3
     	]]>
 	</select>
+	
 	
 	<select id="recall" resultType="Map">
 	<![CDATA[

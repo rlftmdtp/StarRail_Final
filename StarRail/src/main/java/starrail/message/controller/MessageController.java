@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import starrail.main.domain.UserVO;
 import starrail.message.domain.MessageVO;
-import starrail.message.persistence.MessageDAO;
 import starrail.message.service.MessageService;
 
 @Controller
@@ -26,7 +25,6 @@ public class MessageController {
 
 	@Inject
 	public MessageService service;
-	public MessageDAO dao;
 
 
 	@RequestMapping(value = "/msg_insertform", method = RequestMethod.GET)

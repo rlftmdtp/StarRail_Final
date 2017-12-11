@@ -67,7 +67,6 @@ public class ExpensesController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> railro_amountPOST(@RequestBody StatementVO statementVO, ExpensesVO expensesVO) throws Exception{
 		Map<String, Object> map = new HashMap<>();
-		statementVO.setEd_plma("+");
 		
 		//총남은 금액 - 사용금액 계산한 것
 		int totalMoney =service.totalMoney(statementVO.getE_no(), statementVO.getEd_amount());

@@ -170,8 +170,6 @@
 
 <script id="template" type="text/x-handlebars-template">
 
-         
-<li>
 <form class='form-horizontal well' action='#' style='margin-top : 10px;'>
 	
 		<div class='row'>
@@ -186,7 +184,7 @@
 		</div>
 	
 </form>
-</li>  
+
 </script>
 
 <script>

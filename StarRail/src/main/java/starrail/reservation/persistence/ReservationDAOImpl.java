@@ -18,14 +18,14 @@ public class ReservationDAOImpl implements ReservationDAO {
 	
 	private static String namespace="starrail.reservation.mappers.reservationMapper";
 	
-	//¿¹¾à µî·Ï
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public void rCreate(ReservationVO vo) throws Exception {
-		System.out.println("ReservationImpl±îÁö ¼º°ø");
+		System.out.println("ReservationImplí…ŒìŠ¤íŠ¸");
 		session.insert(namespace+".rCreate",vo);
 	}
 
-	//¿¹¾à Á¤º¸ Á¶È¸
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	@Override
 	public List<ReservationVO> reservationRead(Integer res_no) throws Exception {
 		System.out.println(res_no);
@@ -33,7 +33,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		return session.selectList(namespace+".reservationRead",res_no);
 	}
 	
-	//°¡Àå ÃÖ±Ù¿¡ µî·ÏµÈ ¿¹¾à ¹øÈ£
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±Ù¿ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 	@Override
 	public Integer maxResNo() throws Exception {
 		return session.selectOne(namespace+".maxResNo");

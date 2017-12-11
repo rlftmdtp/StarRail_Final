@@ -125,10 +125,10 @@
 				<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" >
 				<img src="/starrail/resources/images/sharetext/Facebook.png" height="4%" width="4%"></a>
 				
-				<a href="#" onclick="javascript:window.open('https://story.kakao.com/s/share?url=' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=300,width=600');return false;" target="_blank" alt="Share on kakaostory">
+				<a href="www.naver.com" onclick="javascript:window.open('https://story.kakao.com/s/share?url=' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=300,width=600');return false;" target="_blank" alt="Share on kakaostory">
 				<img src="/starrail/resources/images/sharetext/KakaoStory.png" height="4%" width="4%"></a>
 				
-				<a href="http://localhost:8081/starrail/sharetext/sharetext_detail?sh_no=118" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" >
+				<a href="www.naver.com" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" >
 				<img src="/starrail/resources/images/sharetext/NaverBand.jpg" height="4%" width="4%"></a><br><br><br>
 	
 	

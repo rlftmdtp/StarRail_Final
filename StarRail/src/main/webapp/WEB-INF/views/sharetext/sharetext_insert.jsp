@@ -44,7 +44,7 @@
 		<div class="form-group" 
 				style="border: 1px solid #48BAE4; height: auto; width: 60%; margin: auto;">
 				<label for="exampleInputEmail1"><img
-					src="/starrail/resources/images/reservation/7305_12899_1845.jpg"></label>
+					src="/starrail/resources/images/reservation/7305_12899_1845.jpg" width="100%" align="center"></label>
 		</div>
 			
 		<div class="form-group" style="border: 1px solid #48BAE4; height: auto; width: 60%; margin: auto; color: green; font-weight: bold; font-size: 1.0em;"

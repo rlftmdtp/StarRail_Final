@@ -81,4 +81,5 @@ public interface ReviewDao {
 	public void inserthash(Map<String, Object> map) throws Exception;
 	
 	public Integer select_hs_no() throws Exception;
+	public List<FileVO> file(int r_no) throws Exception;
 }

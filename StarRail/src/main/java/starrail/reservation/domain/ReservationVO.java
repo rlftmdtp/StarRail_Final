@@ -9,8 +9,9 @@ public class ReservationVO {
 	private String res_sdate;
 	private String res_tcount;
 	private String i_name;
+	private String res_price;
 	
-	public int getRes_no() {
+	public Integer getRes_no() {
 		return res_no;
 	}
 	public void setRes_no(Integer res_no) {
@@ -40,11 +41,13 @@ public class ReservationVO {
 	public void setI_name(String i_name) {
 		this.i_name = i_name;
 	}
-	@Override
-	public String toString() {
-		return "ReservationVO [res_no=" + res_no + ", m_id=" + m_id + ", res_sdate=" + res_sdate + ", res_tcount="
-				+ res_tcount + ", i_name=" + i_name + "]";
+	public String getRes_price() {
+		return res_price;
 	}
+	public void setRes_price(String res_price) {
+		this.res_price = res_price;
+	}
+	
 	
 	
 }

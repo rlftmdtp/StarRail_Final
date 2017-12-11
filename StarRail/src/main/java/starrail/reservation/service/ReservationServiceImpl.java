@@ -16,16 +16,16 @@ public class ReservationServiceImpl implements ReservationService {
 	@Inject
 	private ReservationDAO dao;
 	
-	//¿¹¾àµî·Ï
+	//ê¸€ë“±ë¡
 	@Override
 	public void regist(ReservationVO reservation) throws Exception {
 		dao.rCreate(reservation);
 	}
 
-	//¿¹¾àÁ¤º¸Á¶È¸
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸
 	@Override
 	public List<ReservationVO> reservationRead(Integer res_no) throws Exception {
-		System.out.println("reservationService¼º°ø");
+		System.out.println("reservationServiceï¿½ï¿½ï¿½ï¿½");
 		return dao.reservationRead(res_no);
 	}
 

@@ -42,5 +42,4 @@ public class MapController {
 		List<CourseVO> courseList = service.courseList(userVO.getM_id());
 		model.addAttribute("courseList", courseList);
 	}
-	
 }

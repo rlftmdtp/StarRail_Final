@@ -22,6 +22,21 @@ body * {
 	min-height: 7vh;
 	/*background: pink;*/
 }
+
+.festival{
+	min-height: 20vh;
+}
+
+.festivaldetail{
+	margin: auto;
+    padding-top: 5%;
+}
+
+.festivalimg{
+	width: 280px;
+	height: 280px;
+}
+
 .sort{
 	min-height: 7vh;
 }
@@ -35,16 +50,23 @@ body * {
 	/*background: yellow;*/
 	position: relative;
 }
-.graph {
-	min-height: 30vh;
-	/*background: blue;*/
+
+.iw_inner{
+	width: 200px;
+	height: 200px;
+}
+
+.swiper-container {
+      width: 100%;
+      height: 40%;
+
+    }
+.swiper-slide{
+	width:100%;
 }
 
 #charttable{
 	width: 100%;
-}
-.pagination{
-	margin-left: 65%;
 }
 
 /*

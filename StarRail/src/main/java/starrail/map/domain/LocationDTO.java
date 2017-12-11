@@ -1,7 +1,8 @@
 package starrail.map.domain;
 
-public class TourVO {
+public class LocationDTO {
 	private String title;
+	private Integer c_id;
 	private String tel;
 	private String addr1;
 	private Long contentid;
@@ -9,13 +10,15 @@ public class TourVO {
 	private String firstimage;
 	private Double mapx;
 	private Double mapy;
+	private Integer sort;
 	
-	public TourVO(){}
+	public LocationDTO(){}
 
-	public TourVO(String title, String tel, String addr1, Long contentid, Long contenttypeid, String firstimage,
-			Double mapx, Double mapy) {
+	public LocationDTO(String title, Integer c_id, String tel, String addr1, Long contentid, Long contenttypeid,
+			String firstimage, Double mapx, Double mapy, Integer sort) {
 		super();
 		this.title = title;
+		this.c_id = c_id;
 		this.tel = tel;
 		this.addr1 = addr1;
 		this.contentid = contentid;
@@ -23,6 +26,7 @@ public class TourVO {
 		this.firstimage = firstimage;
 		this.mapx = mapx;
 		this.mapy = mapy;
+		this.sort = sort;
 	}
 
 	public String getTitle() {
@@ -31,6 +35,14 @@ public class TourVO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Integer getC_id() {
+		return c_id;
+	}
+
+	public void setC_id(Integer c_id) {
+		this.c_id = c_id;
 	}
 
 	public String getTel() {
@@ -87,6 +99,14 @@ public class TourVO {
 
 	public void setMapy(Double mapy) {
 		this.mapy = mapy;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	
 }

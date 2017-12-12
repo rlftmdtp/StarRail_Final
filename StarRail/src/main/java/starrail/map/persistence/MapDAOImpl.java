@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
+import starrail.map.domain.LocationDTO;
 import starrail.map.domain.StationXYVO;
 import starrail.map.domain.StationXYVO;
 
@@ -33,5 +34,11 @@ public class MapDAOImpl implements MapDAO {
 	@Override
 	public StationXYVO stationXY(String station) {
 		return session.selectOne(namespace + ".stationXY", station); 
+	}
+
+	@Override
+	public void addLocation(LocationDTO dto) {
+		session.insert(namespace + ".addLocation", dto);
+		
 	}
 }

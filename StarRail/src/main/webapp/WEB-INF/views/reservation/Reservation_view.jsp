@@ -214,7 +214,7 @@ input[type=text] {
 		</div>
 		<div style="width: 90%; border:1px solid #8c8c8c;">
 		<br>
-			<table id="searchtrain" style="text-align: center; border: 1px solid #dddddd;  height:250px; display: block; overflow: auto; " class="table table-bordred table-striped" >
+			<table id="searchtrain" style="text-align: center; border: 1px solid #dddddd;  height:200px; display: block; overflow: auto; " class="table table-bordred table-striped" >
 				<thead>
 					<tr class='info loading' >
 						<th style="width: 300px">열차종류</th>
@@ -228,7 +228,13 @@ input[type=text] {
 				</tbody>
 			</table>
 		</div>
-		
+		<br><br>
+		<div class="ui-group-buttons" align="right">
+						<button type="button" class="btn btn-primary btn-lg">취소</button>
+							<div class="or or-lg"></div>
+							<button type="submit" class="btn btn-success btn-lg">저장</button>
+							</div>
+						</div>
 		<br>
 			</div>
 			<!-- </div> -->
@@ -239,13 +245,10 @@ input[type=text] {
 					
 					</div>
 					<br><br><br>
-			<div class="ui-group-buttons" align="center">
-						<button type="button" class="btn btn-primary btn-lg">취소</button>
-							<div class="or or-lg"></div>
-							<button type="submit" class="btn btn-success btn-lg">저장</button>
-							</div>
+			
+							<br><br><br>
 				</form>
-			</div>
+			
 			
 			
 <!-- ######################################## -->

@@ -45,7 +45,8 @@
 	<context:component-scan base-package="starrail.expenses.service" />
 	<context:component-scan base-package="starrail.expenses.persistence" />
 
-
+	<context:component-scan base-package="starrail.payment.service" />
+	<context:component-scan base-package="starrail.payment.persistence" />
 
 
 	<!-- 코스관련 bean 객체 생성 start -->

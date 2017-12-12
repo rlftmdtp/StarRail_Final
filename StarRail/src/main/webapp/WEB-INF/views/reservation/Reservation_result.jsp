@@ -63,17 +63,22 @@
                                     <td width="50px" ><i class="fa fa-check"></i></td>
                                     <td>[총 가 격] <img src="/starrail/resources/images/reservation/arrow2.png" width="20%" height="20%"> ${reservation.res_price }</td>	
                                     
+                                </tr> <tr align="left">
+                                    <td width="50px" ><i class="fa fa-check"></i></td>
+                                    <td>[열차 좌석] <img src="/starrail/resources/images/reservation/arrow2.png" width="20%" height="20%">2017-12-14 서울->부산 무궁화호 1호차 D1</td>	
+                                    
                                 </tr>
                             </table>
-                            </c:forEach>
-                        </div>
-                        <div class="panel-footer panel-footer-landing">
+                              <div class="panel-footer panel-footer-landing">
                             <a href="/starrail/main/main" class="btn btn-price btn-success btn-lg">확인</a>
-                            <a href="#" class="btn btn-price btn-success btn-lg">결제</a>
+                            <a href="/starrail/payment/payment_insert?res_no=${reservation.res_no}&res_price=${reservation.res_price}" class="btn btn-price btn-success btn-lg">결제</a>
                         </div>
                          <div class="panel-footer panel-footer-landing">
                             <a href="#" class="btn btn-price btn-success btn-lg">카카오톡으로 예약정보 받기</a>
                         </div>
+                            </c:forEach>
+                        </div>
+
                         
                     </div>
                 </div>

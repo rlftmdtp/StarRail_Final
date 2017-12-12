@@ -51,7 +51,7 @@
 			align="center">
 			<label for="exampleInputEmail1">여행일수</label><br>
 			
-						<select name="sh_subject" style="font-family: 굴림체; text-align-last: center;">
+						<select name="sh_subject" style="font-family: 굴림체; text-align-last: center; size: 100px">
 							<option value="  ">여행기간 선택</option>
 								<option value="[5일]">[5일]</option>
 								<option value="[7일]">[7일]</option>
@@ -61,16 +61,18 @@
 
 		<div class="form-group" style="border: 1px solid #48BAE4; height: auto; width: 60%; margin: auto; color: green; font-weight: bold; font-size: 1.0em;"
 			align="center">
+			<br>
 			<label for="exampleInputEmail1">제목</label> 
 			<input type="text"
 				name='sh_title' class="form-control" placeholder="제목을 입력해주세요."><br><br>
 		</div>
 		<div class="form-group" style="border: 1px solid #48BAE4; height: auto; width: 60%; margin: auto; color: green; font-weight: bold; font-size: 1.0em;"
 			align="center">
+			<br>
 			<label for="exampleInputEmail1">코스</label> <br>
 			<%-- <input type="hidden" name="c_id" value="${courseDetailList.get(0).c_id}"> --%>
 			
-			<select id="course" name="c_id" onchange="selectCourse();" >
+			<select id="course" name="c_id" onchange="selectCourse();" style="size: 100px;">
 				<option selected="selected">원하는 코스를 선택 하세요</option>
 				<c:forEach var="CourseObject" items="${courseList }">
 					<option value="${CourseObject.c_id}">${CourseObject.c_name}</option>
@@ -146,8 +148,6 @@
    			});
    			
    		}
-   		
-   		
    		function gotoshareInsert() {
    			location.href = "shareForm.jsp";
    		}
@@ -155,9 +155,6 @@
    		/* 입력안된 곳 입력하라는 경고창 */
    		function writeCheck() {
    			var form = document.writeform;
-   			
-   			
-
 
    			if (!form.sh_title.value) {
    				alert("제목을 입력해주세요.")

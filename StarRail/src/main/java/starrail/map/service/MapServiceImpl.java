@@ -290,7 +290,7 @@ public class MapServiceImpl implements MapService {
 		urlBuilder
 				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
 		urlBuilder.append(
-				"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /* 한페이지결과수 */
+				"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20", "UTF-8")); /* 한페이지결과수 */
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp", "UTF-8") + "="
 				+ URLEncoder.encode("AppTest", "UTF-8")); /* 서비스명=어플명 */
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC",
@@ -354,7 +354,7 @@ public class MapServiceImpl implements MapService {
 			foodVO.setContentid((Long) entity.get("contentid"));
 			foodVO.setContenttypeid((Long) entity.get("contenttypeid"));
 			foodVO.setFirstimage((String) entity.get("firstimage"));
-			foodVO.setMapx((Double) entity.get("mapx"));
+			foodVO.setMapx(Double.parseDouble(((Object) entity.get("mapx")).toString()));
 			foodVO.setMapy(Double.parseDouble(((Object) entity.get("mapy")).toString()));
 
 			foodList.add(foodVO);
@@ -591,7 +591,7 @@ public class MapServiceImpl implements MapService {
 		urlBuilder
 				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
 		urlBuilder.append(
-				"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /* 한페이지결과수 */
+				"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20", "UTF-8")); /* 한페이지결과수 */
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp", "UTF-8") + "="
 				+ URLEncoder.encode("AppTest", "UTF-8")); /* 서비스명=어플명 */
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC",
@@ -895,7 +895,7 @@ public class MapServiceImpl implements MapService {
 		urlBuilder
 				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
 		urlBuilder.append(
-				"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /* 한페이지결과수 */
+				"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20", "UTF-8")); /* 한페이지결과수 */
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp", "UTF-8") + "="
 				+ URLEncoder.encode("AppTest", "UTF-8")); /* 서비스명=어플명 */
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC",

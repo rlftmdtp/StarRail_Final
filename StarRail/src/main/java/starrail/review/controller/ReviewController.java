@@ -1,10 +1,14 @@
 package starrail.review.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import starrail.review.domain.ReviewVO;
 import starrail.main.domain.UserVO;
 import starrail.review.domain.Hash_SearchVO;
+import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewPageMaker;
 import starrail.review.domain.ReviewSearchCriteria;
-import starrail.review.persistence.ReviewDao;
 import starrail.review.service.ReviewService;
 
 @Controller
@@ -28,22 +32,24 @@ public class ReviewController {
 
 	@Inject
 	public ReviewService service;
-	public ReviewDao dao;
+	
+	
 
-	// ÈÄ±â ±Û ÀÛ¼ºÇÏ·¯ °¡´Â Ã¢
+
+	// í›„ê¸° ê¸€ ì‘ì„±í•˜ëŸ¬ ê°€ëŠ” ì°½
 	@RequestMapping(value = "/review_insert", method = RequestMethod.GET)
 	public void insertReviewGET(ReviewVO review, Hash_SearchVO hash, String hashSearch, Model model) throws Exception {
 		List<String> list = new ArrayList<String>();
-		// ÇØ½ÃÅÂ±× ÀüÃ¼ ºÒ·¯¿À±â
+		// í•´ì‹œíƒœê·¸ ì „ì²´ ë¶ˆëŸ¬ì˜¤ê¸°
 		list = service.hashSearch();
 		for (int i = 0; i < list.size(); i++) {
 			list.set(i, "\"" + list.get(i) + "\"");
 		}
-		System.out.println("ºÙ¾î¿À´Ï? : " + list);
+		System.out.println("ë¶™ì–´ì˜¤ë‹ˆ? : " + list);
 		model.addAttribute("list", list);
 	}
 
-	// ÈÄ±â °Ô½Ã¹° µî·ÏÇÏ±â ´­·¶À» ‹š
+	// í›„ê¸° ê²Œì‹œë¬¼ ë“±ë¡í•˜ê¸° ëˆŒë €ì„ ë–„
 	@RequestMapping(value = "/review_insert", method = RequestMethod.POST)
 	public String insertReviewPOST(@ModelAttribute("review") ReviewVO review, Hash_SearchVO searchVO, HttpServletRequest request)
 			throws Exception {
@@ -53,16 +59,16 @@ public class ReviewController {
 		review.setM_id(userVO.getM_id());
 		System.out.println(review.toString());
 
-		//ÈÄ±â °Ô½ÃÆÇ¿¡ µî·Ï
+		//í›„ê¸° ê²Œì‹œíŒì— ë“±ë¡
 		service.register(review);
 		
 		List<String> list = new ArrayList<String>();
-		//ÇØ½ÃÅÂ±× ÀüÃ¼ ºÒ·¯¿À±â
+		//í•´ì‹œíƒœê·¸ ì „ì²´ ë¶ˆëŸ¬ì˜¤ê¸°
 		list = service.hashSearch();
 	
 		List<String> listHash = new ArrayList<String>();
 		
-		//³» ÈÄ±â ±Û¹øÈ£·Î ÇØ½ÃÅÂ±×¸¸ µû·Î ÀúÀå
+		//ë‚´ í›„ê¸° ê¸€ë²ˆí˜¸ë¡œ í•´ì‹œíƒœê·¸ë§Œ ë”°ë¡œ ì €ì¥
 		listHash = service.hashtagInsert(review, searchVO);
 
 		boolean check = false;
@@ -84,28 +90,14 @@ public class ReviewController {
 		return "redirect:/review/review_list";
 	}
 
-	// ÀüÃ¼ ÈÄ±â ¸®½ºÆ®
-	@RequestMapping(value = "/review_list", method = RequestMethod.GET)
-	public void listReviewGET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model) throws Exception {
 
-		model.addAttribute("list", service.listSearchCriteria(cri));
-		ReviewPageMaker pageMaker = new ReviewPageMaker();
-		pageMaker.setCri(cri);
+	
+	
+	
+	
 
-		pageMaker.setTotalCount(service.listSearchCount(cri));
-		model.addAttribute("pageMaker", pageMaker);
-	}
 
-	// ÇÑ°³ »ó¼¼º¸±â ´­·¶À» ¶§
-	@RequestMapping(value = "/review_detail", method = RequestMethod.GET)
-	public void DetailReviewGET(@RequestParam("r_no") int r_no, @ModelAttribute("cri") ReviewSearchCriteria cri,
-			Model model) throws Exception {
-		System.out.println(service.myHash(r_no));
-		model.addAttribute("hasgTag", service.myHash(r_no));
-		model.addAttribute(service.read(r_no));
-	}
-
-	// °Ô½ÃÆÇ »èÁ¦
+	// ê²Œì‹œíŒ ì‚­ì œ
 	@RequestMapping(value = "/review_remove", method = RequestMethod.GET)
 	public String RemoveReviewGET(@RequestParam("r_no") int r_no, ReviewSearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
@@ -118,14 +110,14 @@ public class ReviewController {
 		return "redirect:/review/review_list";
 	}
 
-	// °Ô½ÃÆÇ ¼öÁ¤ Àü
+	// ê²Œì‹œíŒ ìˆ˜ì • ì „
 	@RequestMapping(value = "/review_modify", method = RequestMethod.GET)
 	public void ModifyReviewGET(@RequestParam("r_no") int r_no, @ModelAttribute("cri") ReviewSearchCriteria cri,
 			Model model) throws Exception {
 		model.addAttribute(service.read(r_no));
 	}
 
-	// °Ô½ÃÆÇ ¼öÁ¤ ÈÄ
+	// ê²Œì‹œíŒ ìˆ˜ì • í›„
 	@RequestMapping(value = "/review_modify", method = RequestMethod.POST)
 	public String ModifyReviewPOST(ReviewVO review, ReviewSearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
@@ -142,5 +134,136 @@ public class ReviewController {
 	public List<String> getAttach(@PathVariable("r_no") Integer r_no) throws Exception {
 		return service.getAttach(r_no);
 	}
+	
+	
+	
+	
+	
+	
+// start í¬ì • ì½”ë“œ --------------------------------------------------------------------------------------------------	
+		
+		// ì „ì²´ í›„ê¸° ë¦¬ìŠ¤íŠ¸ + ì¶”ì²œ
+		@RequestMapping(value = "/review_list", method = RequestMethod.GET)
+		public void listReview_GET(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model, HttpServletRequest request) throws Exception {
+			
+			// start ì†” ì½”ë“œ
+			model.addAttribute("list", service.listSearchCriteria(cri));
+			
+			ReviewPageMaker pageMaker = new ReviewPageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.listSearchCount(cri));
+			
+			model.addAttribute("pageMaker", pageMaker);
+			// end ì†” ì½”ë“œ
+
+
+			//******************************************************
+
+			
+			// start ì¶”ì²œ
+			HttpSession session = request.getSession();
+			int m_no;	
+			String m_name;	
+			List<Integer> list = new ArrayList<Integer>();
+			List<Hash_SearchVO> tag_list = new ArrayList<Hash_SearchVO>();
+			
+			try {
+				if(((UserVO) session.getAttribute("login")) != null){
+					UserVO user =  (UserVO) session.getAttribute("login");		
+					m_no = user.getM_no();
+					
+					list = service.preferList_service(m_no);
+					tag_list = service.tagRecommend_service(list);
+					System.out.println("ì»¨íŠ¸ë¡¤ëŸ¬ ê²°ê³¼ê°’ : " + tag_list);
+					
+					model.addAttribute("hashSearchVO", tag_list);
+					model.addAttribute("m_name", user.getM_name());
+					model.addAttribute("m_id", user.getM_id());
+				}else{
+					model.addAttribute("hashSearchVO", null);
+					model.addAttribute("m_name", "?");
+					model.addAttribute("m_id", null);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}		
+			// end ì¶”ì²œ
+		}
+
+		// ì¶”ì²œ íƒœê·¸ í´ë¦­ ì‹œ í´ë¦­í•œ íƒœê·¸ê°€ ì¡´ì¬í•˜ëŠ” ë¦¬ë·°ë§Œ ë³´ì—¬ì§
+		@RequestMapping(value = "/review_list", method = RequestMethod.POST)
+		public @ResponseBody ResponseEntity<Map<Object,Object>> listReview_POST(@ModelAttribute("cri") ReviewSearchCriteria cri, Model model, @RequestParam String tag) throws Exception{
+			List<ReviewVO> list = service.reviewRecommend_service(tag, cri);
+			
+			//System.out.println(cri);
+			
+			ReviewPageMaker pageMaker = new ReviewPageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.reviewRecommendCount_service(tag));
+			
+			Map<Object,Object> map = new HashMap<Object,Object>();
+			map.put("list", list);
+			map.put("pageMaker", pageMaker);
+			
+			//System.out.println(map.get("pageMaker").toString());
+			
+			ResponseEntity<Map<Object,Object>> entity = 
+										new ResponseEntity<Map<Object,Object>>(map, HttpStatus.OK);	
+			
+			return entity;
+		}
+
+		
+		
+		// í•œê°œ ìƒì„¸ë³´ê¸° ëˆŒë €ì„ ë•Œ
+		@RequestMapping(value = "/review_detail", method = RequestMethod.GET)
+		public void DetailReview_GET(@RequestParam("r_no") int r_no, @RequestParam("m_id") String m_id, HttpServletRequest request,
+				@ModelAttribute("cri") ReviewSearchCriteria cri, Model model) throws Exception {
+			
+			// start ì†”
+			model.addAttribute("hasgTag", service.myHash(r_no));
+			model.addAttribute(service.read(r_no));
+			model.addAttribute("filename", service.file(r_no));
+			// System.out.println(service.myHash(r_no));
+			// end ì†”
+						
+			
+			//******************************************************
+			HttpSession session = request.getSession();
+			UserVO user =  (UserVO) session.getAttribute("login");		
+			int m_no = user.getM_no();
+			
+			// start ì¶”ì²œ			
+		Member_RecommendVO mr = new Member_RecommendVO();
+			mr.setMr_no(service.selectMr_no_service()+1);
+			mr.setM_id(user.getM_id());
+			mr.setR_no(r_no);
+			
+			int checkR_no = service.selectCheckR_no_service(mr).get(0);
+			System.out.println("===" + checkR_no);
+			
+			// member_Recommendí…Œì´ë¸”ì—ì„œ r_noê°€ ì¤‘ë³µë˜ë©´ ì•ˆë¨ 
+			if(checkR_no == 2){
+				System.out.println("****************ì»¨íŠ¸ë¡¤ëŸ¬");
+				service.registMemberRecommend_service(mr);
+			}
+			else if(checkR_no == 1){
+				service.updateMr_count_service(mr);
+			}
+			
+			// ì¶”ì²œëœ ê²°ê³¼ë¥¼ ì €ì¥í•˜ëŠ” ë¦¬ìŠ¤íŠ¸
+			List<Integer> r_noList = service.list_reviewRecommend(m_no);
+			System.out.println("$$$$$$$$$ : " + service.list_userBased_servie(r_noList));
+			
+			model.addAttribute("recommendList", service.list_userBased_servie(r_noList));
+			// end ì¶”ì²œ
+		}
+		
+		
+// end í¬ì • ì½”ë“œ --------------------------------------------------------------------------------------------------	
+		
+		
+	
 
 }

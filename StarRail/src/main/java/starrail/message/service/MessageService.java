@@ -6,24 +6,24 @@ import starrail.message.domain.MessageVO;
 
 public interface MessageService {
 
-	//ÂÊÁöº¸³»±â
+	//ìª½ì§€ë³´ë‚´ê¸°
 	public void regist(MessageVO message) throws Exception;
 	
-	//¹ŞÀºÂÊÁöÇÔ ÀüÃ¼ ¸®½ºÆ®
+	//ë°›ì€ìª½ì§€í•¨ ì „ì²´ ë¦¬ìŠ¤íŠ¸
 	public List<MessageVO> messageList(String m_id) throws Exception;
 
-	//º¸³½ÂÊÁöÇÔ ÀüÃ¼ ¸®½ºÆ®
+	//ë³´ë‚¸ìª½ì§€í•¨ ì „ì²´ ë¦¬ìŠ¤íŠ¸
 	public List<MessageVO> sendemail(String m_id) throws Exception;
 
-	//ÂÊÁö»èÁ¦
+	//ìª½ì§€ì‚­ì œ
 	public void remove(int msg_no) throws Exception;
 	
-	//ÂÊÁö ¼ö½ÅÇÔ ¿­¸² ´İÈû È®ÀÎ
+	//ìª½ì§€ ìˆ˜ì‹ í•¨ ì—´ë¦¼ ë‹«í˜ í™•ì¸
 	public Integer msg_hit(int msg_no) throws Exception;
 	
-	//½Ç½Ã°£ ÂÊÁö°¹¼ö
+	//ì‹¤ì‹œê°„ ìª½ì§€ê°¯ìˆ˜
 	public Integer update_hit(String m_id) throws Exception;
 	
-	//ÂÊÁöÈ®ÀÎÇÏ±â
+	//ìª½ì§€í™•ì¸í•˜ê¸°
 	public MessageVO read(int msg_no) throws Exception;
 }

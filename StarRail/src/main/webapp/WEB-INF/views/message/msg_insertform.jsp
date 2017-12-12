@@ -3,20 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%
-	String rec_id = request.getParameter("rec_id");
-	String m_id = (String) session.getAttribute("m_id");
-
-	if (rec_id == null) {
-		rec_id = "";
-	}
-%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
 	href="/starrail/resources/css/message/msg_insertform.css">
+	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -25,39 +18,46 @@
 
 	<div class="container">
 		<div class="col-md-5">
+			
 			<div class="form-area">
+			<div class="logo" style="margin-left: 130px;" >
+				<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 90px; ">
+			</div>
 				<form action="msg_insertform" method="POST">
+					<input type='hidden' value=${m_id } name="msg_sendid"> 
 					<br style="clear: both">
-					<h3 style="margin-bottom: 20px; text-align: center;">Contact
-						Form</h3>
-					<div class="form-group">
-						<input type="text" class="form-control" name="m_id"
-							value="<%=m_id%>" placeholder="받는 사람" size="35px" required>
-					</div>
+					<h3 style="margin-top:-20px;  margin-bottom: 20px; text-align: center;">Message</h3>
+				
+				<div class="message_form">
+					<div class="form-group"> 
+					 	<input type="text" class="form-control" name="m_id" 
+							value="${msg_sendid }" placeholder="받는 사람" size="35px" required>
+					</div> 
 
 					<div class="form-group">
 						<textarea class="form-control" type="textarea" id="message"
-							name="msg_content" placeholder="Message" maxlength="300" rows="7"
-							cols="37"></textarea>
-						<span class="help-block">
-							<p id="characterLeft" class="help-block ">You have reached
-								the limit</p>
+							name="msg_content" placeholder="Message" maxlength="300" rows="7" cols="37">
+						</textarea>
+							<span class="help-block">
+							<p id="characterLeft" class="help-block ">You have reached the limit</p>
 						</span>
 					</div>
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<input type="text" class="form-control" id="msg_sendid"
-							name="msg_sendid" value="msg_sendid" placeholder="보내는 사람"
-							size="35px" required>
-					</div>
+							name="msg_sendid" value="msg_sendid" placeholder="보내는 사람" size="35px" required>
+					</div> -->
 
-					<button type="submit" name="submit"
-						class="btn btn-primary pull-right" id="submitBtn">Submit
-						Form</button>
+					<button type="submit" name="submit" class="btn btn-primary" id="submitBtn" 
+						style="background-color: #F0AD4E; border-color: #F0AD4E; margin-top: 10px; ">
+						보내기
+					</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	
 </body>
 
 <!-- 글자수 체크 300자 -->

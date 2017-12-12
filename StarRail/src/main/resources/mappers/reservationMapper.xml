@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="starrail.reservation.mappers.reservationMapper">
+
+<!-- 1단계 예약등록 -->
+<insert id="rCreate" parameterType="ReservationVO">
+	insert into reservation (res_no, m_id, res_sdate, res_tcount, i_name, res_price  ) 
+	values(RESERVATION_SEQ.nextval, #{m_id}, #{res_sdate}, #{res_tcount}, #{i_name}, #{res_price}) 
+</insert>
+
+
+ <select id="maxResNo" resultType="Integer">
+	select max(res_no) from reservation
+</select> 
+
+<!-- 발권역 정보 가져오기 -->
+<select id="issulistAll" resultType="IssueInfoVO">
+<![CDATA[
+
+	select 
+		i_name 
+	from 
+		issuinfo
+		where i_name >0
+	
+]]>
+</select>
+<!-- 예약 정보 가져오기 -->
+<select id="reservationRead" resultType="ReservationVO">
+<![CDATA[
+
+		select 
+			*
+			from
+			reservation
+			where res_no=#{res_no}
+	
+]]>
+</select>
+
+<select id="seatList" parameterType="String" resultType="SeatVO">
+	select *
+	from 
+	seat 
+	where train_type=#{train_type}
+	order by seat_id
+
+</select>
+</mapper>

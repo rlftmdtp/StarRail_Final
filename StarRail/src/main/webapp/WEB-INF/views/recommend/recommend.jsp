@@ -14,10 +14,7 @@
      <link href="/starrail/resources/css/recommend/recommend.css" rel="stylesheet">
     <link href="/starrail/resources/css/recommend/round-about.css" rel="stylesheet">
 
-<!-- datePicker CSS File -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.standalone.css'>
-	<link rel="stylesheet" href="/starrail/resources/css/main/style.css">
+
 </head>
 <body>
 
@@ -41,7 +38,8 @@
      <!-- start 로그인 한 사용자마다 맞춤 태그 생성 -->
      <div style="margin: 30px 40px;">
 	     <c:forEach items="${hashSearchVO}" var="Hash_SearchVO" varStatus="status">
-		    <a class="btn1 btn-rounded1 btn-round-tosquare1 btn-lg1  btn-bordered-warning1">
+		    <a class="btn1 btn-rounded1 btn-round-tosquare1 btn-lg1  btn-bordered-warning1" 
+		    		data="${Hash_SearchVO.hs_search}">
 		    <span style="font-weight: bold;"></span>${Hash_SearchVO.hs_search}</a>	&nbsp;&nbsp;	
 				  
 <%-- 			<c:if test="${status.count%4 eq 0}">
@@ -52,56 +50,20 @@
       <!-- end 로그인 한 사용자마다 맞춤 태그 생성 -->
       
       
-      <!-- Team Members Row -->
+     <!-- start Team Members Row -->
       <div class="row" style="margin-top: 100px;">
         <div class="col-lg-12">
           <h2 class="my-4">Recommended Review
           	<small>추천된 후기</small>
           </h2>
         </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-          <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-          <h3>John Smith
-            <small>Job Title</small>
-          </h3>
-          <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-          <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-          <h3>John Smith
-            <small>Job Title</small>
-          </h3>
-          <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-          <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-          <h3>John Smith
-            <small>Job Title</small>
-          </h3>
-          <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-          <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-          <h3>John Smith
-            <small>Job Title</small>
-          </h3>
-          <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-          <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-          <h3>John Smith
-            <small>Job Title</small>
-          </h3>
-          <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-          <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-          <h3>John Smith
-            <small>Job Title</small>
-          </h3>
-          <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-        </div>
-      </div>
+
+	    <!-- start 추천태그 클릭 시 후기 리스트  -->
+        <div id="reviewList" class="col-md-12"></div>
+	   <!-- end 추천태그 클릭 시 후기 리스트  -->
+                
+      </div>	
+      <!-- end Team Members Row -->
 
     </div>
     <!-- /.container -->
@@ -113,15 +75,49 @@
     </div>   
 
 
-<!-- datepicker JS File : 무조건 코드 맨마지막에 넣어야 실행됨 -->   
-     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js'></script>
-    <script src="/starrail/resources/js/main/index.js"></script>  
+
 <!-- JS File -->
    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="/starrail/resources/js/partner/partner.js"></script>
-   <script src="/starrail/resources/js/partner/partnerSearch.js"></script>
+   <script src="/starrail/resources/js/recommend/recommend.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script id="template" type="text/x-handlebars-template">
+		<div class="col-md-3">
+
+            <div class="card hovercard">
+                <div class="cardheader">
+
+                </div>
+                <div class="avatar">
+                    <img alt="" src="http://lorempixel.com/100/100/people/9/">
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a target="_blank" href="http://scripteden.com/">{{r_title}}</a>
+                    </div>
+                    <div class="desc"></div>
+                    <div class="desc">추천 수 : {{r_recomm}}</div>
+                    <div class="desc">{{m_id}}</div>
+                </div>
+                <div class="bottom">
+                    <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" rel="publisher"
+                       href="https://plus.google.com/+ahmshahnuralam">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a class="btn btn-primary btn-sm" rel="publisher"
+                       href="https://plus.google.com/shahnuralam">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
+                        <i class="fa fa-behance"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+	</script>
 
   </body>
 </html>

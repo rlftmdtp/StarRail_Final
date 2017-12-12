@@ -117,7 +117,7 @@ $(function() {
 				    		  $("#partner-Profile").empty();
 				    		  $.each(data, function(index, item) {
 				    			  	$.each(item, function (index1, item1) {
-				    			  		if(index1=='m_name'){
+		/*		    			  		if(index1=='m_name'){
 											//alert(item1);
 											var profile = "<div class='col-sm-3' id ='partner-profile-list'>" 
 			        					 		+ "<div class='card'>" 
@@ -135,7 +135,7 @@ $(function() {
 			        				 			+ "</div>";
 											
 											$("#partner-Profile").append(profile);	
-				    			  		}
+				    			  		}*/
 				    			  	})
 				    		  })
 				    		  
@@ -146,4 +146,8 @@ $(function() {
 				
 			});	
 	/* 썸네일 이미지 클릭시 대표 이미지 바뀜 + ajax로 일정 가져오고 버튼 생성 끝 */
+	
+	
+
+		
 });

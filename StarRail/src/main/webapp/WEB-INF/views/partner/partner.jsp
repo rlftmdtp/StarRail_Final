@@ -191,7 +191,7 @@
     <script src="/starrail/resources/js/main/index.js"></script>   -->
 <!-- JS File -->
    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="/starrail/resources/js/partner/partner.js"></script>
+   <script src="/starrail/resources/js/partner/new_partner.js"></script>
    <script src="/starrail/resources/js/partner/partnerSearch.js"></script>
 
   </body>

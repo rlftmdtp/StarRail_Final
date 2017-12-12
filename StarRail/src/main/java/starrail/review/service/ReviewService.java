@@ -1,33 +1,61 @@
 package starrail.review.service;
 
 import java.util.List;
+import java.util.Map;
+
 import starrail.review.domain.ReviewVO;
+import starrail.review.domain.FileVO;
 import starrail.review.domain.Hash_SearchVO;
+import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewCriteria;
 import starrail.review.domain.ReviewSearchCriteria;
 
 
 public interface ReviewService {
+	
+	// ì¶”ì²œ ì‹œì‘
+	public List<Integer> preferList_service(int m_no) throws Exception;
+	public List<Integer> recommender_service(int m_no);
+	public List<Hash_SearchVO> tagRecommend_service(List<Integer> list);
+	public List<ReviewVO> reviewRecommend_service(String tag, ReviewSearchCriteria cri);
+	public Integer reviewRecommendCount_service(String tag);
+	public Integer selectMr_no_service();
+	public List<Integer> selectCheckR_no_service(Member_RecommendVO mr);
+	public void registMemberRecommend_service(Member_RecommendVO mr);
+	public List<Map<String, Integer>> list_MemberRecommend_service();
+	public List<Integer> list_reviewRecommend(int m_no) throws Exception;
+	public void updateMr_count_service(Member_RecommendVO mr);
+	public List<ReviewVO> list_userBased_servie(List<Integer> r_noList);
+	// ì¶”ì²œ ë
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-	//ÈÄ±â°Ô½ÃÆÇ µî·Ï
+	//í›„ê¸°ê²Œì‹œíŒ ë“±ë¡
 	public void register(ReviewVO review) throws Exception;
-	//ÈÄ±â°Ô½ÃÆÇ »ó¼¼º¸±â
+	//í›„ê¸°ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public ReviewVO read(Integer r_no) throws Exception;
-	//ÈÄ±â°Ô½ÃÆÇ ¼öÁ¤
+	//í›„ê¸°ê²Œì‹œíŒ ìˆ˜ì •
 	public void modify(ReviewVO review) throws Exception;
-	//ÈÄ±â°Ô½ÃÆÇ »èÁ¦
+	//í›„ê¸°ê²Œì‹œíŒ ì‚­ì œ
 	public void remove(Integer r_no) throws Exception;
-	//ÀüÃ¼ °Ô½ÃÆÇ
+	//ì „ì²´ ê²Œì‹œíŒ
 	public List<ReviewVO> list() throws Exception;
-	//ÀüÃ¼°Ô½ÃÆÇ + ÆäÀÌÂ¡Ã³¸®
+	//ì „ì²´ê²Œì‹œíŒ + í˜ì´ì§•ì²˜ë¦¬
 	public List<ReviewVO> listCriteria(ReviewCriteria cri) throws Exception;
 	
 	public int listCountCriteria(ReviewCriteria cri) throws Exception;
-	//ÀüÃ¼°Ô½ÃÆÇ + ÆäÀÌÂ¡ + °Ë»ö
+	//ì „ì²´ê²Œì‹œíŒ + í˜ì´ì§• + ê²€ìƒ‰
 	public List<ReviewVO> listSearchCriteria(ReviewSearchCriteria cri) throws Exception;
 	
 	public int listSearchCount(ReviewSearchCriteria cri) throws Exception;
-	//ÆÄÀÏ ºÒ·¯¿À±â
+	//íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 	public List<String> getAttach(Integer r_no) throws Exception;
 	
 	public int hash_no()throws Exception;
@@ -37,13 +65,13 @@ public interface ReviewService {
 	public List<String> hashtagInsert(ReviewVO review, Hash_SearchVO searchVO) throws Exception;
 	
 	public String specialCharacter_replace(String str) throws Exception;
-	//ÀüÃ¼ ÅÂ±× °¡Á®¿À±â
+	//ì „ì²´ íƒœê·¸ ê°€ì ¸ì˜¤ê¸°
 	public List<String> hashSearch() throws Exception;
 	
-	//°Ô½ÃÆÇ »ó¼¼º¸±â¿¡ ÇØ½ÃÅÂ±× °¡Á®¿À±â
+	//ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°ì— í•´ì‹œíƒœê·¸ ê°€ì ¸ì˜¤ê¸°
 	public List<String> myHash(int r_no) throws Exception;
 	
 	public void updateHash(String r_hash) throws Exception;
 	public void insertHash(String r_hash) throws Exception;
-	
+	public List<FileVO> file(int r_no) throws Exception;
 }

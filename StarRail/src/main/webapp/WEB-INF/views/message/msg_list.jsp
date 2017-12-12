@@ -49,29 +49,30 @@
 	 <%@include file="../main/nav_page.jsp"%>
 	 <div style="margin-top: 30px;"></div>
 	 </header>
+<div class ="message" style="width: 1080px; margin :0 auto;">	 
 	<div class="mail-box">
 		<aside class="sm-side">
 		<div class="user-head">
 
 			<div class="user-name">
-				<h5>${messageVO.m_id }</h5>
-				<span>>${messageVO.m_id }@kosta.167</span>
+				<h5>${m_id }</h5>
+				<span>>${m_id }@kosta.167</span>
 			</div>
 
 		</div>
 		<div class="inbox-body">
 			<input type="button" value="쪽지보내기" data-toggle="modal"
-				onclick="openTest()" class="btn btn-compose">
+				id="openTest" class="btn btn-compose">
 
 
 		</div>
 		<ul class="inbox-nav inbox-divider">
 			<li class="active"><a href="/starrail/message/msg_list"><i class="fa fa-inbox"></i>
-					받은쪽지함 <span class="label label-danger pull-right">${updatenum }</span></a></li>
+					받은쪽지함 <span class="label label-danger pull-right" style="background-color: #ff6c60b3;">${updatenum }</span></a></li>
 			<li><a href="/starrail/message/msg_sendmail"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
  			<li><a href="#"><i class="fa fa-bookmark-o"></i> 모아두기</a></li>
 			<li><a href="#"><i class=" fa fa-external-link"></i> 이게 뭐지</a></li>
-			<li><a href="/starrail/message/msg_garbage"><i class=" fa fa-trash-o"></i> 휴지통</a></li> 
+			<li><a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a></li> 
 		</ul>
 
 
@@ -79,35 +80,34 @@
 		</aside>
 		<aside class="lg-side">
 		<div class="inbox-head">
-			<h3>쪽지함</h3>
+			<h3>받은쪽지함</h3>
 
-		</div>
+		</div>		
+		
+		
+		<!-- body -->
 		<div class="inbox-body">
 			<div class="mail-option">
 				<div class="chk-all">
 					<input type="checkbox" class="mail-checkbox mail-group-checkbox"
 						id="all">
 					<div class="btn-group">
-						<a data-toggle="dropdown" href="#" class="btn mini all"
-							aria-expanded="false"> All </a>
+						<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false"> All </a>
 					</div>
 				</div>
 
 				<div class="btn-group">
-					<a data-original-title="Refresh" data-placement="top"
-						data-toggle="dropdown" href="#" onclick="refresh()"
-						class="btn mini tooltips"> <i class=" fa fa-refresh"></i>
+					<a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" 
+						onclick="refresh()" class="btn mini tooltips"> <i class=" fa fa-refresh"></i>
 					</a>
 				</div>
 				<div class="btn-group hidden-phone">
-					<a data-toggle="dropdown" href="#" class="btn mini blue"
-						aria-expanded="false"> ??? </a>
+					<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false"> ??? </a>
 
 				</div>
 				<div class="btn-group">
 
-					<a data-toggle="dropdown" href="#1" class="btn mini blue"
-						aria-expanded="false" onclick="fn_delete()"> 삭제 </a>
+					<a data-toggle="dropdown" href="#1" class="btn mini blue" aria-expanded="false" onclick="fn_delete()"> 삭제 </a>
 				</div>
 
 
@@ -124,51 +124,59 @@
 					<c:forEach items="${list}" var="messageVO">
 						<tr class="unread">
 
-							<td class="inbox-small-cells"><input type="checkbox"
-								class="mail-checkbox" name="check" id="checkbox_id"
-								value="${messageVO.msg_no }"></td>
+							<td class="inbox-small-cells">
+								<input type="checkbox" class="mail-checkbox" name="check" id="checkbox_id" value="${messageVO.msg_no }">
+							</td>
 
 							<c:choose>
 								<c:when test="${messageVO.msg_hit > 0 }">
-									<td class="view-message "><img
-										src="/starrail/resources/images/message/receivemail_icon.png"
-										name="msg_hit"></td>
+									<td class="view-message ">
+										<img src="/starrail/resources/images/message/receivemail_icon.png" name="msg_hit">
+									</td>
 								</c:when>
 								<c:otherwise>
-									<td class="view-message "><img
-										src="/starrail/resources/images/message/sendmail_icon.png"
-										name="msg_hit"></td>
+									<td class="view-message ">
+										<img src="/starrail/resources/images/message/sendmail_icon.png" name="msg_hit">
+									</td>
 								</c:otherwise>
 							</c:choose>
-							<td class="view-message ">${messageVO.msg_sendid }</td>
-							<td class="view-message "><a href="#"
-								onclick="detail_click(${messageVO.msg_no })">
-									${messageVO.msg_content } </a></td>
-							<td class="view-message"><fmt:formatDate
-									pattern="yyyy-MM-dd (HH:mm)" value="${messageVO.msg_date}" />
-
+							
+							<td class="view-message">
+								${messageVO.msg_sendid }
+							</td>
+							<td class="view-message ">
+								<a href="#" onclick="detail_click(${messageVO.msg_no })" style="color: #111"> ${messageVO.msg_content } 
+							</a></td>
+							<td class="view-message">
+								<fmt:formatDate pattern="yyyy-MM-dd (HH:mm)" value="${messageVO.msg_date}" />
 							</td>
 						</tr>
 					</c:forEach>
-
 				</tbody>
 			</table>
 		</div>
-		</aside>
+		
+		
+		
+		
+		
+	</aside>
 	</div>
-		<div style="margin-top: 0;">
+</div>	
+		<div style="margin-bottom: 0px;">
         	<%@include file="../main/footer.jsp"%>	
 	</div>
 </body>
 
 <!-- 쪽지보내기 버튼 눌렀을 때 자식창열리게 -->
 <script type="text/javascript">
-	function openTest() {
+	$('#openTest').on('click', function(){
 		var child = window.open(
-						'/starrail/message/msg_insertform',
-						'childWindow',
-						'resizable=no, width=360, height=380, left=500, top=200, menubar=no, status=no, scrollbars=no');
-	};
+				'/starrail/message/msg_insertform?msg_sendid=""',
+				'childWindow',
+				'resizable=no, width=360, height=360, left=500, top=200, menubar=no, status=no, scrollbars=no');
+	});
+	
 </script>
 
 <!-- 쪽지창 상세보기 눌렀을 때 자식창 뜨게 -->
@@ -177,7 +185,7 @@
 		var child = window.open(
 						'/starrail/message/msg_detail'+msg_no,
 						'childWindow',
-						'resizable=no, width=360, height=380, left=500, top=200, menubar=no, status=no, scrollbars=no');
+						'resizable=no, width=360, height=350, left=500, top=200, menubar=no, status=no, scrollbars=no');
 	};
 	
 	

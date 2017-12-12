@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import starrail.expenses.domain.ExpenseCourseVO;
+import starrail.course.domain.CourseVO;
 import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 
@@ -18,22 +18,22 @@ public class ExpensesDAOImpl implements ExpensesDAO {
 	
 	private static String namespace = "railro.expenses.mapper.ExpensesMapper";
 
-	@Override	//¿¹»ó°æºñ ¼³Á¤
+	@Override	//ì˜ˆìƒê²½ë¹„ ì„¤ì •
 	public void expensesInsert(ExpensesVO expensesVO) throws Exception {
 		session.insert(namespace+".expensesInsert", expensesVO);
 	}
 
-	@Override	//¿¹»ê°æºñÀúÀåÇÒ ¶§ e_no 1¾¿ Áõ°¡
+	@Override	//ì˜ˆì‚°ê²½ë¹„ì €ì¥í•  ë•Œ e_no 1ì”© ì¦ê°€
 	public Integer selectE_no() throws Exception {
 		return session.selectOne(namespace+".selectE_no");
 	}
 	
-	@Override	//ÁöÃâ³»¿ª ÀúÀå
+	@Override	//ì§€ì¶œë‚´ì—­ ì €ì¥
 	public void amountInsert(StatementVO statementVO) throws Exception {
 		session.insert(namespace+".amountInsert", statementVO);
 	}
 	
-	@Override	//ÃÑ ³²Àº±İ¾× ±¸ÇØ¿À±â
+	@Override	//ì´ ë‚¨ì€ê¸ˆì•¡ êµ¬í•´ì˜¤ê¸°
 	public Integer totalMoney(int e_no) throws Exception {
 		return session.selectOne(namespace+".totalMoney", e_no);
 	}
@@ -43,18 +43,18 @@ public class ExpensesDAOImpl implements ExpensesDAO {
 		return session.selectOne(namespace+".selectEd_no");
 	}
 
-	@Override	//ÃÑ ³²Àº ±İ¾×-»ç¿ë±İ¾× µÈ ±İ¾×À¸·Î ÃÑ ³²Àº±İ¾× ¼öÁ¤
+	@Override	//ì´ ë‚¨ì€ ê¸ˆì•¡-ì‚¬ìš©ê¸ˆì•¡ ëœ ê¸ˆì•¡ìœ¼ë¡œ ì´ ë‚¨ì€ê¸ˆì•¡ ìˆ˜ì •
 	public Integer updateExpenses(Map<String, Integer> map) throws Exception {
 		return session.update(namespace+".updateExpenses", map);
 	}
 
-	@Override	//»ç¿ëÀÚ°¡ ¿À´Ã »ç¿ëÇÑ ÃÑ ±İ¾× °¡Á®¿À±â
+	@Override	//ì‚¬ìš©ìê°€ ì˜¤ëŠ˜ ì‚¬ìš©í•œ ì´ ê¸ˆì•¡ ê°€ì ¸ì˜¤ê¸°
 	public Integer todayTotal(Map<String, Object> map) throws Exception {
 		return session.selectOne(namespace+".todayTotal", map);
 	}
 
 	@Override
-	public List<Map<String, Object>> course(String id) throws Exception {
+	public List<CourseVO> course(String id) throws Exception {
 		System.out.println("dao : " + id);
 		return session.selectList(namespace+".course" , id);
 	}
@@ -66,7 +66,19 @@ public class ExpensesDAOImpl implements ExpensesDAO {
 
 	@Override
 	public List<Map<String, Object>> recallData(int e_no) throws Exception {
+		System.out.println("dao e_no : "+e_no);
 		return session.selectList(namespace+".recallData", e_no);
+	}
+
+	@Override	//ì„ íƒí•œ ë‚ ì§œ ë¦¬ìŠ¤íŠ¸ ë½‘ì•„ì˜¤ê¸°
+	public List<Map<String, Object>> listData(Map<String, Object> map) throws Exception {
+		System.out.println("daodoadoa : "+ map);
+		return session.selectList(namespace+".listData", map);
+	}
+
+	@Override
+	public List<Map<String, Object>> chart(int e_no) throws Exception {
+		return session.selectList(namespace+".chart", e_no);
 	}
 
 

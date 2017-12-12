@@ -25,8 +25,17 @@
 	<context:component-scan base-package="starrail.recommender.persistence" />
 	<!-- 추천 service / persistence 설정 end -->
 
-
-
+	<!-- 예약 service / persistence 설정 start -->
+	<context:component-scan base-package="starrail.reservation.service"/>
+	<context:component-scan base-package="starrail.reservation.persistence"/>
+	<context:component-scan base-package="starrail.reservation.util"/>
+	<!-- 예약 service / persistence 설정 end -->
+	
+	<!-- 공유 게시판 service / persistence 설정 start -->
+	<context:component-scan base-package="starrail.sharetext.service"/>
+	<context:component-scan base-package="starrail.sharetext.persistence"/>
+	<!-- 공유 게시판 service / persistence 설정 end -->
+	
 	<context:component-scan base-package="starrail.review.service" />
 	<context:component-scan base-package="starrail.review.persistence" />
 
@@ -45,7 +54,9 @@
 	<context:component-scan base-package="starrail.course.service" />
 	<!-- 코스관련 bean 객체 생성 end -->
 
-
+	<!-- 마이페이지 관련 객체 생성 -->
+	<context:component-scan base-package="starrail.mypage.persistance" />
+	<context:component-scan base-package="starrail.mypage.service" />
 
 	<!-- DB 설정 -->
 	<!-- Oracle 연결 -->

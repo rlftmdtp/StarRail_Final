@@ -146,7 +146,7 @@ td.td_c_info{
 	border-radius: 15px;
 	padding:15px;
 	margin-top:20px;
-	
+
 	background: #eef7ff;
 }
 
@@ -161,13 +161,14 @@ td.td_c_info{
 }
 
 .reserve-list-table{
-	width:300px;
+	width:350px;
     border-collapse: separate;
     border-spacing: 0;
     border-top:1px solid #57afff;
     border-left:1px solid #57afff;
     border-radius: 10px;
     background: #fff;
+    margin:0 auto;
 }
 
 .reserve-list-table tr td,
@@ -175,6 +176,14 @@ td.td_c_info{
 {
 	border-right: 1px solid #57afff;
 	border-bottom: 1px solid #57afff;
+	text-align: center;
+	font-size:10pt;
+	padding:5px;
+}
+
+.reserve-list-table tr th{
+	font-weight: bolder;
+	background:#f1f1f1;
 }
 
 .reserve-list-table tr:first-child th:first-child{
@@ -199,7 +208,7 @@ td.td_c_info{
 }
 
 .reserve-list-table .reserveTCount{
-	width:50px;
+	width:100px;
 	text-align: center;
 }
 
@@ -209,7 +218,8 @@ td.td_c_info{
 }
 
 .reserve-list-table tr{
-	height: 50px;
+	height: 30px;
+	
 }
 
 .reserve-list-table tr td{

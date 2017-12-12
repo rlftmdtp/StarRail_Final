@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=divice-width" , initial-scale="1">
 <title>My Page</title>
 <!-- 마이페이지 css -->
-<link rel="stylesheet" type="text/css" href="/starrail/resources/css/mypage/mypage.css?ver=1">
+<link rel="stylesheet" type="text/css" href="/starrail/resources/css/mypage/mypage.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 

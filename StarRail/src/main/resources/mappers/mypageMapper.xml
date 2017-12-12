@@ -11,10 +11,10 @@
 		where m_id = #{m_id}
 	</select>
 	
-<!-- 	<select id="reservationList" resultType="ReservationVO" parameterType="String">
+ 	<select id="reservationList" resultType="ReservationVO" parameterType="String">
 		select * from reservation
 		where m_id = #{m_id}
-	</select> -->
+	</select> 
 	
 	<delete id="courseDelete" parameterType="Integer">
 		delete from course where c_id = #{c_id}

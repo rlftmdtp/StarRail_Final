@@ -120,6 +120,7 @@ public class ReservationUtil {
 		      
 		   }
 	   
+	   //기차정보 가져오기
 	   public List<TrainSCVO> getTimeTable(String red_sstation, String red_sdate, String red_estation, String red_stime) throws Exception{
 		      
 		      String depPlaceId="&depPlaceId="+red_sstation;   //출발역ID
@@ -183,6 +184,7 @@ public class ReservationUtil {
 		   return list;
 		   }
 	   
+	   
 	 /*public static void main(String[] args){
 		   ReservationUtil util = new ReservationUtil();
 		   try {
@@ -197,7 +199,7 @@ public class ReservationUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	   }*/
+	   };*/
 
 }	  
 	   

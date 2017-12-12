@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="starrail.recommend.mappers.paymentMapper">
+	
+	<insert id="payCreate"  parameterType="PaymentVO">
+ 		insert into payment(pay_no, res_no, pay_price, pay_bank, pay_cardnum, pay_cardpw, pay_cvc, pay_mm, pay_yy)
+ 			values(payment_seq.nextval, #{res_no}, #{pay_price}, #{pay_bank}, #{pay_cardnum}, #{pay_cardpw}, #{pay_cvc},#{pay_mm},#{pay_yy})
+ 	</insert>
+	
+	<select id="maxPayNo" resultType="int">
+			select max(pay_no) from payment
+	</select> 
+
+
+</mapper>  

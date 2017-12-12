@@ -55,7 +55,7 @@ $(function(){
 			
 		})
 		
-	})
+	});
 	
 	
 	$('#searchtrain tbody').on('click', '.choiceseat', function(){
@@ -102,15 +102,12 @@ $(function(){
 	
 	
 	$('div.trainSeat').on('click','.eachseat', function(){
-		alert($(this).attr("seatID"));
 		var thisSeat = $(this);
 		alert( "선택하신 좌석은 " + $(this).text() + "입니다.");
 		if(thisSeat.hasClass("able")){
-			alert( "jdasdsaf  "+thisSeat.hasClass("able"));
 			$(this).removeClass("able");
 			$(this).addClass("eachseat");
 			$(this).addClass("currentSelect");
-//			thisSeat.addClass('currentSelect');
 			$(this).css("background-image","url(/starrail/resources/images/reservation/choseat.png)");
 			
 		}
@@ -129,6 +126,7 @@ $(function(){
 
 
 });
+
 /*발권역 알림*/
 function choiceStation(){
 	var x = document.getElementById("sselectbox");

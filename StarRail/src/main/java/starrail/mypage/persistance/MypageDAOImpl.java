@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
-//import starrail.reservation.domain.ReservationVO;
+import starrail.reservation.domain.ReservationVO;
 
 @Repository
 public class MypageDAOImpl implements MypageDAO {
@@ -27,7 +27,6 @@ public class MypageDAOImpl implements MypageDAO {
 
 	@Override
 	public List<ReservationVO> reservationList(String m_id) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectList(namespace+".reservationList", m_id);
 	}
 

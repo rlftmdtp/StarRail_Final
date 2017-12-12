@@ -27,6 +27,8 @@
 	<context:component-scan base-package="starrail.partner.controller" />
 	<context:component-scan base-package="starrail.recommender.controller" />
 	<context:component-scan base-package="starrail.mypage.controller" />
+	<context:component-scan base-package="starrail.reservation.controller"/>
+	<context:component-scan base-package="starrail.sharetext.controller"/>
 
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
@@ -61,7 +63,12 @@
 		</interceptor>
 
 		<interceptor>
-			<mapping path="/map/search" />
+			<mapping path="/expenses/railro_expenses" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/message/msg_list" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 
@@ -80,12 +87,20 @@
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 		
-		
 		<interceptor>
 			<mapping path="/mypage/mypage" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
+
+		<interceptor>
+			<mapping path="/sharetext/sharetext_insert" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
 		
+		<interceptor>
+			<mapping path="/reservation/Reservation_view" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
 		
 	</interceptors>
 

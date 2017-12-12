@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import starrail.course.domain.CourseVO;
 import starrail.expenses.domain.ExpensesVO;
 import starrail.expenses.domain.StatementVO;
 
@@ -52,7 +54,7 @@ public class ExpensesDAOImpl implements ExpensesDAO {
 	}
 
 	@Override
-	public List<Map<String, Object>> course(String id) throws Exception {
+	public List<CourseVO> course(String id) throws Exception {
 		System.out.println("dao : " + id);
 		return session.selectList(namespace+".course" , id);
 	}

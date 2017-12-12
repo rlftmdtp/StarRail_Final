@@ -25,12 +25,12 @@ public class MypageDAOImpl implements MypageDAO {
 		return session.selectList(namespace+".courseList", m_id);
 	}
 
-/*	@Override
+	@Override
 	public List<ReservationVO> reservationList(String m_id) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".reservationList", m_id);
 	}
-*/
+
 	@Override
 	public void courseDelete(Integer c_id) throws Exception {
 		session.delete(namespace+".courseDelete", c_id);

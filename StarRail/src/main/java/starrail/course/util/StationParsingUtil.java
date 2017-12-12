@@ -66,6 +66,7 @@ public class StationParsingUtil {
 			
 			URL url = new URL(xmlAddr+citycode.get(i));
 			
+			
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 			factory.setNamespaceAware(true);
 			XmlPullParser xpp = factory.newPullParser();

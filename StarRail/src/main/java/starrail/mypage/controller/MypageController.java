@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import starrail.course.domain.CourseVO;
-//import starrail.reservation.domain.ReservationVO;
+import starrail.reservation.domain.ReservationVO;
 import starrail.main.domain.UserVO;
 import starrail.mypage.service.MypageService;
 
@@ -33,10 +33,10 @@ public class MypageController {
 		model.addAttribute("user", user);
 		
 		List<CourseVO> courses = service.courseListService(user.getM_id());
-//		List<ReservationVO> reserves = service.reservationListService(user.getM_id());
+		List<ReservationVO> reserves = service.reservationListService(user.getM_id());
 		
 		model.addAttribute("courses", courses);
-//		model.addAttribute("reserves", reserves);
+		model.addAttribute("reserves", reserves);
 	}
 	
 	

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import starrail.course.domain.CourseVO;
-//import starrail.reservation.domain.ReservationVO;
+import starrail.reservation.domain.ReservationVO;
 import starrail.course.persistence.CourseDAO;
 import starrail.mypage.persistance.MypageDAO;
 
@@ -22,10 +22,10 @@ public class MypageServiceImpl implements MypageService {
 		return dao.courseList(m_id); 
 	}
 
-	/*@Override
+	@Override
 	public List<ReservationVO> reservationListService(String m_id) throws Exception {
 		return dao.reservationList(m_id);
-	}*/
+	}
 
 	@Override
 	public void courseRemove(Integer c_id) throws Exception {

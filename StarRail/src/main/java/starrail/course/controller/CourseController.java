@@ -2,15 +2,19 @@ package starrail.course.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,10 +26,12 @@ import net.sf.json.JSONArray;
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
 import starrail.course.domain.IssueInfoVO;
+import starrail.course.domain.StationCoorVO;
 import starrail.course.domain.StationVO;
 import starrail.course.domain.TrainTimeVO;
 import starrail.course.service.CourseService;
 import starrail.course.util.StationParsingUtil;
+import starrail.main.domain.UserVO;
 
 @Controller
 @RequestMapping("/course/*")
@@ -38,8 +44,15 @@ public class CourseController {
 	private CourseService service;
 	
 	@RequestMapping(value="/makeCourse",method=RequestMethod.GET)	//코스짜기 페이지 열기
-	public void courseGET() throws Exception{
-			
+	public void courseGET(HttpServletRequest request, Model model) throws Exception{
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO) session.getAttribute("login");
+		if(user !=null){
+			model.addAttribute("m_id", user.getM_id());
+		} else {
+			model.addAttribute("m_id", "");
+		}
+		
 	}
 	
 	@RequestMapping(value="/depList", method=RequestMethod.POST)	//n일차 선택 후 출발역 리스트 불러오기
@@ -73,14 +86,14 @@ public class CourseController {
 			List<StationVO> allNodes = stationParser.stationList(cityCodes);
 			List<StationVO> arrStations = stationParser.arrStationList(depNode, depDate, allNodes);
 			
-			entity = new ResponseEntity<List<StationVO>>(arrStations, responseHeaders, HttpStatus.OK);  //200OK
-							//ResponseEntity<String>는 실행결과, HttpStatus결과를 가져와 넣기 위한 것
+			entity = new ResponseEntity<List<StationVO>>(arrStations, responseHeaders, HttpStatus.OK); 
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 		}
 		return entity;
 	}
+	
 	
 	@RequestMapping(value="/trainTime", method=RequestMethod.POST)	//출발 희망시간 선택 후 시간표 출력
 	@ResponseBody
@@ -104,19 +117,28 @@ public class CourseController {
 	
 	@RequestMapping(value="/issuelist", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<List<IssueInfoVO>> issuelistPOST(@RequestParam(value="selectedDep", required=false) String selectedDep,
+	public ResponseEntity<HashMap<String, Object>> issuelistPOST(@RequestParam(value="selectedDep", required=false) String selectedDep,
 															@RequestParam(value="selectedArr", required=false) String selectedArr) throws Exception{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		ResponseEntity<List<IssueInfoVO>> entity = null;
+		ResponseEntity<HashMap<String, Object>> entity = null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		try {
 			List<String> nodes = new ArrayList<String>();
 			nodes.add(selectedDep);
 			nodes.add(selectedArr);
+			List<IssueInfoVO> issues = service.issueList(nodes);
 			
-			List<IssueInfoVO> list = service.issueList(nodes);
-			entity = new ResponseEntity<List<IssueInfoVO>>(list, responseHeaders, HttpStatus.OK);
+			StationCoorVO depCoor = service.getCoordinateService(selectedDep);
+			StationCoorVO arrCoor = service.getCoordinateService(selectedArr);
+
+			
+			map.put("issues", issues);
+			map.put("depCoor", depCoor);
+			map.put("arrCoor", arrCoor);
+			
+			entity = new ResponseEntity<HashMap<String, Object>>(map, responseHeaders, HttpStatus.OK);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,6 +153,7 @@ public class CourseController {
 	public ResponseEntity<String> insertCoursePOST(@RequestParam(value="m_id", required=false)String m_id,
 													@RequestParam(value="i_name", required=false)String i_name,
 													@RequestParam(value="c_name", required=false)String c_name,
+													@RequestParam(value="c_filename", required=false)String c_filename,
 													@RequestParam(value="details", required=false)String details) throws Exception{
 		ResponseEntity<String> entity = null;
 		
@@ -140,7 +163,7 @@ public class CourseController {
 			c.setM_id(m_id);
 			c.setC_name(c_name);
 			c.setI_name(i_name);
-			c.setC_filename("test");	//추후 파일 업로드 구현 후에 수정
+			c.setC_filename(c_filename);	
 			
 			List<String> detail_list = JSONArray.fromObject(details);
 			
@@ -169,7 +192,7 @@ public class CourseController {
 	
 	
 	
-	@RequestMapping(value="/editCourse{c_id}",method=RequestMethod.GET)	//코스짜기 페이지 열기
+	@RequestMapping(value="/editCourse{c_id}",method=RequestMethod.GET)	//코스수정 페이지 열기
 	public ModelAndView courseModifyGET(@PathVariable int c_id) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/course/editCourse");
@@ -186,7 +209,8 @@ public class CourseController {
 	@ResponseBody
 	public ResponseEntity<String> updateCoursePOST(@RequestParam(value="c_id", required=false)Integer c_id,
 													@RequestParam(value="i_name", required=false)String i_name,
-													@RequestParam(value="c_name", required=false)String c_name,
+													@RequestParam(value="c_name", required=false)String c_name, 
+													@RequestParam(value="c_filename", required=false)String c_filename,
 													@RequestParam(value="details", required=false)String details) throws Exception{
 		ResponseEntity<String> entity = null;
 		
@@ -195,7 +219,7 @@ public class CourseController {
 			c.setC_id(c_id);
 			c.setC_name(c_name);
 			c.setI_name(i_name);
-			c.setC_filename("test2");	//추후 파일 업로드 구현 후에 수정
+			c.setC_filename(c_filename);
 			
 			List<String> detail_list = JSONArray.fromObject(details);
 			
@@ -211,12 +235,10 @@ public class CourseController {
 				cd.setCd_etime(data[3]);
 				
 				cds.add(cd);
-				
-				service.courseModify(c, cds);
-				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 			}
 			
-			
+			service.courseModify(c, cds);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -46,6 +46,11 @@
 	<delete id="courseDetailDelete" parameterType="Integer">
 		delete from coursedetail where c_id = #{c_id}
 	</delete>
+	
+	<select id="getCoordinate" parameterType="String" resultType="StationCoorVO">
+		select * from stationcoor
+		where stc_name = #{stc_name}
+	</select>
 
 </mapper>  
 

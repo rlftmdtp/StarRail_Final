@@ -1,7 +1,8 @@
 .departures div.btn-group,
 .arrivals div.btn-group{
 	width:480px;
-}
+	display:block;
+	}
 
 .departures div.btn-group label,
 .arrivals div.btn-group label
@@ -11,7 +12,17 @@
   margin-top:0px;
   margin-bottom:5px;
   margin-right:5px;
+
+  border-radius: 0px;
+  
+	background: #cee6ff;
 }
+
+.departures div.btn-group label span,
+.arrivals div.btn-group label span{
+	font-size: 10pt;
+}
+
 
 .departures div.btn-group label.btn input[type="radio"]:empty,
 .arrivals div.btn-group label.btn input[type="radio"]:empty
@@ -46,6 +57,6 @@
   content: '\2714';
   text-indent: .3em;
   color: #fff;
-  background-color: #5cb85c;
+  background-color: #8bccfc;
   line-height: 2.5em;
 }

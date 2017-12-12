@@ -25,8 +25,17 @@
 	<context:component-scan base-package="starrail.recommender.persistence" />
 	<!-- 추천 service / persistence 설정 end -->
 
-
-
+	<!-- 예약 service / persistence 설정 start -->
+	<context:component-scan base-package="starrail.reservation.service"/>
+	<context:component-scan base-package="starrail.reservation.persistence"/>
+	<context:component-scan base-package="starrail.reservation.util"/>
+	<!-- 예약 service / persistence 설정 end -->
+	
+	<!-- 공유 게시판 service / persistence 설정 start -->
+	<context:component-scan base-package="starrail.sharetext.service"/>
+	<context:component-scan base-package="starrail.sharetext.persistence"/>
+	<!-- 공유 게시판 service / persistence 설정 end -->
+	
 	<context:component-scan base-package="starrail.review.service" />
 	<context:component-scan base-package="starrail.review.persistence" />
 
@@ -36,7 +45,8 @@
 	<context:component-scan base-package="starrail.expenses.service" />
 	<context:component-scan base-package="starrail.expenses.persistence" />
 
-
+	<context:component-scan base-package="starrail.payment.service" />
+	<context:component-scan base-package="starrail.payment.persistence" />
 
 
 	<!-- 코스관련 bean 객체 생성 start -->

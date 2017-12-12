@@ -117,7 +117,11 @@ td.td_c_info{
 	font-size:12pt;
 }
 
-.td_c_edit,
+.td_c_edit{
+	width:100px;
+	text-align: center;
+}
+
 .td_c_del{
 	width:50px;
 	text-align: center;

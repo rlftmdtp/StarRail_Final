@@ -10,10 +10,7 @@ body * {
     font-family: Lato, Helvetica, Arial, sans-serif;
     letter-spacing: 2px;
 }
-.rails {
-	min-height: 7vh;
-	/*background: red;*/
-}
+
 .course {
 	min-height: 7vh;
 	/*background: green;*/

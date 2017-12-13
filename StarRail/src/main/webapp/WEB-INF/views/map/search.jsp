@@ -26,15 +26,15 @@
 	<%@include file="../main/nav_page.jsp"%>
 	<div style="margin-top: 60px;"></div>
 
-	<div class="container-fluid"
-		style="padding-right: 10%; padding-left: 10%;">
-		<div class="row rails">star 레일</div>
+	<div class="container-fluid" style="padding-right: 10%; padding-left: 10%;">
 		<div class="row course">
 			<h2 class="fontapply">여행 코스</h2>
 			<div class="row" id="courseButtons">
 				<c:forEach items="${courseList }" var="courseVO">
-					<button type="submit" value="${courseVO.c_id }"
-						class="btn btn-default courseButton">${courseVO.c_name }</button>
+					<img src="/starrail/resources/images2/partner/test_map.PNG"/ style="width: 10%; height: 20%">
+					<button type="submit" value="${courseVO.c_id }" class="btn btn-default courseButton" style="display: inherit;">
+					${courseVO.c_name }
+					</button>
 				</c:forEach>
 			</div>
 		</div>

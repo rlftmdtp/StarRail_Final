@@ -65,19 +65,10 @@ $(function() {
 						$.getJSON("/starrail/maprest/coursedetail/"+ c_id,
 										function(data) {
 											$(data).each(function() {
-													$('.stepwizard-row').append('<div class="stepwizard-step">' +
-													'<button type="submit" class="btn btn-warning btn-circle stationButton" value="'+this.cd_start+'" data-time="'+this.cd_stime+'">'
+													$('.stepwizard-row').append('<div class="stepwizard-step">' 
+													+'<button type="submit" class="btn btn-warning btn-circle stationButton" value="'+this.cd_start+'" data-time="'+this.cd_stime+'">'
 													+ this.cd_start + '</button></div>')
 															});
-											/*
-											 * for(var i=0; i<stations.length;
-											 * i++){
-											 * $('#stationButtons').append('<button
-											 * type="submit" value="'
-											 * +stations[i] +'" class="btn
-											 * btn-default stationButton">' +
-											 * stations[i] +'</button>'); }
-											 */
 										})
 					});
 
@@ -267,23 +258,15 @@ $(function() {
 
 			// -------------------- 맛집 -----------------
 			$(data.foodList).each(function(number) {
-				/*
-				 * // 검색 API에서 얻은 좌표는 TM128(카텍좌표계) 이므로 지도 API에서 사용하기 위해서는
-				 * LatLng좌표로 변경해야 한다. // number객체를 => naver.maps.Point객체로 변경 후 =>
-				 * fromTM128ToLatLng(naver.maps.Point객체)로 이용한다 var tm128= new
-				 * naver.maps.Point(this.mapx,this.mapy); var latlng =
-				 * naver.maps.TransCoord.fromTM128ToLatLng(tm128);
-				 */
 				var latlng = new naver.maps.LatLng(this.mapy, this.mapx);
-				// foodLatlngs.push(latlng);
 				
 				// Info 정보창생성
 				var contentString = [
 				'<div>',
-				'   <h3> 음식점 명:' + this.title + '</h3>',
-				'	<div class="iw_inner"><img src="'+this.firstimage+'" width=100% height=100%;/></div>',
-				'   <p> 주소지: ' + this.addr1 + '</p><br />',
-				, '</div>' ]
+				'<h3> 음식점 명:' + this.title + '</h3>',
+				'<div class="iw_inner"><img src="'+this.firstimage+'" width=100% height=100%;/></div>',
+				'<p> 주소지: ' + this.addr1 + '</p><br />',
+				,'</div>' ]
 				.join('') // join함수는배열을문자열로바꾼다.
 				infoFoodList.push(contentString);
 				
@@ -331,7 +314,6 @@ $(function() {
 		$('.info2detail').empty();
 		$('#saveButtons').empty();
 		$.getJSON("/starrail/maprest/fooddetail/" + contentid,function(data) {
-							alert("음식 디테일 정보가 들어왔습니다");
 
 							$(data.foodDetailVO).each(function() {
 										$('.info2detail').append(
@@ -345,12 +327,8 @@ $(function() {
 
 									});
 
-							$(data.foodImageList)
-									.each(
-											function(number) {
-												$('#foodimg' + number)
-														.append(
-																'<img src="'
+							$(data.foodImageList).each(function(number) {
+												$('#foodimg' + number).append('<img src="'
 																		+ this.smallimageurl
 																		+ '" width="100%" class="img-thumbnail"/>');
 											});

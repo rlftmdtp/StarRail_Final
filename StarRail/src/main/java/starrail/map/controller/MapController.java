@@ -35,9 +35,8 @@ public class MapController {
 		logger.info("Map Controller에 오신것을 환영합니다 !");
 		
 		HttpSession session = request.getSession();
-		UserVO userVO = (UserVO)session.getAttribute("login");
-		
-		// 유저의 코스와 코스 디테일을 가져와야 한다.
+		UserVO userVO = (UserVO)session.getAttribute("login");	
+		// 유저의 코스와 코스 디테일을 가져온다.
 		// m_id를 통해 c_id를 가져온다.
 		List<CourseVO> courseList = service.courseList(userVO.getM_id());
 		model.addAttribute("courseList", courseList);

@@ -112,6 +112,7 @@
 		        </li>
 		      </ul>&nbsp;&nbsp;&nbsp;&nbsp;	
 		      
+
 			 
 			 <ul class="nav navbar-nav">	<!-- id="navbarResponsive" -->
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"	href="/starrail/map/search">&nbsp;&nbsp;Map&nbsp;&nbsp;</a></li>&nbsp;&nbsp;&nbsp;&nbsp;					

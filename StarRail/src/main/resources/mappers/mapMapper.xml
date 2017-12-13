@@ -4,14 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="starrail.mpa.mappers.MapMapper">
-
+	
+	<insert id="addLocation">
+		insert into
+		location(l_name, c_id, l_tel, l_addr1, l_contentid, l_contenttypeid, l_firstimage, l_mapx, l_mapy, sort)
+		values(#{title}, #{c_id}, #{tel}, #{addr1}, #{contentid} , #{contenttypeid}, #{firstimage}, #{mapx}, #{mapy}, #{sort})
+	</insert>
+	
 	<select id="courseList" resultType="CourseVO">
 		select c_id, m_id, i_name, c_name, c_filename from course
 		where m_id=#{m_id}
 	</select>
 	
 	<select id="stations" resultType="CourseDetailVO">
-		select cd_start, cd_end from coursedetail
+		select * from coursedetail
 		where c_id=#{c_id}
 	</select>
 	

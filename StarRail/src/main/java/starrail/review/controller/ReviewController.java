@@ -24,7 +24,6 @@ import starrail.review.domain.Hash_SearchVO;
 import starrail.review.domain.Member_RecommendVO;
 import starrail.review.domain.ReviewPageMaker;
 import starrail.review.domain.ReviewSearchCriteria;
-import starrail.review.persistence.ReviewDao;
 import starrail.review.service.ReviewService;
 
 @Controller
@@ -33,7 +32,6 @@ public class ReviewController {
 
 	@Inject
 	public ReviewService service;
-	public ReviewDao dao;	
 	
 	
 
@@ -226,6 +224,7 @@ public class ReviewController {
 			// start 솔
 			model.addAttribute("hasgTag", service.myHash(r_no));
 			model.addAttribute(service.read(r_no));
+			model.addAttribute("filename", service.file(r_no));
 			// System.out.println(service.myHash(r_no));
 			// end 솔
 						

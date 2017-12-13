@@ -31,7 +31,7 @@
 	<!-- 지출내역등록 -->
 	<insert id="amountInsert" parameterType="StatementVO">
 		insert into expenses_detail 
-		values(#{ed_no}, #{e_no}, #{ed_date}, #{ed_kategorie}, #{ed_katename}, #{ed_amount}, #{ed_plma})
+		values(#{ed_no}, #{e_no}, #{ed_date}, #{ed_kategorie}, #{ed_katename}, #{ed_amount})
 	</insert>
 	
 	<select id="selectEd_no" resultType="Integer">

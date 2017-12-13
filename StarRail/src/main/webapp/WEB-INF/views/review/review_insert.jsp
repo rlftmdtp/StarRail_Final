@@ -88,9 +88,8 @@
     			<div class="panel-body">
     			<div class="fileDrop"></div>
     			<div class="box-footer">
-									<ul class="mailbox-attachments clearfix uploadedList"></ul>
-									
-								</div>
+					<ul class="mailbox-attachments clearfix uploadedList"></ul>
+				</div>
 				 	<div class="input-group image-preview" style="margin-left: 220px;">
 									
 						<!-- don't give a name === doesn't send on POST/GET  -->
@@ -170,8 +169,6 @@
 
 <script id="template" type="text/x-handlebars-template">
 
-         
-<li>
 <form class='form-horizontal well' action='#' style='margin-top : 10px;'>
 	
 		<div class='row'>
@@ -186,7 +183,7 @@
 		</div>
 	
 </form>
-</li>  
+
 </script>
 
 <script>
@@ -200,13 +197,9 @@
 		event.preventDefault();
 
 		var files = event.originalEvent.dataTransfer.files;
-
 		var file = files[0];
-
 		var formData = new FormData();
-
 		formData.append("file", file);
-
 		$.ajax({
 			url : '/starrail/review/uploadAjax',
 			data : formData,
@@ -215,9 +208,7 @@
 			contentType : false,
 			type : 'POST',
 			success : function(data) {
-
 				var fileInfo = getFileInfo(data);
-
 				var html = template(fileInfo);
 				$(".uploadedList").append(html);
 			}
@@ -255,7 +246,6 @@
 				$("#hashSearchForm").autocomplete({
 					source : autocomplete_text 
 			});
-		
-	});
+		});
 </script>
 

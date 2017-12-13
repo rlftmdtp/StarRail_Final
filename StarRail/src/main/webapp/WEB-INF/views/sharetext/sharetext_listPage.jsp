@@ -42,8 +42,9 @@
 				<div class="form-group" 
 				style="border: 1px solid #48BAE4; height: auto; width: 100%; margin: auto;">
 				<img
-					src="/starrail/resources/images/sharetext/shareimg.jpg" style="position: top:0; left: 0; width: 100%;">
+					src="/starrail/resources/images/sharetext/shareimg.jpg" style="position: top:0; left: 0; width: 100%;height: 20%">
 				</div>
+				<br>
 
 			<div class="col-md-12">
 				<div class="table-responsive">
@@ -84,11 +85,11 @@
 
 					</table>
 					<!-- 검색 조건 -->
-					<div class='box-body' align="center">
-						<select name="searchType">
+					<div class='box-body'  align="center">
+						<select name="searchType" >
 							<option value="n"
 								<c:out value="${scri.searchType == null?'selected':''}"/>>
-								---------</option>
+								선택해주세요.</option>
 							<option value="t"
 								<c:out value="${scri.searchType eq 't'?'selected':''}"/>>
 								제목</option>
@@ -107,11 +108,11 @@
 							<option value="tcw"
 								<c:out value="${scri.searchType eq 'tcw'?'selected':''}"/>>
 								제목 + 내용 + 작성자</option>
-						</select> <input type="text" name='keyword' id="keywordInput" value='${scri.keyword }' placeholder="검색어를 입력해주세요 :)" size="25">
+						</select> <input type="text" name='keyword' id="keywordInput" value='${scri.keyword }' placeholder="검색어를 입력해주세요 :)" size="35">
 	
-						<button id='searchBtn'>검색</button>	
+						<button type="button" class="btn btn-primary btn-lg btn3d" id='searchBtn'><span class="glyphicon glyphicon-cloud"></span>검색</button>
 						<div align="right">			
-							<button id='newBtn'>새로운 글</button>
+							 <button type="button" class="btn btn-success btn-lg btn3d" id="newBtn"><span class="glyphicon glyphicon-ok"></span>글등록</button>
 						</div>	
 
 					</div>

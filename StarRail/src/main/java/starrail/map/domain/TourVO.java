@@ -2,25 +2,25 @@ package starrail.map.domain;
 
 public class TourVO {
 	private String title;
-	private String category;
-	private String description;
-	private String telephone;
-	private String address;
-	private String link;
-	private Integer mapx;
-	private Integer mapy;
+	private String tel;
+	private String addr1;
+	private Long contentid;
+	private Long contenttypeid;
+	private String firstimage;
+	private Double mapx;
+	private Double mapy;
 	
 	public TourVO(){}
 
-	public TourVO(String title, String category, String description, String telephone, String address, String link,
-			Integer mapx, Integer mapy) {
+	public TourVO(String title, String tel, String addr1, Long contentid, Long contenttypeid, String firstimage,
+			Double mapx, Double mapy) {
 		super();
 		this.title = title;
-		this.category = category;
-		this.description = description;
-		this.telephone = telephone;
-		this.address = address;
-		this.link = link;
+		this.tel = tel;
+		this.addr1 = addr1;
+		this.contentid = contentid;
+		this.contenttypeid = contenttypeid;
+		this.firstimage = firstimage;
 		this.mapx = mapx;
 		this.mapy = mapy;
 	}
@@ -33,61 +33,60 @@ public class TourVO {
 		this.title = title;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getAddr1() {
+		return addr1;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
 
-	public String getTelephone() {
-		return telephone;
+	public Long getContentid() {
+		return contentid;
 	}
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setContentid(Long contentid) {
+		this.contentid = contentid;
 	}
 
-	public String getAddress() {
-		return address;
+	public Long getContenttypeid() {
+		return contenttypeid;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setContenttypeid(Long contenttypeid) {
+		this.contenttypeid = contenttypeid;
 	}
 
-	public String getLink() {
-		return link;
+	public String getFirstimage() {
+		return firstimage;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setFirstimage(String firstimage) {
+		this.firstimage = firstimage;
 	}
 
-	public Integer getMapx() {
+	public Double getMapx() {
 		return mapx;
 	}
 
-	public void setMapx(Integer mapx) {
+	public void setMapx(Double mapx) {
 		this.mapx = mapx;
 	}
 
-	public Integer getMapy() {
+	public Double getMapy() {
 		return mapy;
 	}
 
-	public void setMapy(Integer mapy) {
+	public void setMapy(Double mapy) {
 		this.mapy = mapy;
-	};
-	
+	}
 	
 }

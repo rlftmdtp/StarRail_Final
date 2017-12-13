@@ -306,6 +306,12 @@
 		select max(hs_no)
 		from hash_search
 	</select>
+	
+	<select id="file" resultType="FileVO">
+		select rf.rf_fullname "rf_fullname"
+		from review_file rf, review r
+		where r.r_no = #{r_no}
+	</select>
 <!-- end 게시판 -->
 
 </mapper>

@@ -21,7 +21,7 @@ public class SharetextReplyServiceImpl implements SharetextReplyService {
 	@Inject
 	private ShareTextDAO sdao;
 	
-	//´ñ±Û Ãß°¡
+	//ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	@Transactional
 	@Override
 	public void addReply(SharetextReplyVO vo) throws Exception {
@@ -29,19 +29,20 @@ public class SharetextReplyServiceImpl implements SharetextReplyService {
 		dao.create(vo);
 		sdao.updateReplyCnt(vo.getSh_no(), 1);
 	}
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<SharetextReplyVO> listReply(Integer sh_no) throws Exception {
 		
 		return dao.list(sh_no);
 	}
-	//´ñ±Û ¼öÁ¤
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void modifyReply(SharetextReplyVO vo) throws Exception {
 		dao.update(vo);
 	}
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	@Transactional
 	@Override
 	public void removeReply(Integer sr_no) throws Exception {
 		
@@ -51,7 +52,7 @@ public class SharetextReplyServiceImpl implements SharetextReplyService {
 
 	}
 	
-	//´ñ±Û ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	@Override
 	public List<SharetextReplyVO> listReplyPage(Integer sh_no, ShareTextCriteria scri) throws Exception {
 		

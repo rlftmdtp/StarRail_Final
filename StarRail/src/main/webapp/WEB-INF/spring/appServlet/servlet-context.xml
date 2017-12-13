@@ -26,8 +26,11 @@
 	<context:component-scan base-package="starrail.expenses.controller" />
 	<context:component-scan base-package="starrail.partner.controller" />
 	<context:component-scan base-package="starrail.recommender.controller" />
+	<context:component-scan base-package="starrail.mypage.controller" />
 	<context:component-scan base-package="starrail.reservation.controller"/>
 	<context:component-scan base-package="starrail.sharetext.controller"/>
+	<context:component-scan base-package="starrail.payment.controller"/>
+
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
@@ -85,6 +88,11 @@
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 		
+		<interceptor>
+			<mapping path="/mypage/mypage" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+
 		<interceptor>
 			<mapping path="/sharetext/sharetext_insert" />
 			<beans:ref bean="authInterceptor" />

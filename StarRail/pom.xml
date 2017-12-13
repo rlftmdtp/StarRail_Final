@@ -168,21 +168,21 @@
 
 		<!-- JSON 라이브러리(중간때 쓰던것 같은) 용도 -->
 		<dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <classifier>jdk15</classifier>
-        </dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
 
 
-		
 
-		<!--  NaverAPI Json 파싱을 위한 라이브러리 -->
-		 <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
+
+		<!-- NaverAPI Json 파싱을 위한 라이브러리 -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 
 
 		<!-- 파일 업로드 -->
@@ -208,6 +208,20 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
+		</dependency>
+
+		<!-- Spring에서 R을 사용하기 위해 -->
+		<!-- https://mvnrepository.com/artifact/org.rosuda.REngine/REngine -->
+		<dependency>
+			<groupId>org.rosuda.REngine</groupId>
+			<artifactId>REngine</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.rosuda.REngine/Rserve -->
+		<dependency>
+			<groupId>org.rosuda.REngine</groupId>
+			<artifactId>Rserve</artifactId>
+			<version>1.8.1</version>
 		</dependency>
 
 

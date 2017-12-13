@@ -33,10 +33,10 @@ private ReservationUtil reservationutil;
 @Inject
 private ReservationService service;
 	
-//¿¹¾à ÀúÀå
+//ë“±ë¡
 @RequestMapping(value="/Reservation_view", method=RequestMethod.GET)
 public void registGET(ReservationVO reservation, Model model, HttpServletRequest request)throws Exception{
-	System.out.println("Reservation registGET ¼º°ø");
+	System.out.println("Reservation registGET ï¿½ï¿½ï¿½ï¿½");
 	
 	HttpSession session = request.getSession();
 	UserVO userVO = (UserVO)session.getAttribute("login");
@@ -47,26 +47,27 @@ public void registGET(ReservationVO reservation, Model model, HttpServletRequest
 	model.addAttribute("list",list);
 	
 }
-//¿¹¾à ÀúÀå
+//ê¸€ë“±ë¡
 @RequestMapping(value="/Reservation_view", method=RequestMethod.POST)
 public String registPOST(ReservationVO reservation, RedirectAttributes rttr, Model model)throws Exception{
-	System.out.println("Reservation registPOST ¼º°ø");
+	System.out.println("Reservation registPOST í…ŒìŠ¤íŠ¸");
 	System.out.println(reservation.toString());
 	
 	service.regist(reservation);
-	/*model.addAttribute("result", "success");*/
-	/*reservation.setRes_no(service.getMaxResNo());*/
-	/*rttr.addFlashAttribute("msg", "success");*/
-	/*rttr.addAttribute("res_no", reservation.getRes_no());*/
+	model.addAttribute("result", "success");
+	//reservation.setRes_no(service.getMaxResNo());
+	//rttr.addFlashAttribute("msg", "success");
+	//rttr.addAttribute("res_no", reservation.getRes_no());
 	return "redirect:/reservation/Reservation_result";
 }
 	
 
-//¿¹¾à Á¤º¸ Á¶È¸
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 @RequestMapping(value="Reservation_result", method=RequestMethod.GET)
-public void read(@RequestParam("res_no") int res_no, Model model) throws Exception{
-	System.out.println("reservation read...ñé");
-	model.addAttribute(service.reservationRead(res_no));
+public void read(Model model) throws Exception{
+	System.out.println("reservation read...ï¿½ï¿½");
+	Integer res_no = service.getMaxResNo();
+	model.addAttribute("list",service.reservationRead(res_no));
 }
 
 

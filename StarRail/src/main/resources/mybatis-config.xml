@@ -16,7 +16,8 @@
 		<package name="starrail.partner.domain"/>
 		<package name="starrail.sharetext.domain"/>
 		<package name="starrail.reservation.domain"/>
-
+		<package name="starrail.payment.domain"/>
+ 		
 	</typeAliases>
 	
 </configuration>

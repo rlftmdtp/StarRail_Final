@@ -201,7 +201,7 @@
    <!-- <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script> -->
    
    <!-- 코스 js -->
-<script src="/starrail/resources/js/course/course.js" type="text/javascript"></script>
+<script src="/starrail/resources/js/course/course.js?ver=1" type="text/javascript"></script>
 <!-- n일차 js -->
 <script src="/starrail/resources/js/course/nthBtn.js" type="text/javascript"></script>
 </body>

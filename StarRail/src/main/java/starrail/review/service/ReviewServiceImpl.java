@@ -13,19 +13,14 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
-import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.mahout.cf.taste.recommender.Recommender;
-import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.stereotype.Service;
@@ -159,7 +154,6 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<String> hashtagInsert(ReviewVO review, Hash_SearchVO searchVO) throws Exception {
 		//정규표현식
 		Pattern p = Pattern.compile("\\#([0-9a-zA-Z가-힣]*)");
-		//후기게시판 내용에 있는 것들 가져와서
 		Matcher m = p.matcher(review.getR_content());
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -169,17 +163,14 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		while (m.find()) {
 			r_hash = specialCharacter_replace(m.group());
-			System.out.println("서비스 r_hash : " + r_hash);
 			if (dao.hash_no() != null) {
 				h_no = dao.hash_no() + 1;
-				System.out.println("서비스 h_no : "+h_no);
 			}else{
 				h_no = 1;
 			}
 				paramMap.put("h_no", h_no);
 				paramMap.put("r_no", review.getR_no());
 				paramMap.put("r_hash", r_hash);
-				System.out.println("서비스 : "+paramMap);
 				dao.tagAdd(paramMap);
 				list.add(r_hash);
 			}
@@ -230,6 +221,10 @@ public class ReviewServiceImpl implements ReviewService {
 		dao.inserthash(map);
 	}
 
+	@Override
+	public List<FileVO> file(int r_no) throws Exception {
+		return dao.file(r_no);
+	}		
 //--------------------------------------------------------------------------------------------------------------
 	// 추천 시작
 		@Override
@@ -432,7 +427,9 @@ public class ReviewServiceImpl implements ReviewService {
 		@Override
 		public List<ReviewVO> list_userBased_servie(List<Integer> r_noList) {
 			return dao.list_userBased(r_noList);
-		}		
+		}
+
+
 		
 		// 추천 끝
 

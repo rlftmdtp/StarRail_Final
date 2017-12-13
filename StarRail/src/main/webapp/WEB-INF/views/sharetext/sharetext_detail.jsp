@@ -12,7 +12,7 @@
 	href="/starrail/resources/css/main/header_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="/starrail/resources/css/sharetext/sharetext.css">
-	   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 
 <!-- Main content -->
@@ -45,6 +45,7 @@
     </div>
 
 		<br>
+		<section class="content"> 
 		<div class="form-group" 
 				style="border: 1px solid #48BAE4; height: auto; width: 60%; margin: auto;">
 				<img
@@ -107,11 +108,6 @@
 					value="${shareTextVO.sh_date }" />
 			</div>
 		</div>
-		
-				
-		
-		
-		
 			
 		<!-- 버튼 -->
 	</form>
@@ -119,16 +115,16 @@
 	
 	<!-- SNS공유 -->
 	<div align="center">
-	<a href="#" onclick="javascript:window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Twitter" >
+				<a href="http://localhost:8081/starrail/sharetext/sharetext_detail?sh_no=${sh_no}" onclick="javascript:window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Twitter" >
 				<img src="/starrail/resources/images/sharetext/Twitter.jpg" height="4%" width="4%"></a>
 
-				<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" >
+				<a href="http://localhost:8081/starrail/sharetext/sharetext_detail?sh_no=${sh_no}"  onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" >
 				<img src="/starrail/resources/images/sharetext/Facebook.png" height="4%" width="4%"></a>
 				
-				<a href="#" onclick="javascript:window.open('https://story.kakao.com/s/share?url=' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=300,width=600');return false;" target="_blank" alt="Share on kakaostory">
+				<a href="http://localhost:8081/starrail/sharetext/sharetext_detail?sh_no=${sh_no}"  onclick="javascript:window.open('https://story.kakao.com/s/share?url=' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=300,width=600');return false;" target="_blank" alt="Share on kakaostory">
 				<img src="/starrail/resources/images/sharetext/KakaoStory.png" height="4%" width="4%"></a>
 				
-				<a href="http://localhost:8081/starrail/sharetext/sharetext_detail?sh_no=118" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" >
+				<a onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" href="http://localhost:8081/starrail/sharetext/sharetext_detail?sh_no=160" target="_blank" alt="Share on Naver" >
 				<img src="/starrail/resources/images/sharetext/NaverBand.jpg" height="4%" width="4%"></a><br><br><br>
 	
 	
@@ -148,17 +144,8 @@
 	<br>
 	<br>
 
-	<!-- <div>
-	<div>
-		작성자 <input type="text" name="replyer" id="newReplyWriter">
-	</div>
-	<div>
-		내용 <input type="text" name="sr_content" id="newReplyText">
-	</div>
-	<button id="replyaddBtn">추가</button>
-</div> -->
 
-
+	<!-- **************댓글************** -->
 	
 	<c:if test="${empty login }">
 		<div class="box-body">
@@ -172,7 +159,7 @@
 	</c:if>
 
 
-	<!-- **************댓글************** -->
+
 
 
 
@@ -244,13 +231,14 @@
       	<c:if test="${login.m_id==shareTextVO.m_id }">
         <button type="button" class="btn btn-info" id="replyModBtn">수정</button>
         <button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
-        </c:if>
+       </c:if> 
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
 </div>
 
+</section>
 
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
@@ -263,8 +251,10 @@
   <h3 class="timeline-header"><strong>{{sr_no}}</strong> -{{replyer}}</h3>
   <div class="timeline-body">{{sr_content}} </div>
     <div class="timeline-footer">
+	<c:if test="${login.m_id==shareTextVO.m_id }">
      <a class="btn btn-primary btn-xs" 
-	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+	    data-toggle="modal" data-target="#modifyModal">편집하기</a>
+	</c:if>
     </div>
   </div>			
 </li>
@@ -321,17 +311,17 @@
 
 		if (pageMaker.prev) {
 			str += "<li><a href='" + (pageMaker.startPage - 1)
-					+ "'> << </a></li>";
+					+ "'> </a></li>";
 		}
 
 		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
+			var strClass = pageMaker.scri.page == i ? 'class=active' : '';
 			str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
 		}
 
 		if (pageMaker.next) {
 			str += "<li><a href='" + (pageMaker.endPage + 1)
-					+ "'> >> </a></li>";
+					+ "'> </a></li>";
 		}
 
 		target.html(str);
@@ -445,6 +435,8 @@ $(function(){
 		  
 		  var sr_no = $(".modal-title").html();
 		  var sr_content = $("#sr_content").val();
+		  
+		 console.log(sr_content);
 		  
 		  $.ajax({
 				type:'put',

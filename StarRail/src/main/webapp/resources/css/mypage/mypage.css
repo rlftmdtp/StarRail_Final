@@ -1,0 +1,245 @@
+@CHARSET "utf-8";
+
+
+
+#mypageWrap{
+	margin:0 auto;
+	width:1080px;
+	height:100%;
+	border-radius:15px;
+	border: 1px solid #93ccff;
+	margin-top:90px;
+}
+
+.usser-info{
+	font-size: 11pt;
+}
+
+.usser-info h3{
+	font-weight: bolder;
+	font-size:15pt;
+	color:#57afff;
+}
+
+.usser-info h4{
+	font-weight: bolder;
+	font-size:13pt;
+}
+
+
+#left-side-area{
+	width:250px;
+	height:100%;
+	float: left;
+	padding:15px;
+	border-right: 1px solid #93ccff;
+	border-radius: 15px 0px 0px 15px;
+	
+	background: #eef7ff;
+}
+
+#right-side-area{
+	float:left;
+	width:740px;
+	margin-left:40px;
+
+}
+
+#myCourse{
+	width:740px;
+	border:1px solid #93ccff;
+	border-radius: 15px;
+	padding:15px;
+	margin-top:30px;
+	
+	background: #eef7ff;
+}
+
+#myCourse h4{
+	font-size:15pt;
+	font-weight:bolder;
+	color:#57afff;
+}
+
+.nullCourse{
+	font-size: 10pt;
+}
+
+.course-list-table{
+	width:710px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-top:1px solid #57afff;
+    border-left:1px solid #57afff;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.course-list-table tr td{
+	border-right: 1px solid #57afff;
+	border-bottom: 1px solid #57afff;
+}
+
+.course-list-table tr:first-child td:first-child{
+	border-top-left-radius: 10px;
+}
+
+.course-list-table tr:first-child td:last-child {
+	border-top-right-radius: 10px;
+}
+
+.course-list-table tr:last-child td:first-child{
+	border-bottom-left-radius: 10px;
+}
+
+.course-list-table tr:last-child td:last-child {
+	border-bottom-right-radius: 10px;
+}
+
+
+.td_c_img{
+	width:120px;
+	background:#f1f1f1;
+	padding:5px 10px 5px 10px;
+}
+
+.c_img{
+	width:100px;
+}
+
+td.td_c_info{
+	font-size:10pt;
+	padding-left:20px;
+}
+
+.td_c_info h3{
+	font-weight: bolder;
+	font-size:12pt;
+}
+
+.td_c_edit{
+	width:100px;
+	text-align: center;
+}
+
+.td_c_del{
+	width:50px;
+	text-align: center;
+}
+
+.td_c_edit .btn,
+.td_c_del .btn{
+	color: #8bccfc;
+    border-color: #8bccfc;
+}
+
+.td_c_edit .btn:hover,
+.td_c_del .btn:hover{
+	color:#8bccfc;
+	background-color: #eef7ff;
+    border-color: #8bccfc;
+}
+
+#myReserv{
+	width:740px;
+	border:1px solid #93ccff;
+	border-radius: 15px;
+	padding:15px;
+	margin-top:20px;
+
+	background: #eef7ff;
+}
+
+#myReserv h4{
+	font-size:15pt;
+	font-weight:bolder;
+	color:#57afff;
+}
+
+.nullReserv{
+	font-size: 10pt;
+}
+
+.reserve-list-table{
+	width:350px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-top:1px solid #57afff;
+    border-left:1px solid #57afff;
+    border-radius: 10px;
+    background: #fff;
+    margin:0 auto;
+}
+
+.reserve-list-table tr td,
+.reserve-list-table tr th
+{
+	border-right: 1px solid #57afff;
+	border-bottom: 1px solid #57afff;
+	text-align: center;
+	font-size:10pt;
+	padding:5px;
+}
+
+.reserve-list-table tr th{
+	font-weight: bolder;
+	background:#f1f1f1;
+}
+
+.reserve-list-table tr:first-child th:first-child{
+	border-top-left-radius: 10px;
+}
+
+.reserve-list-table tr:first-child th:last-child {
+	border-top-right-radius: 10px;
+}
+
+.reserve-list-table tr:last-child td:first-child{
+	border-bottom-left-radius: 10px;
+}
+
+.reserve-list-table tr:last-child td:last-child {
+	border-bottom-right-radius: 10px;
+}
+
+.reserve-list-table .reservaeDate{
+	width: 150px;
+	text-align: center;
+}
+
+.reserve-list-table .reserveTCount{
+	width:100px;
+	text-align: center;
+}
+
+.reserve-list-table .reserveIName{
+	width:100px;
+	text-align: center;
+}
+
+.reserve-list-table tr{
+	height: 30px;
+	
+}
+
+.reserve-list-table tr td{
+	text-align: center;
+}
+
+
+#myMap{
+	width:740px;
+	border:1px solid #93ccff;
+	border-radius: 15px;
+	padding:15px;
+	margin-top:20px;
+	
+	background: #eef7ff;
+}
+
+
+#myMap h4{
+	font-size:15pt;
+	font-weight:bolder;
+	color:#57afff;
+}

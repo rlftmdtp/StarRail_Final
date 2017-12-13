@@ -55,10 +55,12 @@ $(function(){
 			
 		})
 		
-	})
+	});
 	
 	
 	$('#searchtrain tbody').on('click', '.choiceseat', function(){
+		var first=$("#option1").val();
+	
 		$.ajax({
 			type:'post',
 			url:'/starrail/reservation/seats',
@@ -71,28 +73,26 @@ $(function(){
 				$('div.trainSeat .second').empty();
 				$('div.trainSeat .third').empty();
 				$('div.trainSeat .forth').empty();
-				
-				$.each(result,function(key,value){
-					if(key%4==0){
-						$('div.trainSeat .first').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
-					}
-					if(key%4==1){
-						$('div.trainSeat .second').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
-					}
-					if(key%4==2){
-						$('div.trainSeat .third').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
-					}
-					if(key%4==3){
-						$('div.trainSeat .forth').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
-					}
+					$.each(result,function(key,value){
+						if(key%4==0){
+							$('div.trainSeat .first').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
+						}
+						if(key%4==1){
+							$('div.trainSeat .second').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
+						}
+						if(key%4==2){
+							$('div.trainSeat .third').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
+						}
+						if(key%4==3){
+							$('div.trainSeat .forth').append('<div class = "eachseat able" seatID="'+value.seat_id+'">'+value.seat_num+'</div>');
+						}
+						
+						
 					
-					
-				
-					/*$('div.trainSeat').append(value.train_type + ' / ' + value.seat_id + ' / ' +value.seat_num + ' / ' + value.train_count + ' / ' + '<br/>')
-					*/
-				})
-				
-			}
+						/*$('div.trainSeat').append(value.train_type + ' / ' + value.seat_id + ' / ' +value.seat_num + ' / ' + value.train_count + ' / ' + '<br/>')
+						*/
+					})
+				}
 			
 		})
 		
@@ -102,16 +102,13 @@ $(function(){
 	
 	
 	$('div.trainSeat').on('click','.eachseat', function(){
-		alert($(this).attr("seatID"));
 		var thisSeat = $(this);
 		alert( "선택하신 좌석은 " + $(this).text() + "입니다.");
 		if(thisSeat.hasClass("able")){
-			alert( "jdasdsaf  "+thisSeat.hasClass("able"));
 			$(this).removeClass("able");
 			$(this).addClass("eachseat");
 			$(this).addClass("currentSelect");
-//			thisSeat.addClass('currentSelect');
-			$(this).css("background-image","url(/starrail/resoures/images/reservation/choseat.png)");
+			$(this).css("background-image","url(/starrail/resources/images/reservation/choseat.png)");
 			
 		}
 		
@@ -130,3 +127,18 @@ $(function(){
 
 });
 
+/*발권역 알림*/
+function choiceStation(){
+	var x = document.getElementById("sselectbox");
+	alert('선택하신 발권역은 │'+ x.options[x.selectedIndex].value+'역│입니다 :)');
+}
+
+/*요일에 따른 가격 확인*/
+$(".btn-warning").on('click', function(){
+	alert('선택하신 요일의 티켓 가격은 ' + $("#option99").attr('data-rno')+'입니다.');
+	$("#res_price").attr("value",$("#option99").attr('data-rno'));
+});
+$(".btn-danger").on('click', function(){
+	alert('선택하신 요일의 티켓 가격은 ' + $("#option88").attr('data-rno')+'입니다.');
+	$("#res_price").attr("value",$("#option88").attr('data-rno'));
+});

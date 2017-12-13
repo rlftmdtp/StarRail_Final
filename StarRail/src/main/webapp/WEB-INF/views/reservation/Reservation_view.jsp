@@ -233,6 +233,7 @@ input[type=text] {
 						<button type="button" class="btn btn-primary btn-lg">취소</button>
 							<div class="or or-lg"></div>
 							<button type="submit" class="btn btn-success btn-lg">저장</button>
+							
 							</div>
 						</div>
 		<br>
@@ -280,17 +281,17 @@ input[type=text] {
 									<span class="glyphicon glyphicon-ok"></span>
 								</label>
 			
-								<label class="btn btn-warning">
+								<label class="btn btn-primary">
 									<input type="radio" name="train_type" id="option2" autocomplete="off">2호차
 									<span class="glyphicon glyphicon-ok"></span>
 								</label>
 
-								<label class="btn btn-primary">
+								<label class="btn btn-info">
 									<input type="radio" name="train_type" id="option3" autocomplete="off">3호차
 									<span class="glyphicon glyphicon-ok"></span>
 								</label>
 		
-								<label class="btn btn-info">
+								<label class="btn btn-warning">
 									<input type="radio" name="train_type" id="option4" autocomplete="off">4호차
 									<span class="glyphicon glyphicon-ok"></span>
 								</label>
@@ -335,8 +336,10 @@ input[type=text] {
                 
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 취소</button>
-                        <button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> 저장</button>
+                   		 <button type="button" class="btn btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
+                        <button type="submit" class="btn btn-info btn-circle btn-lg" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i></button>
+                        
+                        
                     </div>
                 </div>
  

@@ -4,7 +4,7 @@ public class PaymentVO {
 
 	private int pay_no;
 	private int res_no;
-	private int pay_price;
+	private String pay_price;
 	private String pay_bank;
 	private String pay_cardnum;
 	private String pay_cardpw;
@@ -24,10 +24,11 @@ public class PaymentVO {
 	public void setRes_no(int res_no) {
 		this.res_no = res_no;
 	}
-	public int getPay_price() {
+
+	public String getPay_price() {
 		return pay_price;
 	}
-	public void setPay_price(int pay_price) {
+	public void setPay_price(String pay_price) {
 		this.pay_price = pay_price;
 	}
 	public String getPay_bank() {
@@ -66,6 +67,12 @@ public class PaymentVO {
 	}
 	public void setPay_yy(int pay_yy) {
 		this.pay_yy = pay_yy;
+	}
+	@Override
+	public String toString() {
+		return "PaymentVO [pay_no=" + pay_no + ", res_no=" + res_no + ", pay_price=" + pay_price + ", pay_bank="
+				+ pay_bank + ", pay_cardnum=" + pay_cardnum + ", pay_cardpw=" + pay_cardpw + ", pay_cvc=" + pay_cvc
+				+ ", pay_mm=" + pay_mm + ", pay_yy=" + pay_yy + "]";
 	}
 	
 	

@@ -5,16 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/starrail/resources/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
 	href="/starrail/resources/css/main/header_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="/starrail/resources/css/reservation/reservation.css">
+	href="/starrail/resources/css/payment/payment.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <title>StarRail 결제</title>
 </head>
@@ -43,14 +43,14 @@
                     </div>                    
                 </div>
                 <div class="panel-body">
-                    <form id="payment-form" action="payment_insert" method="post" >
+                    <form id="payment-form" action="/starrail/payment/payment_insert" method="post" >
                        <input type="hidden" name="res_no" value="${res_no}">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="cardNumber">카드번호</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="pay_cardnum" placeholder="Valid Card Number" >
+                                      <input type="text" class="form-control" name="pay_cardnum" placeholder="Valid Card Number" > 
                                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                         
                                     </div>
@@ -61,13 +61,13 @@
                              <div class="col-xs-5 col-md-5 pull-right">
                                 <div class="form-group">
                                     <label for="cardMM">MM</label>
-                                    <input type="text" class="form-control" name="pay_mm" placeholder="MM"  />
+                                    <input type="text" class="form-control" name="pay_mm" placeholder="MM" value="" />
                                 </div>
                             </div>
                              <div class="col-xs-5 col-md-5 pull-right">
                                 <div class="form-group">
                                     <label for="cardYY">YY</label>
-                                    <input type="text" class="form-control" name="pay_yy" placeholder="YY"  />
+                                    <input type="text" class="form-control" name="pay_yy" placeholder="YY"   />
                                 </div>
                             </div>
                             <div class="col-xs-5 col-md-5 pull-right">
@@ -88,7 +88,7 @@
                                    		<option value="국민">국민</option>
                                    		<option value="카카오">카카오</option>
                                    		<option value="농협">농협</option>
-                                   	</select>
+                                   	</select> 
                                 </div>
                             </div>                        
                         </div>
@@ -97,7 +97,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="couponCode">비밀번호</label>
-                                    <input type="text" class="form-control" name="pay_cardpw" />
+                                   <input type="text" class="form-control" name="pay_cardpw" />
                                 </div>
                             </div>                        
                         </div>
@@ -105,7 +105,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="couponCode">결제가격</label>
-                                    <input type="text" class="form-control" name="pay_price" value="${res_price}" readonly="readonly" >
+                                     <input type="text" class="form-control" name="pay_price" value="${res_price}" readonly="readonly" >
                                     
                                 </div>
                             </div>                        

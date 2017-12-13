@@ -30,12 +30,18 @@ public class PaymentController {
 		model.addAttribute("res_price",res_price);
 	}
 	
-	@RequestMapping(value="payment_insert", method=RequestMethod.POST)
-	public String registerPOST(PaymentVO payment)throws Exception{
+	@RequestMapping(value="/payment_insert", method=RequestMethod.POST)
+	public String registerPOST(PaymentVO vo){
 		System.out.println("paymenPost success...");
-		service.regist(payment);
+		System.out.println(vo.toString());
+		try {
+			service.regist(vo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return "redirect:/starrail/payment/payment_success";
+		return "redirect:/payment/payment_success";
 	}
 	
 	@RequestMapping(value="/payment_success",method=RequestMethod.GET)

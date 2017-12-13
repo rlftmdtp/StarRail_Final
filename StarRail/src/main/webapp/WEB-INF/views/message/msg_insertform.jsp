@@ -20,15 +20,15 @@
 		<div class="col-md-5">
 			
 			<div class="form-area">
-			<div class="logo" style="margin-left: 130px;" >
-				<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 90px; ">
+			<div class="logo" style="margin-left: 110px;" >
+				<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 70px; ">
 			</div>
 				<form action="msg_insertform" method="POST">
 					<input type='hidden' value=${m_id } name="msg_sendid"> 
 					<br style="clear: both">
 					<h3 style="margin-top:-20px;  margin-bottom: 20px; text-align: center;">Message</h3>
 				
-				<div class="message_form">
+				<div class="message_form" style="margin-left: 15px;">
 					<div class="form-group"> 
 					 	<input type="text" class="form-control" name="m_id" 
 							value="${msg_sendid }" placeholder="받는 사람" size="35px" required>

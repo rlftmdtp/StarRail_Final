@@ -18,6 +18,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	@Override	//쪽지보내기
 	public void insertMessage(MessageVO message) throws Exception {
+		System.out.println("라ㅏ라라");
 		session.insert(namespace +".insertMessage", message); 
 	}
 

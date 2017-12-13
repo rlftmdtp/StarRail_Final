@@ -117,7 +117,7 @@ $(function() {
 		var chartSort = $(this).parent().attr('id'); // 어떤 종류의 차트인가
 		var contentid = this.getAttribute("id");
 		var markerNumber = $(this).attr('data-markerFoodList');
-		alert("markerNumber " + markerNumber);
+		//alert("markerNumber " + markerNumber);
 
 		switch (chartSort) {
 		case 'foodTable':
@@ -227,7 +227,7 @@ $(function() {
 	$('#saveButtons').on('click','#saveButton',function(){
 		var number = $(this).attr('data-number');
 		var sort = $(this).attr('data-sort');
-		alert("데이터베이스에 위치를 저장시키는 함수 발동 ! number " +number+ " sort " + sort );
+		//alert("데이터베이스에 위치를 저장시키는 함수 발동 ! number " +number+ " sort " + sort );
 		savelocation(number,sort);
 	})
 
@@ -412,7 +412,7 @@ $(function() {
 				.getJSON(
 						"/starrail/maprest/staydetail/" + contentid,
 						function(data) {
-							alert("숙소 디테일 정보가 들어왔습니다");
+							//alert("숙소 디테일 정보가 들어왔습니다");
 
 							$(data.stayDetailVO)
 									.each(
@@ -520,7 +520,7 @@ $(function() {
 				.getJSON(
 						"/starrail/maprest/tourdetail/" + contentid,
 						function(data) {
-							alert("관광지 디테일 정보가 들어왔습니다");
+							//alert("관광지 디테일 정보가 들어왔습니다");
 
 							$(data.tourDetailVO).each(
 									function(number) {
@@ -813,11 +813,11 @@ $(function() {
 	            }),
 	            success : function(result){
 	               if (result == 'SUCCESS'){
-	                  alert("등록 되었습니다.");
+	                  //alert("등록 되었습니다.");
 	               }
 	            },
 	            error:function(){
-	            	alert("이미 저장되어 있는 장소입니다");
+	            	//alert("이미 저장되어 있는 장소입니다");
 	            }
 	         });
 			break;
@@ -844,11 +844,11 @@ $(function() {
 	            }),
 	            success : function(result){
 	               if (result == 'SUCCESS'){
-	                  alert("등록 되었습니다.");
+	                  //alert("등록 되었습니다.");
 	               }
 	            },
 	            error:function(){
-	            	alert("이미 저장되어 있는 장소입니다");
+	            	//alert("이미 저장되어 있는 장소입니다");
 	            }
 	         });
 			break;
@@ -875,11 +875,11 @@ $(function() {
 	            }),
 	            success : function(result){
 	               if (result == 'SUCCESS'){
-	                  alert("등록 되었습니다.");
+	                  //alert("등록 되었습니다.");
 	               }
 	            },
 	            error:function(){
-	            	alert("이미 저장되어 있는 장소입니다");
+	            	//alert("이미 저장되어 있는 장소입니다");
 	            }
 	         });
 			break;

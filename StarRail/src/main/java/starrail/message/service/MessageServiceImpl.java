@@ -18,12 +18,14 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override	//쪽지 보내기 + 쪽지 글번호+1
 	public void regist(MessageVO message) throws Exception {
-		int msg_no = dao.selectMsg_no();
 		
-		if(msg_no != 0){
+		if(dao.selectMsg_no() != null){
 			message.setMsg_no(dao.selectMsg_no()+1);
+		}else{
+			message.setMsg_no(1);
 		}
 		
+		System.out.println("???");
 		dao.insertMessage(message);
 	}
 

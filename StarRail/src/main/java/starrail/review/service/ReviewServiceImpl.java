@@ -266,7 +266,7 @@ public class ReviewServiceImpl implements ReviewService {
 				// 현재 item ID -> id는 오류를 방지하기 위해 long타입 사용
 				long m_No = m_no;
 					
-				// 현재 item아이디와 가장 유사한 5개의 아이템 추천
+				// 현재 item아이디와 가장 유사한 8개의 아이템 추천
 				List<RecommendedItem> recommendations = recommender.mostSimilarItems(m_No, 8);
 					
 				// 유사한 아이템 출력 = '현재 아이템ID | 추천된 아이템ID | 유사도' ==> 유사도가 1에 가까울수록 추천순위가 높은것임
@@ -383,7 +383,7 @@ public class ReviewServiceImpl implements ReviewService {
 				// 데이터 모델 생성
 				DataModel dm = new FileDataModel(new File("C:\\data\\member_prefer.csv"));
 				
-				// 유사도 모델 : ItemSimilarity 사용
+				// 유사도 모델 : LogLikelihoodSimilarity 사용
 				UserSimilarity sim = new LogLikelihoodSimilarity(dm);
 				
 				UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, sim, dm);
@@ -398,12 +398,11 @@ public class ReviewServiceImpl implements ReviewService {
 				// 현재 item ID -> id는 오류를 방지하기 위해 long타입 사용
 				long m_No = m_no;
 					
-				// 현재 item아이디와 가장 유사한 5개의 아이템 추천
+				// 현재 item아이디와 가장 유사한 4개의 아이템 추천
 				List<RecommendedItem> recommendations = recommender.recommend(m_No, 4);
 					
 				// 유사한 아이템 출력 = '현재 아이템ID | 추천된 아이템ID | 유사도' ==> 유사도가 1에 가까울수록 추천순위가 높은것임
 				for (RecommendedItem recommendation : recommendations) {
-					//System.out.println("피어슨 추천 결과 : " + m_No + "," + recommendation.getItemID());
 					list.add((int) recommendation.getItemID());
 				}
 				System.out.println(list);

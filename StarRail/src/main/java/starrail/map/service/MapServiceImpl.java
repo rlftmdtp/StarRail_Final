@@ -77,7 +77,7 @@ public class MapServiceImpl implements MapService {
 	public List<FestivalVO> festival(String areaCode, String pageNo, String date) throws Exception {
 		
 		// String => Date형 변환
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
 		Date tempDate = dateFormat.parse(date);
 		System.out.println("Date형 날짜" + tempDate);
 		

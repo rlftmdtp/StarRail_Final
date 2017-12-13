@@ -27,7 +27,7 @@
 
 	<section class="box-position">
 	<div class="logo" style="margin-left: 130px;" >
-		<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 100px; ">
+		<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 80px; ">
 	</div>
 		<div class="  col-xs-12 col-md-3 col-sm-4 pull-right">
 
@@ -56,14 +56,14 @@
 								</th>
 							</tr>
 							<tr class="form-group">
-								<td colspan="2" class="form-control" id="msg_content" style="width: 380px;">
+								<td colspan="2" class="form-control" id="msg_content" style="width: 300px;">
 									${messageVO.msg_content }
 								</td>
 							</tr>
 
 							<tr class="form-group">
 								<td colspan="2">
-								<input type = "submit" id="submit" class="form-control" style="width: 380px;" value="확인">
+								<input type = "submit" id="submit" class="form-control" style="width: 300px;" value="확인">
 								</td>
 							</tr>
 

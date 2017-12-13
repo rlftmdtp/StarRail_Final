@@ -35,14 +35,13 @@ public class MessageController {
 		HttpSession session = request.getSession();
 		
 		try {
+			//보내는 사람이 존재할 경우
 			if(((UserVO) session.getAttribute("login")) != null){
 				UserVO user =  (UserVO) session.getAttribute("login");		
 				if(msg_sendid!=null){
-					System.out.println("보내는사람 있어");
 					model.addAttribute("m_id", user.getM_id());
 					model.addAttribute("msg_sendid", msg_sendid);
-				}else{
-					System.out.println("null이야");
+				}else{	//보내는 사람이 존재하지 않을 경우
 					model.addAttribute("m_id", user.getM_id());
 					model.addAttribute("msg_sendid", "");
 				}

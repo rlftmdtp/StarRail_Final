@@ -156,6 +156,11 @@ public class ReviewDaoImpl implements ReviewDao{
 	public Integer select_hs_no() throws Exception {
 		return session.selectOne(namespace+".select_hs_no");
 	}
+	
+	@Override
+	public List<FileVO> file(int r_no) throws Exception {
+		return session.selectList(namespace+".file", r_no);
+	}		
 
 	//-------------------------------------------------------------------------------------------------------------
 
@@ -221,6 +226,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	public List<ReviewVO> list_userBased(List<Integer> r_noList) {
 		return session.selectList(namespace+".userBasedRecommend_Select", r_noList);
 	}
+
 	
 	// 추천 끝
 

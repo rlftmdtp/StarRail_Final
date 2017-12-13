@@ -80,7 +80,7 @@
      			<input type="text" id="r_title" class="floatLabel" name="r_title">
     		</div>
    
-    		<textarea rows="10" cols="138" name="r_content" id="hashSearchForm"></textarea>
+    		<textarea rows="10" cols="123" name="r_content" id="hashSearchForm"></textarea>
   		</div>
   
  		<div class="form-group" style="margin-top: 10px;">
@@ -88,10 +88,9 @@
     			<div class="panel-body">
     			<div class="fileDrop"></div>
     			<div class="box-footer">
-									<ul class="mailbox-attachments clearfix uploadedList"></ul>
-									
-								</div>
-				 	<div class="input-group image-preview" style="margin-left: 350px;">
+					<ul class="mailbox-attachments clearfix uploadedList"></ul>
+				</div>
+				 	<div class="input-group image-preview" style="margin-left: 220px;">
 									
 						<!-- don't give a name === doesn't send on POST/GET  -->
 						<span class="input-group-btn"> 
@@ -130,7 +129,7 @@
 
 				</div>
 				<button class="btn btn-primary" style="font-size:20px; 
-					background-color: #f39818; border-color: #f39818; margin-left: 580px; margin-top: -20px;">Submit</button>
+					background-color: #f39818; border-color: #f39818; margin-left:450px; margin-top: -20px;">Submit</button>
   </div>	
   
   
@@ -170,8 +169,6 @@
 
 <script id="template" type="text/x-handlebars-template">
 
-         
-<li>
 <form class='form-horizontal well' action='#' style='margin-top : 10px;'>
 	
 		<div class='row'>
@@ -186,7 +183,7 @@
 		</div>
 	
 </form>
-</li>  
+
 </script>
 
 <script>
@@ -200,13 +197,9 @@
 		event.preventDefault();
 
 		var files = event.originalEvent.dataTransfer.files;
-
 		var file = files[0];
-
 		var formData = new FormData();
-
 		formData.append("file", file);
-
 		$.ajax({
 			url : '/starrail/review/uploadAjax',
 			data : formData,
@@ -215,9 +208,7 @@
 			contentType : false,
 			type : 'POST',
 			success : function(data) {
-
 				var fileInfo = getFileInfo(data);
-
 				var html = template(fileInfo);
 				$(".uploadedList").append(html);
 			}
@@ -255,7 +246,6 @@
 				$("#hashSearchForm").autocomplete({
 					source : autocomplete_text 
 			});
-		
-	});
+		});
 </script>
 

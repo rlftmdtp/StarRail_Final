@@ -13,6 +13,12 @@
 	margin: 0 auto;
 }
 
+.ui-autocomplete ui-front{
+	background-color: red;
+}
+
+
+
 //부트스트랩
 
 <style class="cp-pen-styles">html, body, div, span, applet, object, iframe,

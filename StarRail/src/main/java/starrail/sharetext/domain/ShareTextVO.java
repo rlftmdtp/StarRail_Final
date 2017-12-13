@@ -3,8 +3,8 @@ package starrail.sharetext.domain;
 import java.sql.Timestamp;
 
 public class ShareTextVO {
-	private int sh_no;
-	private int c_id;
+	private Integer sh_no;
+	private Integer c_id;
 	private String m_id;
 	private String sh_subject;
 	private String sh_title;
@@ -13,10 +13,11 @@ public class ShareTextVO {
 	private Timestamp sh_date;
 	private int sh_hit;
 	private String sh_shareok;
+	private int replycnt;
 	
 	public ShareTextVO(){}
 
-	public ShareTextVO(int sh_no, int c_id, String m_id, String sh_subject, String sh_title, String sh_content,
+	public ShareTextVO(Integer sh_no, Integer c_id, String m_id, String sh_subject, String sh_title, String sh_content,
 			String sh_pw, Timestamp sh_date, int sh_hit, String sh_shareok) {
 		super();
 		this.sh_no = sh_no;
@@ -31,11 +32,20 @@ public class ShareTextVO {
 		this.sh_shareok = sh_shareok;
 	}
 
+	
+	public int getReplycnt() {
+		return replycnt;
+	}
+
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
+
 	public int getSh_no() {
 		return sh_no;
 	}
 
-	public void setSh_no(int sh_no) {
+	public void setSh_no(Integer sh_no) {
 		this.sh_no = sh_no;
 	}
 
@@ -43,7 +53,7 @@ public class ShareTextVO {
 		return c_id;
 	}
 
-	public void setC_id(int c_id) {
+	public void setC_id(Integer c_id) {
 		this.c_id = c_id;
 	}
 
@@ -115,7 +125,9 @@ public class ShareTextVO {
 	public String toString() {
 		return "ShareTextVO [sh_no=" + sh_no + ", c_id=" + c_id + ", m_id=" + m_id + ", sh_subject=" + sh_subject
 				+ ", sh_title=" + sh_title + ", sh_content=" + sh_content + ", sh_pw=" + sh_pw + ", sh_date=" + sh_date
-				+ ", sh_hit=" + sh_hit + ", sh_shareok=" + sh_shareok + "]";
-	}	
+				+ ", sh_hit=" + sh_hit + ", sh_shareok=" + sh_shareok + ", replycnt=" + replycnt + "]";
+	}
+
+
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import starrail.course.domain.CourseDetailVO;
 import starrail.course.domain.CourseVO;
 import starrail.course.domain.IssueInfoVO;
+import starrail.course.domain.StationCoorVO;
 
 public interface CourseDAO {
 	
@@ -21,4 +22,6 @@ public interface CourseDAO {
 
 	public void courseUpdate(CourseVO c) throws Exception;
 	public void courseDetailDelete(Integer c_id) throws Exception;
+	
+	public StationCoorVO getCoordinate(String stc_name) throws Exception;
 }

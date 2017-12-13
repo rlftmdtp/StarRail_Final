@@ -1,6 +1,8 @@
 package starrail.message.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import starrail.main.domain.UserVO;
 import starrail.message.domain.MessageVO;
-import starrail.message.persistence.MessageDAO;
 import starrail.message.service.MessageService;
 
 @Controller
@@ -22,22 +25,40 @@ public class MessageController {
 
 	@Inject
 	public MessageService service;
-	public MessageDAO dao;
 
-	@RequestMapping(value = "/start", method = RequestMethod.GET)
-	public void startGET() {
-		//희정이 동반자 찾기 버튼 
-	}
 
 	@RequestMapping(value = "/msg_insertform", method = RequestMethod.GET)
-	public void msg_insertGET(MessageVO message) throws Exception {
-		//쪽지보내기 버튼누르면 쪽지창 뜸
+	public void msg_insertPartnerGET(MessageVO message,@RequestParam("msg_sendid") String msg_sendid, 
+			Model model, HttpServletRequest request) throws Exception {
+		//희정 동반자
+		
+		HttpSession session = request.getSession();
+		
+		try {
+			//보내는 사람이 존재할 경우
+			if(((UserVO) session.getAttribute("login")) != null){
+				UserVO user =  (UserVO) session.getAttribute("login");		
+				if(msg_sendid!=null){
+					model.addAttribute("m_id", user.getM_id());
+					model.addAttribute("msg_sendid", msg_sendid);
+				}else{	//보내는 사람이 존재하지 않을 경우
+					model.addAttribute("m_id", user.getM_id());
+					model.addAttribute("msg_sendid", "");
+				}
+				
+			}else{
+				model.addAttribute("m_id", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 
-
 	@RequestMapping(value = "/msg_insertform", method = RequestMethod.POST)
 	public void msg_insertformPOST(MessageVO message) throws Exception {
+		System.out.println("여기는 오니?");
+		System.out.println(message);
 		//보내기 누르면 쪽지가 상대방에게 보내진다!
 		service.regist(message);
 	}
@@ -57,16 +78,29 @@ public class MessageController {
 	
 
 	@RequestMapping(value = "/msg_list", method = RequestMethod.GET)
-	public ModelAndView msg_listGET(Model model, MessageVO messageVO) throws Exception {
+	public ModelAndView msg_listGET(Model model, MessageVO messageVO, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
 		//로그인한 아이디의 받은 쪽지를 가져온다
 		ModelAndView mav = new ModelAndView();
-		messageVO.setM_id("dlwotmd");
 		
-		//msg_list로 아래의 3가지를 가지고 가겠다.
-		mav.setViewName("/message/msg_list");
-		mav.addObject("m_id", "dlwotmd");
-		mav.addObject("updatenum", service.update_hit(messageVO.getM_id()));
-		mav.addObject("list", service.messageList(messageVO.getM_id()));
+		try {
+			if(((UserVO) session.getAttribute("login")) != null){
+				UserVO user =  (UserVO) session.getAttribute("login");		
+				mav.setViewName("/message/msg_list");
+				mav.addObject("m_name", user.getM_name());
+				mav.addObject("m_id", user.getM_id());
+				mav.addObject("updatenum", service.update_hit( user.getM_id()));
+				mav.addObject("list", service.messageList( user.getM_id()));
+			}else{
+				model.addAttribute("hashSearchVO", null);
+				model.addAttribute("m_name", "?");
+				model.addAttribute("m_id", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return mav;
 	}
 	
@@ -103,14 +137,29 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value = "/msg_sendmail", method = RequestMethod.GET)
-	public ModelAndView msg_sendmailGET(Model model, MessageVO messageVO) throws Exception {
-		//로그인한 아이디가 다른 사람에게 보낸 쪽지
+	public ModelAndView msg_sendmailGET(Model model, MessageVO messageVO, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+
+		//로그인한 아이디의 받은 쪽지를 가져온다
 		ModelAndView mav = new ModelAndView();
-		messageVO.setM_id("dlwotmd");
-		mav.setViewName("/message/msg_sendmail");
-		mav.addObject("m_id", "dlwotmd");
-		mav.addObject("updatenum", service.update_hit(messageVO.getM_id()));
-		mav.addObject("list", service.sendemail(messageVO.getM_id()));
+		
+		try {
+			if(((UserVO) session.getAttribute("login")) != null){
+				UserVO user =  (UserVO) session.getAttribute("login");		
+				mav.setViewName("/message/msg_sendmail");
+				mav.addObject("m_name", user.getM_name());
+				mav.addObject("m_id", user.getM_id());
+				mav.addObject("updatenum", service.update_hit( user.getM_id()));
+				mav.addObject("list", service.sendemail( user.getM_id()));
+			}else{
+				model.addAttribute("hashSearchVO", null);
+				model.addAttribute("m_name", "?");
+				model.addAttribute("m_id", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 		return mav;
 	}
 	

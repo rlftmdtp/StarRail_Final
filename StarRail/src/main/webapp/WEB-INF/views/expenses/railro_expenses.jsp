@@ -338,19 +338,16 @@
 			data : obj.m_id,
 			dataType : "json",
 			success : function(data) {
-
-				 
 				var c_name = "";
 				var c_id =0;
 				 //map에서 꺼내기 위한 each문 두번
 				$.each(data, function(index, item) {
-					$('#thumbnail').append("<div class='col-md-4'><img src='/starrail/resources/images/expenses/slide6.jpg' class='img-responsive img-radio'/>"
-							+ "<button type='button' style='background-color: #FF8224; border-color: #FF8224;' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
+					alert(item)
+					$('#thumbnail').append("<div class='col-md-4'><img src ='" + item["c_filename"]
+							+ "' class='img-responsive img-radio'> <button type='button' style='background-color: #FF8224; border-color: #FF8224;' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
 							+ item["c_name"]
 							+ "</button></div>");
 				}); 
-
-				
 			}
 		});
 	}
@@ -362,7 +359,6 @@
  $(function() {
 
 		var tripLong = document.getElementsByName("tripLong"); // 체크박스 전용 변수
- 
  			$('#datepicker_expense').datepicker({
 			onSelect : function(StartDate) {
 				$('#datepicker_expense').empty(); //출발역 목록 비우기
@@ -370,7 +366,6 @@
 				tripDateStart = new Date(StartDate);
 				$('input[name="tripLong"]').removeAttr('disabled');
 				$('input[name="tripLong"]').prop('checked', false);
-
 			},
 			autoclose: true,
 			format: "yyyy-mm-dd",
@@ -379,7 +374,6 @@
 		 		
 		$('.tripLong').click(function() {
 							var tripDateStart = new Date();
-
 							var strArr = $('#datepicker_expense').val().split('-');
 							/* 날짜계산을 년월일 같이 set해주게되면 12월로 안넘어간다 따로 해주어야함 */
 							tripDateStart.setMonth(Number(strArr[1]) - 1);
@@ -387,7 +381,6 @@
 							tripDateStart.setDate(strArr[2]);
 
 							var endDate = new Date();
-
 							endDate.setMonth(Number(strArr[1]) - 1);
 							endDate.setFullYear(strArr[0]);
 							endDate.setDate(tripDateStart.getDate() + Number($(this).val()) - 1);
@@ -396,7 +389,6 @@
 							var interval = endDate.getTime() - tripDateStart.getTime();
 							interval = Math.floor(interval / (1000 * 60 * 60 * 24));
 							interval.toString();
-
 							alert(interval.toString());
 
 							$('#endDate').attr("value", (endDate.getFullYear() + '-'
@@ -407,7 +399,6 @@
 							$('.dayButton').empty();
 							$('#tabnavi').empty();
 							for (var i = 0; i <= parseInt(interval); i++) {
-
 								$('.dayButton').append('<input type="button" style="background-color: #FF8224; border-color: #FF8224" value='
 														+ (i + 1)
 														+ '일차  class="ed_date btn btn-primary" id="'
@@ -438,14 +429,10 @@ var thumbnailBtn;
 
 $('#thumbnail').on('click','#thumbnailBtn' ,function(){
 	thumbnailBtn = $(this).attr('data');
-	
 })
 
 	$('#submit1').on('click', function(){
-	
-		alert("등록합니다");
 		$.ajax({
-
 					url : '/starrail/expenses/railro_expenses',
 					type : 'POST',
 					headers : {
@@ -586,27 +573,22 @@ $('#thumbnail').on('click','#thumbnailBtn' ,function(){
 		    google.charts.setOnLoadCallback(drawChart);
 		      var title = new Array();
 		      title =  [['Task', 'Hours per Day']];
-		      
+
 		      $.each(data, function(index, item) {
 		      var keys = Object.keys(item);
 		      	for(var i in keys){
 		    		title.push([keys[i],item[keys[i]]]);
 		    	  }	      
-		    	  
 		      });
 		      function drawChart() {
-
 		        var data = google.visualization.arrayToDataTable(
 		        		title
-
 		        );
 
 		        var options = {
 		          title: 'My Expense'
 		        };
-
 		        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
 		        chart.draw(data, options);
 		      }
 		}

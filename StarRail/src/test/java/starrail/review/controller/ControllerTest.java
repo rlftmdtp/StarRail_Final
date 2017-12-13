@@ -1,10 +1,6 @@
 package starrail.review.controller;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import javax.inject.Inject;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,12 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
+import starrail.message.persistence.MessageDAO;
 import starrail.review.controller.ControllerTest;
-import starrail.review.domain.ReviewVO;
 import starrail.review.persistence.ReviewDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,6 +24,7 @@ private static final Logger logger = LoggerFactory.getLogger(ControllerTest.clas
 	
 	@Inject
 	private WebApplicationContext wac;
+	private MessageDAO msgdao;
 	private ReviewDao dao;
 	private MockMvc mockMvc;
 	
@@ -40,19 +35,15 @@ private static final Logger logger = LoggerFactory.getLogger(ControllerTest.clas
 	}
 	
 		@Test
-	    public void testInsertReview() throws Exception{
-			Date date = new Date();
-
-		    Timestamp timestamp = new Timestamp(date.getTime());
-	        ReviewVO review = new ReviewVO();
-	        review.setR_no(88);
-	        review.setM_id("rlftmdtp");
-	        review.setR_title("�̾� �����̴�!!!!!");
-	        review.setR_content("����������������");
-	        review.setR_date(timestamp);
-	        review.setR_hit(0);
-	       
-
-	        dao.insertReview(review);
+	    public void testInsertMessage() throws Exception{
+/*			MessageVO message = new MessageVO();
+			message.setMsg_no(80);
+			message.setM_id("rlftmdtp");
+			message.setMsg_sendid("thf147");
+			message.setMsg_content("ㅋㅋㅋㅋㅋ응안녕");
+			message.getMsg_date();
+			message.setMsg_hit(0);
+			
+			msgdao.insertMessage(message);*/
 	    }
 }

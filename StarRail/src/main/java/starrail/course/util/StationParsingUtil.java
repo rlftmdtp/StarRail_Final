@@ -4,8 +4,10 @@ import java.io.BufferedInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import org.codehaus.jackson.map.util.Comparators;
 import org.springframework.stereotype.Component;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -27,9 +29,11 @@ public class StationParsingUtil {
 		BufferedInputStream bis = new BufferedInputStream(url.openStream());
 		xpp.setInput(bis, "utf-8");
 		
-		String tag = null;
+		
 		int eventType = xpp.getEventType();
+		
 		ArrayList<String> list = new ArrayList<String>();
+		String tag = null;
 		String str = null;
 		
 		while(eventType != XmlPullParser.END_DOCUMENT){
@@ -107,7 +111,14 @@ public class StationParsingUtil {
 	public List<StationVO> arrStationList(String depNode, String depDate, List<StationVO> allNodes) throws Exception{	//선택 가능한 도착역 불러오기
 		
 		String depPlaceId="&depPlaceId="+depNode;	//출발역ID
-		String depPlandTime="&depPlandTime="+depDate.replaceAll("/","");	//출발일 (n일차 버튼 value)
+		
+		String[] arrDepDate=depDate.split("/");
+		
+		if(arrDepDate[1].length()<2){arrDepDate[1] = "0"+arrDepDate[1];}	//1~9월이면 앞에 0 추가
+		if(arrDepDate[2].length()<2){arrDepDate[2] = "0"+arrDepDate[2];}	//1~9일이면 앞에 0 추가
+		
+		String depPlandTime="&depPlandTime="+arrDepDate[0]+arrDepDate[1]+arrDepDate[2];	//출발일 (n일차 버튼 value)
+		
 		List<StationVO> arrPlaceIds= allNodes;	//도착역ID (위 리스트 몽땅 넣어줘야 함!)		
 		
 		String xmlOrg = "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getStrtpntAlocFndTrainInfo?serviceKey=TGcClofLdZE%2B0HSLqvPVVLrixz8HFOrgUW2yZUuIASicA0%2BIDXMxYLiT3MCirXZQ2xG%2Bfedyb38VIDSGlB3yzQ%3D%3D&numOfRows=200"
@@ -172,7 +183,14 @@ public class StationParsingUtil {
 	public List<TrainTimeVO> getTimeTable(String depNode, String depDate, String arrNode, int selectedTime) throws Exception{
 		
 		String depPlaceId="&depPlaceId="+depNode;	//출발역ID
-		String depPlandTime="&depPlandTime="+depDate.replaceAll("/","");	//출발일 (n일차 버튼 value)
+
+		String[] arrDepDate=depDate.split("/");
+		
+		if(arrDepDate[1].length()<2){arrDepDate[1] = "0"+arrDepDate[1];}	//1~9월이면 앞에 0 추가
+		if(arrDepDate[2].length()<2){arrDepDate[2] = "0"+arrDepDate[2];}	//1~9일이면 앞에 0 추가
+		
+		String depPlandTime="&depPlandTime="+arrDepDate[0]+arrDepDate[1]+arrDepDate[2];	//출발일 (n일차 버튼 value)
+		
 		String arrPlaceId="&arrPlaceId="+arrNode;	//도착역ID
 		
 		String hopingTime = "";
@@ -216,8 +234,8 @@ public class StationParsingUtil {
 				tag = xpp.getName();
 				if(tag.equals("item")){
 					if(trainType.equals("무궁화호") || trainType.equals("새마을호") || trainType.equals("누리로")){
-						if(Long.parseLong(depDate.replaceAll("/","")+hopingTime)-20000 <= Long.parseLong(depTime)
-								&&Long.parseLong(depTime)<=Long.parseLong(depDate.replaceAll("/","")+hopingTime)+20000){	//int의 범위를 벗어나는 숫자이므로 long으로 파싱
+						if(Long.parseLong(arrDepDate[0]+arrDepDate[1]+arrDepDate[2]+hopingTime)-20000 <= Long.parseLong(depTime)
+								&&Long.parseLong(depTime)<=Long.parseLong(arrDepDate[0]+arrDepDate[1]+arrDepDate[2]+hopingTime)+20000){	//int의 범위를 벗어나는 숫자이므로 long으로 파싱
 							
 							arrTime = arrTime.substring(8, 12);
 							depTime = depTime.substring(8, 12);
@@ -238,14 +256,11 @@ public class StationParsingUtil {
 							list.add(vo);	
 						}
 					}
-					
 				}
 			}
 			
 			eventType=xpp.next();
 		}
-		
-	Collections.sort(list);
 		
 	return list;
 	}
@@ -254,7 +269,7 @@ public class StationParsingUtil {
 /*	public static void main(String[] args){
 		StationParsingUtil a = new StationParsingUtil();
 		try {
-			List<StationVO> list = a.stationList(a.getCityCode());
+			List<String> list = a.stationList(a.getCityCode());
 			
 			System.out.println(list.size());
 		} catch (Exception e) {

@@ -105,7 +105,7 @@
 		          <ul class="dropdown-menu">
 		            <li><a href="/starrail/recommend/recommend">Course  <span class="glyphicon glyphicon glyphicon-star pull-right"></span></a></li>
 		            <li class="divider"></li>
-		            <li><a href="#">Travel Information <span class="glyphicon glyphicon glyphicon-map-marker pull-right"></span></a></li>
+		            <li><a href="/starrail/map/search">Travel Information <span class="glyphicon glyphicon glyphicon-map-marker pull-right"></span></a></li>
 		          </ul>
 		        </li>
 		      </ul>&nbsp;&nbsp;&nbsp;&nbsp;	

@@ -57,44 +57,18 @@ $(function() {
 	// --------------------------------------------
 
 	// 코스를 누르면 코스 디테일의 역들이 로드된다.
-	$('.course')
-			.on(
-					'click',
-					'.courseButton',
+	$('.course').on('click','.courseButton',
 					function() {
 						c_id = $(this).val();
 
-						$('#stationButtons').empty();
-
-						$
-								.getJSON(
-										"/starrail/maprest/coursedetail/"
-												+ c_id,
+						$('.stepwizard-row').empty();
+						$.getJSON("/starrail/maprest/coursedetail/"+ c_id,
 										function(data) {
-
-											$(data)
-													.each(
-															function() {
-																$(
-																		'#stationButtons')
-																		.append(
-																				'<button type="submit" value="'
-																						+ this.cd_start
-																						+ '" class="btn btn-default stationButton" data-time="'
-																						+ this.cd_stime
-																						+ '">'
-																						+ this.cd_start
-																						+ '</button>');
-															})
-											/*
-											 * for(var i=0; i<stations.length;
-											 * i++){
-											 * $('#stationButtons').append('<button
-											 * type="submit" value="'
-											 * +stations[i] +'" class="btn
-											 * btn-default stationButton">' +
-											 * stations[i] +'</button>'); }
-											 */
+											$(data).each(function() {
+													$('.stepwizard-row').append('<div class="stepwizard-step">' 
+													+'<button type="submit" class="btn btn-warning btn-circle stationButton" value="'+this.cd_start+'" data-time="'+this.cd_stime+'">'
+													+ this.cd_start + '</button></div>')
+															});
 										})
 					});
 
@@ -175,72 +149,24 @@ $(function() {
 	 */
 
 	// 축제 정보이벤트 모달 띄우기
-	$('.festivalimg')
-			.on('click',function() {
-						// 사진에 존재하는 컨텐츠 아이디를 가져와서 해당 축제의 자세한 정보를 가져와야 한다.... ㅅㅂ
+	$('.festivalimg').on('click',function() {// 사진에 존재하는 컨텐츠 아이디를 가져와서 해당 축제의 자세한 정보를 가져와야 한다.... ㅅㅂ
 						var contentid = $(this).attr('data-contentid');
+						var title = $(this).children().attr('data-title');
+	
 						$('#myModalLabel').empty();
 						$('.modal-body').empty();
-
-						$.getJSON("/starrail/maprest/festivaldetail/"+ contentid,
-										function(data) {
+						
+						$.getJSON("/starrail/maprest/festivaldetail/"+ contentid,function(data) {
 											$(data.festivaldetailList).each(function() {
-																$('#myModalLabel').append(
-																				'<p>'
-																						+ this.title
-																						+ '</p>');
-																$('.modal-body')
-																		.append(
-																				'<div class="row">')
-																$('.modal-body')
-																		.append(
-																				'<div class="col-md-6">')
-																$('.modal-body')
-																		.append(
-																				'<img src="'
-																						+ this.firstimage
-																						+ '" height=50% width="50%" />')
-																$('.modal-body')
-																		.append(
-																				'</div>')
-																$('.modal-body')
-																		.append(
-																				'<div class="col-md-6">')
-																$('.modal-body')
-																		.append(
-																				'<div> 주소 : '
-																						+ this.addr1
-																						+ "</div>")
-																$('.modal-body')
-																		.append(
-																				'<div> 전화명 : '
-																						+ this.telname
-																						+ "</div>")
-																$('.modal-body')
-																		.append(
-																				'<div> 전화번호 : '
-																						+ this.tel
-																						+ "</div>")
-																$('.modal-body')
-																		.append(
-																				'<div> 홈페이지 : '
-																						+ this.homepage
-																						+ "</div>")
-																$('.modal-body')
-																		.append(
-																				'<div> 소개 : '
-																						+ this.overview
-																						+ "</div>")
-																$('.modal-body')
-																		.append(
-																				'</div>')
-																$('.modal-body')
-																		.append(
-																				'</div>')
+																$('#myModalLabel').append('<p>'+ title + '</p>');
+																$('.modal-body').append('<div class="row"><div class="col-md-6"><img src="'+this.firstimage+'" hetight="100%" width="100%"/></div>');
+																$('.modal-body').append('<div class="col-md-6"><p> 개요: '+this.overview+'<br>주소지: ' +this.addr1+'</p></div></div>');
 															})
 										})
 
-						$("#myModal").modal();
+						$("#myModal").modal({
+							backdrop : true
+						});
 					});
 
 	// ---페이지 처리관련 모음 ---
@@ -309,14 +235,11 @@ $(function() {
 	function getFestival(areaCode, pageNo, date) {
 		$('.festivalimg').empty();
 
-		alert(date);
-		$.getJSON("/starrail/maprest/festival/" + areaCode + "/" + pageNo + "/"
-				+ date, function(data) {
-			$(data.festivalList).each(
-					function(number) {
+		$.getJSON("/starrail/maprest/festival/" + areaCode + "/" + pageNo + "/"+ date, function(data) {
+			$(data.festivalList).each(function(number) {
 						$('#festivalimg' + number).append(
 								'<img src="' + this.firstimage
-										+ '"  width="100%" height="100%" />');
+										+ '"  width="100%" height="100%" data-title="'+this.title+'"/>');
 						$('#festivalimg' + number).attr('data-contentid',
 								this.contentid);
 					})
@@ -335,23 +258,15 @@ $(function() {
 
 			// -------------------- 맛집 -----------------
 			$(data.foodList).each(function(number) {
-				/*
-				 * // 검색 API에서 얻은 좌표는 TM128(카텍좌표계) 이므로 지도 API에서 사용하기 위해서는
-				 * LatLng좌표로 변경해야 한다. // number객체를 => naver.maps.Point객체로 변경 후 =>
-				 * fromTM128ToLatLng(naver.maps.Point객체)로 이용한다 var tm128= new
-				 * naver.maps.Point(this.mapx,this.mapy); var latlng =
-				 * naver.maps.TransCoord.fromTM128ToLatLng(tm128);
-				 */
 				var latlng = new naver.maps.LatLng(this.mapy, this.mapx);
-				// foodLatlngs.push(latlng);
 				
 				// Info 정보창생성
 				var contentString = [
 				'<div>',
-				'   <h3> 음식점 명:' + this.title + '</h3>',
-				'	<div class="iw_inner"><img src="'+this.firstimage+'" width=100% height=100%;/></div>',
-				'   <p> 주소지: ' + this.addr1 + '</p><br />',
-				, '</div>' ]
+				'<h3> 음식점 명:' + this.title + '</h3>',
+				'<div class="iw_inner"><img src="'+this.firstimage+'" width=100% height=100%;/></div>',
+				'<p> 주소지: ' + this.addr1 + '</p><br />',
+				,'</div>' ]
 				.join('') // join함수는배열을문자열로바꾼다.
 				infoFoodList.push(contentString);
 				
@@ -384,76 +299,36 @@ $(function() {
 	}
 	function getFoodTable(areaCode, pageNo) {
 		foodTable.empty();
-		$
-				.getJSON(
-						"/starrail/maprest/foodtable/" + areaCode + "/"
-								+ pageNo,
-						function(data) {
-							$(data.foodList)
-									.each(
-											function(number) {
-												foodTable
-														.append('<tr id="'
-																+ this.contentid
-																+ '" class="chartTr" data-markerFoodList="'
-																+ number
-																+ '"> <th scope="row">'
-																+ number
-																+ '</th>'
-																+ '<td>'
-																+ this.title
-																+ '</td></tr>'); // 차트
-												// 목록에
-												// 추가
-											})
-							printPaging(data.pageMaker, '2');
-						})
+		$.getJSON("/starrail/maprest/foodtable/" + areaCode + "/"+ pageNo,function(data) {
+							$(data.foodList).each(function(number) {
+												foodTable.append('<tr id="'+ this.contentid
+																+ '" class="chartTr" data-markerFoodList="'+ number+ '"> <th scope="row">'
+																+ ((pageNo-1) *10 +number+1) + '</th>'+ '<td>'+ this.title+ '</td></tr>'); // 차트목록추가
+																})
+									printPaging(data.pageMaker, '2');
+							})	
 	}
 	// 해당 음식점의 자세한 정보를 가져온다.
 	function foodDetail(contentid,markerNumber) {
-		/*
-		 * var marker = markerFoodList[seq]; // 해당 마커 위치로 이동하고 정보창을 띄운다.
-		 * map.panTo(marker.getPosition()); marker.setIcon({ url :
-		 * "/starrail/resources/images/map/food32.png" }) // 1.정보창의 내용을 바꾸고 지도에
-		 * 정보창을 띄운다. infoWindow.setContent(infoFoodList[seq]);
-		 * infoWindow.open(map, marker); // 2.지도 하단오른쪽에 블로그 정보로드. //var title =
-		 * foods[seq].title; //info2.empty();
-		 */
 		$('.swiper-slide').empty();
 		$('.info2detail').empty();
 		$('#saveButtons').empty();
-		$
-				.getJSON(
-						"/starrail/maprest/fooddetail/" + contentid,
-						function(data) {
-							alert("음식 디테일 정보가 들어왔습니다");
+		$.getJSON("/starrail/maprest/fooddetail/" + contentid,function(data) {
 
-							$(data.foodDetailVO).each(
-									function() {
+							$(data.foodDetailVO).each(function() {
 										$('.info2detail').append(
-												'<p>대표메뉴 :' + this.firstmenu
-														+ '<br />'
-														+ '<p>취급메뉴 :'
-														+ this.treatmenu
-														+ '<br />' + '<p>연락처 :'
-														+ this.infocenterfood
-														+ '<br />'
-														+ '<p>영업시간 :'
-														+ this.opentimefood
-														+ '<br />' + '<p>쉬는날 :'
-														+ this.restdatefood
-														+ '<br />');
+												'<p>대표메뉴 :' +this.firstmenu+ '<br />'
+												+ '<p>취급메뉴 :'+ this.treatmenu+ '<br />' 
+												+ '<p>연락처 :'+ this.infocenterfood+ '<br />'
+												+ '<p>영업시간 :'+ this.opentimefood+ '<br />' 
+												+ '<p>쉬는날 :'+ this.restdatefood+ '<br />');
 										
-										$('#saveButtons').append('<button type="submit" class="btn btn-default" id="saveButton" data-number="'+markerNumber+'" data-sort="1">맛집 저장하기</button>');
+										$('#saveButtons').append('<button type="submit" class="btn btn-danger" id="saveButton" data-number="'+markerNumber+'" data-sort="1">맛집 저장하기</button>');
 
 									});
 
-							$(data.foodImageList)
-									.each(
-											function(number) {
-												$('#foodimg' + number)
-														.append(
-																'<img src="'
+							$(data.foodImageList).each(function(number) {
+												$('#foodimg' + number).append('<img src="'
 																		+ this.smallimageurl
 																		+ '" width="100%" class="img-thumbnail"/>');
 											});
@@ -513,27 +388,15 @@ $(function() {
 	}
 	function getStayTable(areaCode, pageNo) {
 		stayTable.empty();
-		$
-				.getJSON(
-						"/starrail/maprest/staytable/" + areaCode + "/"
-								+ pageNo,
-						function(data) {
-							$(data.stayList)
-									.each(
+		$.getJSON("/starrail/maprest/staytable/" + areaCode + "/"+ pageNo,
+						function(data) {$(data.stayList).each(
 											function(number) {
-												stayTable
-														.append('<tr id="'
+												stayTable.append('<tr id="'
 																+ this.contentid
 																+ '" class="chartTr" data-markerFoodList="'
-																+ number
-																+ '"> <th scope="row">'
-																+ number
-																+ '</th>'
-																+ '<td>'
-																+ this.title
-																+ '</td></tr>'); // 차트
-												// 목록에
-												// 추가
+																+ number+ '"> <th scope="row">'
+																+ ((pageNo-1) *10 +number+1)+ '</th>'
+																+ '<td>'+ this.title+ '</td></tr>'); // 차트
 											})
 							printPaging(data.pageMaker, '3');
 						})
@@ -572,7 +435,7 @@ $(function() {
 																		+ this.roomcount
 																		+ '<br />');
 												
-												$('#saveButtons').append('<button type="submit" class="btn btn-default" id="saveButton" data-number="'+markerNumber+'" data-sort="2">숙소 저장하기</button>');
+												$('#saveButtons').append('<button type="submit" class="btn btn-danger" id="saveButton" data-number="'+markerNumber+'" data-sort="2">숙소 저장하기</button>');
 											});
 							$(data.stayImageList)
 									.each(
@@ -636,27 +499,12 @@ $(function() {
 	}
 	function getTourTable(areaCode, pageNo) {
 		tourTable.empty();
-		$
-				.getJSON(
-						"/starrail/maprest/tourtable/" + areaCode + "/"
-								+ pageNo,
+		$.getJSON("/starrail/maprest/tourtable/" + areaCode + "/"+ pageNo,
 						function(data) {
-							$(data.tourList)
-									.each(
-											function(number) {
-												tourTable
-														.append('<tr id="'
-																+ this.contentid
-																+ '" class="chartTr" data-markerFoodList="'
-																+ number
-																+ '"> <th scope="row">'
-																+ number
-																+ '</th>'
-																+ '<td>'
-																+ this.title
-																+ '</td></tr>'); // 차트
-												// 목록에
-												// 추가
+							$(data.tourList).each(function(number) {
+												tourTable.append('<tr id="'+ this.contentid
+																+ '" class="chartTr" data-markerFoodList="'+ number+ '"> <th scope="row">'
+																+ ((pageNo-1) *10 +number+1)+ '</th>'+ '<td>'+ this.title+ '</td></tr>'); // 차트
 											})
 							printPaging(data.pageMaker, '4');
 						})
@@ -686,7 +534,7 @@ $(function() {
 														+ '<p>이용시간 :'
 														+ this.usetime);
 										
-										$('#saveButtons').append('<button type="submit" class="btn btn-default" id="saveButton" data-number="'+markerNumber+'" data-sort="3">관광지 저장하기</button>');
+										$('#saveButtons').append('<button type="submit" class="btn btn-danger" id="saveButton" data-number="'+markerNumber+'" data-sort="3">관광지 저장하기</button>');
 									});
 							$(data.tourImageList)
 									.each(

@@ -83,12 +83,6 @@
 				and cd.CD_STIME <= #{cd_etime}
 				and cd.CD_ETIME >= #{cd_etime} ]]>
 		and cd.CD_END = #{cd_end}
-
-
-		<!-- select m_id, m_pw, m_name , m_gender, m_age from member where M_ID 
-			IN(select m.M_ID from member m, course c, coursedetail cd where m.M_ID = 
-			c.M_ID and c.C_ID = cd.C_ID and not c.c_id = #{c_id} <![CDATA[ and cd.CD_STIME 
-			<= #{cd_etime} and cd.CD_ETIME >= #{cd_etime} ]]> and cd.CD_END = #{cd_end}) -->
 	</select>
 
 	<select id="cd_Select" resultType="CourseDetailVO">

@@ -103,7 +103,7 @@
 
 	<!-- 후기게시물 등록  -->
  <insert id="insertReview" parameterType="ReviewVO">
-      insert into review
+      insert into review(r_no, m_id, r_title, r_content, r_date, r_hit, r_recomm)
       values(
       #{r_no}, #{m_id}, #{r_title}, #{r_content},
       SYSDATE, 0,0

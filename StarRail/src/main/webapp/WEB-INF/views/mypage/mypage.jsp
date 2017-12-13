@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=divice-width" , initial-scale="1">
 <title>My Page</title>
 <!-- 마이페이지 css -->
-<link rel="stylesheet" type="text/css" href="/starrail/resources/css/mypage/mypage.css?ver=1">
+<link rel="stylesheet" type="text/css" href="/starrail/resources/css/mypage/mypage.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
@@ -69,7 +69,7 @@
 								<span>발권역: ${course.i_name}</span>
 							</td>
 							<td class="td_c_edit">
-								<button type="button" class="btn btn-outline-success editBtn" c_id="${course.c_id }">수정</button>
+								<button type="button" class="btn btn-outline-success editBtn" c_id="${course.c_id }">보기/수정</button>
 							</td>
 							<td class="td_c_del">
 								<button type="button" class="btn btn-outline-success delBtn" c_id="${course.c_id }">삭제</button>
@@ -91,7 +91,7 @@
 		
 		<div id ="myReserv">
 			<h4 id = "myReservTitle">내 예약 정보</h4>
-			<%-- <c:choose>
+			 <c:choose>
 				<c:when test="${fn:length(reserves) == 0}">
 					<span class="nullReserv">예약 내역이 없습니다.</span>
 				</c:when>
@@ -115,7 +115,7 @@
 				</table>
 				
 				</c:otherwise>
-			</c:choose> --%>
+			</c:choose> 
 		
 		</div>
 		<!-- 내 예약 정보 불러오기 종료 -->

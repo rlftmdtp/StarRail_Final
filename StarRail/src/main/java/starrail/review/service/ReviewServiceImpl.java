@@ -154,7 +154,6 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<String> hashtagInsert(ReviewVO review, Hash_SearchVO searchVO) throws Exception {
 		//정규표현식
 		Pattern p = Pattern.compile("\\#([0-9a-zA-Z가-힣]*)");
-		//후기게시판 내용에 있는 것들 가져와서
 		Matcher m = p.matcher(review.getR_content());
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -164,17 +163,14 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		while (m.find()) {
 			r_hash = specialCharacter_replace(m.group());
-			System.out.println("서비스 r_hash : " + r_hash);
 			if (dao.hash_no() != null) {
 				h_no = dao.hash_no() + 1;
-				System.out.println("서비스 h_no : "+h_no);
 			}else{
 				h_no = 1;
 			}
 				paramMap.put("h_no", h_no);
 				paramMap.put("r_no", review.getR_no());
 				paramMap.put("r_hash", r_hash);
-				System.out.println("서비스 : "+paramMap);
 				dao.tagAdd(paramMap);
 				list.add(r_hash);
 			}

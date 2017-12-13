@@ -601,10 +601,12 @@ $(function() {
 			
 				success:function(result){
 					alert('코스를 수정했습니다.');
-					location.href='starrail/mypage/mypage';
+					location.href='/starrail/mypage/mypage';
 				}
 				
 			})
+			
+			
 		});
 		
 

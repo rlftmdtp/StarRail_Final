@@ -88,11 +88,6 @@ $(function() {
 		$('.pay').empty();
 		$('.totalmoney').empty();
 		todayTotal = 0;
-//		for (var i = 0; i < ed_date.length; i++) {
-
-//			if ($(this).attr('id').match(ed_date[i])) {
-//				alert($(this).attr('id'));
-//				alert(ed_date[i]);
 				date = $(this).attr('id');
 				$.ajax({
 		               url : '/starrail/expenses/listData',
@@ -108,11 +103,6 @@ $(function() {
 		               success : function(data) {
 		            	   todayTotal = 0;
 		            	   $.each(data, function(index, item) {
-		            		//   ed_amount[index] = item["ed_amount"];
-		            		  /* for(var i=0; i<ed_amount.length; i++){
-		            			   todayTotal += ed_amount[i];
-		            		   }*/
-		            		   
 		            		   ed_amount = item["ed_amount"];
 		            		   e_total =item["e_total"];
 		            		   todayTotal += ed_amount;

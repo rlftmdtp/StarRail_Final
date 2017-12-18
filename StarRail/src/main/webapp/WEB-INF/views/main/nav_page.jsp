@@ -139,7 +139,7 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="/starrail/main/login">Login <span class="glyphicon glyphicon glyphicon-log-in pull-right"></span></a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">My Page <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+	            <li><a href="/starrail/mypage/mypage">My Page <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
 	            <li class="divider"></li>
 	            <li><a href="/starrail/message/msg_list">Messages <span class="badge pull-right"> 42 </span></a></li>
 	            <li class="divider"></li>

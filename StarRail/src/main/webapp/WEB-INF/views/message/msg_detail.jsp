@@ -26,8 +26,8 @@
 <body>
 
 	<section class="box-position">
-	<div class="logo" style="margin-left: 130px;" >
-		<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 80px; ">
+	<div class="logo" style="margin-left: 120px;" >
+		<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 70px; ">
 	</div>
 		<div class="  col-xs-12 col-md-3 col-sm-4 pull-right">
 

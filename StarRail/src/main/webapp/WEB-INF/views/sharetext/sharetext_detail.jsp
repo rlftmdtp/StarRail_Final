@@ -177,13 +177,16 @@
 						<img src="/starrail/resources/images/sharetext/smiley.png" height="10%" width="10%"></h3>
 					</div>
 					<div class="box-body">
-						<label for="exampleInputEmail1">작성자</label> <input
-							class="form-control" type="text" placeholder="USER ID"
-							id="newReplyWriter" value="${login.m_id}"> <label
-							for="exampleInputEmail1"> 내용</label> 
+											<label for="exampleInputEmail1">작성자</label> 
+						<input
+							class="form-control" type="text" placeholder="USER ID" name = "replyer"
+							id="newReplyWriter" value="${login.m_id}"> 
+							<label
+							for="exampleInputEmail1"> 내용
+							</label> 
 							<input class="form-control"
 							type="text" placeholder="타인에게 상처를 주는 글은 남기지 맙시다."
-							id="sr_content">
+							id="sr_content" name = "sr_content">
 					</div>
 					
 

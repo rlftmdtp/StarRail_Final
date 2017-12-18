@@ -172,7 +172,7 @@
 		var child = window.open(
 				'/starrail/message/msg_insertform?msg_sendid=""',
 				'childWindow',
-				'resizable=no, width=360, height=360, left=500, top=200, menubar=no, status=no, scrollbars=no');
+				'resizable=no, width=360, height=380, left=500, top=200, menubar=no, status=no, scrollbars=no');
 	});
 	
 </script>

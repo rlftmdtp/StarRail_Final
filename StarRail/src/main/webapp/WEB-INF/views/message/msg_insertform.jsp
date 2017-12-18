@@ -21,7 +21,7 @@
 			
 			<div class="form-area">
 			<div class="logo" style="margin-left: 110px;" >
-				<img src="/starrail/resources/images/message/logo.jpg" style="width: 50%; height: 70px; ">
+				<img src="/starrail/resources/images/message/logo.jpg" style="width: 45%; height: 55px; ">
 			</div>
 				<form action="msg_insertform" method="POST">
 					<input type='hidden' value=${m_id } name="msg_sendid"> 

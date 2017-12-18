@@ -26,6 +26,7 @@ public class ShareTextDAOImpl implements ShareTextDAO {
 	
 	@Override
 	public void create(ShareTextVO vo) throws Exception {
+		System.out.println(vo);
 		session.insert(namespace+".create",vo);
 	}
 
@@ -72,7 +73,7 @@ public class ShareTextDAOImpl implements ShareTextDAO {
 	public List<ShareTextVO> listCriteria(SearchShareTextCriteria scri) throws Exception {
 		
 		return session.selectList(namespace+".listCriteria", scri, new RowBounds(scri.getPageStart(), scri.getPerPageNum())); 
-		//¾ÈÇÏ¸é ´Ù³ª¿È
+		//ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù³ï¿½ï¿½ï¿½
 	}
 
 	@Override
@@ -88,6 +89,7 @@ public class ShareTextDAOImpl implements ShareTextDAO {
 		paramMap.put("sh_no", sh_no);
 		paramMap.put("amount", amount);
 		
+		System.out.println("Sarefjkdjsk  : "+paramMap);
 		session.update(namespace+".updateReplyCnt", paramMap);
 		
 	}
@@ -100,7 +102,7 @@ public class ShareTextDAOImpl implements ShareTextDAO {
 	}
 	
 	
-	//°Ô½ÃÆÇ c_idÁ¤º¸ °¡Á®¿À±â
+	//ï¿½Ô½ï¿½ï¿½ï¿½ c_idï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public List<HashMap<String, Object>> courseDetailList(int c_id) {
 		

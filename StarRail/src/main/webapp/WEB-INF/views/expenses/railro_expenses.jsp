@@ -342,7 +342,6 @@
 				var c_id =0;
 				 //map에서 꺼내기 위한 each문 두번
 				$.each(data, function(index, item) {
-					alert(item)
 					$('#thumbnail').append("<div class='col-md-4'><img src ='" + item["c_filename"]
 							+ "' class='img-responsive img-radio'> <button type='button' style='background-color: #FF8224; border-color: #FF8224;' class='btn btn-primary btn-radio' id='thumbnailBtn' data='"+ item["c_id"] +"'>"
 							+ item["c_name"]
@@ -389,7 +388,6 @@
 							var interval = endDate.getTime() - tripDateStart.getTime();
 							interval = Math.floor(interval / (1000 * 60 * 60 * 24));
 							interval.toString();
-							alert(interval.toString());
 
 							$('#endDate').attr("value", (endDate.getFullYear() + '-'
 													+ (endDate.getMonth() + 1)
@@ -469,7 +467,6 @@ $('#thumbnail').on('click','#thumbnailBtn' ,function(){
 	/* 카테고리중 클릭한 값 가져오기 */
 	$('.btn').on('click', function() {
 		kategorie = $(this).attr('data');
-		alert(kategorie);
 		/* 클릭한 버튼에 이벤트 걸어 뭐 눌렀는지 알려주자 */
 		$(this).addClass("selected");
 		$(this).siblings().removeClass("selected");
@@ -505,7 +502,6 @@ $('#thumbnail').on('click','#thumbnailBtn' ,function(){
 			}),
 			dataType : "json",
 			success : function(data) {
-				alert("데이터 :  -----------" +data);
 				/* 내가 사용한 지출 내역을 가져와 view에 뿌려줌 */
 					$(document).on('click', '.listed_date', function() {
 						$('.lead').empty();

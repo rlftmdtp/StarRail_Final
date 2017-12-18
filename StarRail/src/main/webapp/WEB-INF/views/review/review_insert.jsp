@@ -80,7 +80,7 @@
      			<input type="text" id="r_title" class="floatLabel" name="r_title">
     		</div>
    
-    		<textarea rows="10" cols="95" name="r_content" id="hashSearchForm"></textarea>
+    		<textarea rows="10" cols="121" name="r_content" id="hashSearchForm"></textarea>
   		</div>
   
  		<div class="form-group" style="margin-top: 10px;">
@@ -90,7 +90,7 @@
     			<div class="box-footer">
 					<ul class="mailbox-attachments clearfix uploadedList"></ul>
 				</div>
-				 	<div class="input-group image-preview" style="margin-left: 180px;">
+				 	<div class="input-group image-preview" style="margin-left: 220px;">
 									
 						<!-- don't give a name === doesn't send on POST/GET  -->
 						<span class="input-group-btn"> 
@@ -129,7 +129,7 @@
 
 				</div>
 				<button class="btn btn-primary" style="font-size:20px; 
-					background-color: #f39818; border-color: #f39818; margin-left:380px; margin-top: -20px;">Submit</button>
+					background-color: #f39818; border-color: #f39818; margin-left:420px; margin-top: -20px;">Submit</button>
   </div>	
   
   
@@ -224,14 +224,12 @@
 				var str = "";
 				$(".uploadedList .glyphicon-remove").each(
 						function(index) {
-							alert("??");
 							str += "<input type='hidden' name='files[" + index
 									+ "]' value='" + $(this).attr("href")
 									+ "'> ";
 						});
 
 				that.append(str);
-				alert(str);
 				that.get(0).submit();
 			});
 </script>

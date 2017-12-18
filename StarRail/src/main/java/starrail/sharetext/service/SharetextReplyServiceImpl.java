@@ -25,8 +25,9 @@ public class SharetextReplyServiceImpl implements SharetextReplyService {
 	@Transactional
 	@Override
 	public void addReply(SharetextReplyVO vo) throws Exception {
-		
+		System.out.println(vo);
 		dao.create(vo);
+		System.out.println("second");
 		sdao.updateReplyCnt(vo.getSh_no(), 1);
 	}
 	//��� ���

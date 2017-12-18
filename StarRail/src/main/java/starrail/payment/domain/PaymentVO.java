@@ -11,6 +11,7 @@ public class PaymentVO {
 	private int pay_cvc;
 	private int pay_mm;
 	private int pay_yy;
+	private int card_id;
 	
 	public int getPay_no() {
 		return pay_no;
@@ -67,6 +68,14 @@ public class PaymentVO {
 	}
 	public void setPay_yy(int pay_yy) {
 		this.pay_yy = pay_yy;
+	}
+	
+	
+	public int getCard_id() {
+		return card_id;
+	}
+	public void setCard_id(int card_id) {
+		this.card_id = card_id;
 	}
 	@Override
 	public String toString() {

@@ -1,9 +1,12 @@
 package starrail.payment.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import starrail.payment.domain.CardCompanyVO;
 import starrail.payment.domain.PaymentVO;
 import starrail.payment.persistence.PaymentDAO;
 
@@ -26,5 +29,15 @@ public class PaymentServiceImpl implements PaymentService {
 		return dao.maxPayNo();
 	}
 	
+	@Override
+	public CardCompanyVO cardView(CardCompanyVO vo) throws Exception {
+		return dao.cardView(vo);
+	}
+
+	@Override
+	public List<CardCompanyVO> cardCheck() throws Exception {
+		
+		return dao.cardCheck();
+	}
 	
 }

@@ -19,7 +19,39 @@
 <title>StarRail 결제</title>
 </head>
 <body>
+<script type="text/javascript">
+/*카드 결제*/
+$(function(){
+	$('#bbbbtn').on("click",function(){
+		paycheck();
+		
+	});
+});
 
+function paycheck(){
+	alert('결제 check');
+	var payform = $("#payment-form");
+	$.ajax({
+		url:"/starrail/payment/pay",
+		type:"get",
+		dataType : "json",
+		success : function(result){
+			$.each(result, function(index, value){
+						if(value.card_num ==$("#pay_cardnum").val() ){
+							alert("정보가 일치합니다.");
+							
+						}else{
+							alert("정보가 일치하지 않습니다.");
+						}
+					
+			});
+		}
+		
+	});
+	
+}
+
+</script>
  <!-- 해더 -->
  <%@include file="../main/nav_page.jsp"%>
 	
@@ -97,7 +129,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="couponCode">비밀번호</label>
-                                   <input type="text" class="form-control" name="pay_cardpw" />
+                                   <input type="password" class="form-control" name="pay_cardpw" />
                                 </div>
                             </div>                        
                         </div>
@@ -112,7 +144,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <input class="subscribe btn btn-success btn-lg btn-block" type="submit" value="결제"/>
+                                <button class="subscribe btn btn-success btn-lg btn-block" id="bbbbtn" type="submit">결제</button>
+
                             </div>
                         </div>
                         <div class="row" style="display:none;">

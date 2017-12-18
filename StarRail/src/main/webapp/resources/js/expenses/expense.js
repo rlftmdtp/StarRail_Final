@@ -106,7 +106,6 @@ $(function() {
 		            		   ed_amount = item["ed_amount"];
 		            		   e_total =item["e_total"];
 		            		   todayTotal += ed_amount;
-		            		   alert(todayTotal);
 								if (item["ed_kategorie"] == 'food') {
 									$('.pay').append('<div class="list-group-item"><img src ="/starrail/resources/images/expenses/dinner.png">('
 															+ item["ed_katename"]

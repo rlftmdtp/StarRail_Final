@@ -72,7 +72,6 @@ small {
 									  success: function(data){
 										  
 										  var str ="";
-										  alert(str);
 										  if(checkImageType(data)){
 											  
 											  str ="<div><a href=/starrail/review/displayFile?fileName="+getImageLink(data)+">"

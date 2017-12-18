@@ -26,7 +26,6 @@ iframe{
 	
 	<script>
 		function addFilePath(msg){
-			alert(msg);
 			document.getElementById("form1").reset();
 		}
 	</script>

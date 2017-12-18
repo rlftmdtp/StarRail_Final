@@ -15,4 +15,7 @@
 	</select> 
 
 
+	<select id="cardcompany" resultType="CardCompanyVO">
+      select * from cardcompany
+  	 </select>
 </mapper>  
